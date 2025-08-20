@@ -55,8 +55,8 @@ const HomeMenu = () => {
                                 Who we are
                         </NavigationMenuTrigger>
                         <NavigationMenuContent>
-                                <ul className="grid gap-2 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
-                                        <li className="row-span-3">
+                                <div className="grid gap-2 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
+                                        <div className="row-span-3">
                                                 <NavigationMenuLink asChild>
                                                         <Link
                                                                 className="from-muted/50 to-muted flex h-full w-full flex-col justify-end rounded-md bg-linear-to-b p-6 no-underline outline-hidden select-none focus:shadow-md"
@@ -73,7 +73,7 @@ const HomeMenu = () => {
                                                                 </div>
                                                         </Link>
                                                 </NavigationMenuLink>
-                                        </li>
+                                        </div>
                                         <ListItem href="/about-lagos-home-fix" title="About us">
                                                 Lagos home fix is the number listing platform for home fixers in Lagos.
                                         </ListItem>
@@ -83,7 +83,7 @@ const HomeMenu = () => {
                                         <ListItem href="/terms-and-conditions" title="Terms and conditions">
                                                 Read our terms and conditions to understand the platform guidelines properly.
                                         </ListItem>
-                                </ul>
+                                </div>
                         </NavigationMenuContent>
                 </NavigationMenuItem>
         )
@@ -100,10 +100,9 @@ const MenuItem = ({ title, menuItems }: MenuItemProps) => {
                         <NavigationMenuContent>
                                 <ul className="grid w-[300px] gap-2 text-black">
                                         {menuItems.map((menu) => (
-                                                <li>
+                                                <li key={menu.title} >
                                                         <NavigationMenuLink 
-                                                                key={menu.title} 
-                                                                asChild 
+                                                               asChild 
                                                         >
                                                                 <Link
                                                                         href={menu.href}

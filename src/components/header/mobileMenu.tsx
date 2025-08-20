@@ -4,10 +4,7 @@ import {
         Sheet,
         SheetClose,
         SheetContent,
-        SheetDescription,
         SheetFooter,
-        SheetHeader,
-        SheetTitle,
         SheetTrigger,
 } from "@/components/ui/sheet"
 import {
@@ -51,11 +48,12 @@ const MenuAccordion = () => {
                                         defaultValue='item-1'
                                 >
                                         {mobileMenuNavLists.map((list) => (
-                                        <Navs 
+                                                <Navs 
+                                                        key={list.value}
                                                         value={list.value}
                                                         title={list.title}
                                                         MenuItems={list.MenuItem}
-                                        /> 
+                                                /> 
                                         ))}  
                                 </Accordion>
                                 <SheetClose asChild>
@@ -85,9 +83,11 @@ const Navs = ({ value, title, MenuItems }: NavProps) => {
                         </AccordionTrigger>
                         <AccordionContent className="flex flex-col gap-4 text-balance">
                                 {MenuItems.map((menu) => (
-                                        <SheetClose asChild>
+                                        <SheetClose
+                                                key={menu.title} 
+                                                asChild
+                                        >
                                                 <Link 
-                                                        key={menu.href} 
                                                         href={menu.href}
                                                         className='text-sm'
                                                 >
