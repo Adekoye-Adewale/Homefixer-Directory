@@ -6,7 +6,7 @@ import DesktopMenu from './desktopMenu'
 
 export default function HeaderNav() {
         return (
-                <header className='py-2.5 px-2.5 md:px-5 bg-amber-100 sticky top-0 left-0'>
+                <header className='py-2.5 px-2.5 md:px-5 bg-amber-100 sticky top-0 left-0 z-50'>
                         <div className='container mx-auto flex justify-between items-center gap-2 '>
                                 <div>
                                         <Link href={`/`} title={`Lagos HomeFix Logo`}>
