@@ -4,7 +4,7 @@ import React from 'react'
 
 export default function HeroSection() {
         return (
-                <div className='flex justify-center items-center py-24 md:py-32 px-2.5 md:px-5 relative overflow-clip min-h-96 max-h-[500px] h-full z-[1]'>
+                <section className='flex justify-center items-center py-24 md:py-32 px-2.5 md:px-5 relative overflow-clip min-h-96 max-h-[500px] h-full z-[1]'>
                         <Image 
                                 src={'/lagoshomefixer-hero-img.webp'} 
                                 alt={'Lagos Home Fixers'} 
@@ -24,6 +24,6 @@ export default function HeroSection() {
                                 </div>
                                 <SearchwithLocation/>
                         </div>
-                </div>
+                </section>
         )
 }
