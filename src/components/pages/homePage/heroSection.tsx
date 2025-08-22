@@ -10,9 +10,8 @@ export default function HeroSection() {
                                 alt={'Lagos Home Fixers'} 
                                 width={1000} 
                                 height={758}
-                                className='absolute inset-0 size-full object-cover'
+                                className='absolute inset-0 size-full object-cover brightness-10'
                         />
-                        <div className='absolute inset-0 size-full bg-black/90'></div>
                         <div className='container relative mx-auto'>
                                 <div className='text-center text-pretty mb-5 md:mb-8'>
                                         <h1 className='text-center font-bold text-4xl md:text-6xl text-white'>

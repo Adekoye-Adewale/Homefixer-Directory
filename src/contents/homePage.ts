@@ -1,4 +1,4 @@
-import { cardProps } from "@/components/pages/homePage/homeContentTypes"
+import { cardProps, connectingBizCardProps } from "@/components/pages/homePage/homeContentTypes"
 
 export const howItWorksContents: cardProps[] = [
         {
@@ -15,5 +15,23 @@ export const howItWorksContents: cardProps[] = [
                 title: `Contact Business`,
                 description: `Easily setup an appointment directly from the business listing page using our integrated booking options.`,
                 imgSrc: `/icons/customer-service.gif`,
+        },
+]
+
+export const connectBizContents: connectingBizCardProps[] = [
+        {
+                titleTop: `Request `,
+                titleBottom: `a service`,
+                description: `Search businesses for your match.`,
+        },
+        {
+                titleTop: `Explore `,
+                titleBottom: `your loctaion`,
+                description: `Browse businesses from your location.`,
+        },
+        {
+                titleTop: `Connect with `,
+                titleBottom: `your best fixer`,
+                description: `Find and connect with fixers close to you.`,
         },
 ]
