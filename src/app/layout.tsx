@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import HeaderNav from "@/components/header"
 import "./globals.css";
+import { SanityLive } from "@/sanity/lib/live";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -27,6 +28,7 @@ export default function RootLayout({
         <main>
           {children}
         </main>
+        <SanityLive/>
       </body>
     </html>
   );

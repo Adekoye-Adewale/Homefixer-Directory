@@ -28,10 +28,6 @@ export const lagosLocations = [
                 title: "Apapa" 
         },
         { 
-                value: "badore", 
-                title: "Badore" 
-        },
-        { 
                 value: "banana-island", 
                 title: "Banana Island" 
         },
@@ -60,20 +56,16 @@ export const lagosLocations = [
                 title: "Egbeda" 
         },
         { 
-                value: "eti-osa", 
-                title: "Eti-Osa" 
-        },
-        { 
-                value: "fadeyi", 
-                title: "Fadeyi" 
-        },
-        { 
                 value: "festac-town", 
                 title: "Festac Town" 
         },
         { 
                 value: "gbagada", 
                 title: "Gbagada" 
+        },
+        { 
+                value: "ibeju-lekki", 
+                title: "Ibeju Lekki" 
         },
         { 
                 value: "ikeja", 
@@ -92,16 +84,8 @@ export const lagosLocations = [
                 title: "Isale Eko" 
         },
         { 
-                value: "iyana-ipaja", 
-                title: "Iyana Ipaja"
-        },
-        { 
                 value: "ketu", 
                 title: "Ketu" 
-        },
-        { 
-                value: "lakowe", 
-                title: "Lakowe" 
         },
         { 
                 value: "lekki-phase-1", 
@@ -110,10 +94,6 @@ export const lagosLocations = [
         { 
                 value: "maryland", 
                 title: "Maryland" 
-        },
-        { 
-                value: "mile-2", 
-                title: "Mile 2" 
         },
         { 
                 value: "mushin", 
@@ -128,24 +108,12 @@ export const lagosLocations = [
                 title: "Ojo" 
         },
         { 
-                value: "oniru", 
-                title: "Oniru" 
-        },
-        { 
-                value: "orile", 
-                title: "Orile" 
-        },
-        { 
                 value: "oshodi", 
                 title: "Oshodi" 
         },
         { 
                 value: "oworonshoki", 
                 title: "Oworonshoki" 
-        },
-        { 
-                value: "sangotedo", 
-                title: "Sangotedo" 
         },
         { 
                 value: "shomolu", 

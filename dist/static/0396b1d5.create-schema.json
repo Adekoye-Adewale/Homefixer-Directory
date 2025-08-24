@@ -1,0 +1,238 @@
+[
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "businessName",
+        "type": "string"
+      },
+      {
+        "options": {
+          "source": "businessName"
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "slug",
+        "type": "slug"
+      },
+      {
+        "description": "Use an image with a 1:1 ratio for best display results",
+        "name": "businessLogo",
+        "type": "image"
+      },
+      {
+        "description": "Use an image with a 16:6 ratio for best display results",
+        "name": "coverImage",
+        "type": "image"
+      },
+      {
+        "options": {
+          "layout": "grid"
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "max",
+                "constraint": 4
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Upload up to 4 images. Max 4 images",
+        "of": [
+          {
+            "type": "image"
+          }
+        ],
+        "name": "gallery",
+        "type": "array"
+      },
+      {
+        "initialValue": false,
+        "name": "featured",
+        "type": "boolean"
+      },
+      {
+        "to": [
+          {
+            "type": "businessCategory"
+          }
+        ],
+        "name": "category",
+        "type": "reference"
+      },
+      {
+        "name": "description",
+        "type": "text"
+      },
+      {
+        "to": [
+          {
+            "type": "businessLocation"
+          }
+        ],
+        "name": "location",
+        "type": "reference"
+      },
+      {
+        "name": "businessAddress",
+        "type": "text"
+      },
+      {
+        "name": "businessEmail",
+        "type": "email"
+      },
+      {
+        "name": "businessPhoneNumber",
+        "type": "string"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "uri",
+                "constraint": {
+                  "options": {
+                    "scheme": [
+                      "/^http$/",
+                      "/^https$/"
+                    ],
+                    "allowRelative": false,
+                    "relativeOnly": false,
+                    "allowCredentials": false
+                  }
+                }
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "businessWebsite",
+        "type": "url"
+      }
+    ],
+    "name": "business",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "name": "description",
+        "type": "text"
+      },
+      {
+        "options": {
+          "source": "title"
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "slug",
+        "type": "slug"
+      },
+      {
+        "name": "image",
+        "type": "image"
+      }
+    ],
+    "name": "businessCategory",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "options": {
+          "source": "title"
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "slug",
+        "type": "slug"
+      },
+      {
+        "name": "image",
+        "type": "image"
+      }
+    ],
+    "name": "businessLocation",
+    "type": "document"
+  }
+]

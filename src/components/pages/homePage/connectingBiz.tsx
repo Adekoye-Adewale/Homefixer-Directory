@@ -1,8 +1,8 @@
-import { ArrowRightFromLine, MoveRight } from 'lucide-react'
-import Image from 'next/image'
 import React, { Fragment } from 'react'
+import Image from 'next/image'
 import { connectingBizCardProps } from './homeContentTypes'
 import { connectBizContents } from '@/contents/homePage'
+import { MoveRight } from 'lucide-react'
 
 export default function ConnectingBiz() {
         return (
