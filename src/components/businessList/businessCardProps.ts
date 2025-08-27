@@ -7,13 +7,15 @@ export type BusinessCardProps = {
         categorySlug: string
         location: string
         locationSlug: string
-        businessSlug: string
+        slug: string
         businessWebsite: string
 }
 
 export type BizContentCardProps = {
         _id: string
-        coverImage: string
+        coverImage?: {
+                url: string
+        }
         businessLogo: string
         businessName: string
         businessWebsite: string

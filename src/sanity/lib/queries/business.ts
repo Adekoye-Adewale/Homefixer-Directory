@@ -5,17 +5,28 @@ export const businessQuery = `*[_type == "business"]{
         businessPhoneNumber,
         businessAddress,
         businessWebsite,
-        "businessLogo": businessLogo.asset->url,
-        "coverImage": coverImage.asset->url,
+        "businessLogo": businessLogo.asset->{
+                url
+        },
+        "coverImage": coverImage.asset->{
+                url
+        },
+        "gallery": gallery[]{
+                asset->{
+                        url
+                }
+        },
         description,
         featured,
         slug,
         category->{
                 _id,
-                title
+                title,
+                slug
         },
         location->{
                 _id,
-                title
+                title,
+                slug
         }
 }`

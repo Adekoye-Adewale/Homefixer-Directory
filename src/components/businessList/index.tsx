@@ -1,9 +1,10 @@
 import React, { Fragment } from 'react'
 import MainBusinessCard from './businessCard'
 import { BizContentCardProps } from './businessCardProps'
+import { customBusiness } from '@/sanity/lib/customTypes/business'
 
 type MainBusinessListProps = {
-        BizContents: BizContentCardProps[]
+        BizContents: customBusiness[]
 }
 
 export default function MainBusinessList({ BizContents }: MainBusinessListProps) {
@@ -14,15 +15,15 @@ export default function MainBusinessList({ BizContents }: MainBusinessListProps)
                         {BizContents.map((content) => (
                                 <Fragment key={content._id}>
                                         <MainBusinessCard
-                                                coverImgUrl={content.coverImage}
-                                                logoUrl={content.businessLogo}
-                                                title={content.businessName}
+                                                coverImage={content.coverImage}
+                                                businessLogo={content.businessLogo}
+                                                businessName={content.businessName}
                                                 description={content.description}
-                                                category={content.category.title}
-                                                categorySlug={`/${content.category.title}`}
-                                                location={content.location?.title}
-                                                locationSlug={`/${content.location?.title}`}
-                                                businessSlug={content.slug.current}
+                                                category={content.category}
+                                                categorySlug={`/${content.category.slug}`}
+                                                location={content.location}
+                                                locationSlug={`/${content.location?.slug}`}
+                                                slug={content.slug}
                                                 businessWebsite={content.businessWebsite}
                                         />
                                 </Fragment>

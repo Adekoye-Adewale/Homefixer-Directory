@@ -1,34 +1,43 @@
 import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { BusinessCardProps } from './businessCardProps'
 import { Globe, SquareArrowOutUpRight } from 'lucide-react'
+import { customBusiness } from '@/sanity/lib/customTypes/business'
+
+type UpdatedType = customBusiness & {
+        locationSlug: string
+        categorySlug: string
+}
 
 export default function MainBusinessCard({ 
-        coverImgUrl, 
-        logoUrl, 
-        title,
+        _id,
+        coverImage, 
+        businessLogo, 
+        businessName,
         description, 
-        category, 
-        categorySlug, 
+        category,  
         location, 
-        locationSlug, 
-        businessSlug,
-        businessWebsite
-} : BusinessCardProps) {
+        slug,
+        businessWebsite,
+        locationSlug,
+        categorySlug
+} : UpdatedType) {
         return (
-                <div className='grid content-end max-w-[350px] w-full p-2.5 md:p-5 relative rounded border border-solid overflow-hidden'>
+                <div 
+                        className='grid content-end max-w-[350px] w-full p-2.5 md:p-5 relative rounded border border-solid overflow-hidden group'
+                        key={_id}
+                >
                         <Image
-                                src={coverImgUrl}
-                                alt={`${title} cover image`}
+                                src={coverImage.url}
+                                alt={`${businessName} cover image`}
                                 width={350}
                                 height={230}
-                                className='absolute inset-0 size-full object-cover brightness-20'
+                                className='absolute inset-0 size-full object-cover brightness-20 transition-all duration-300 group-hover:brightness-5'
                         />
                         <div className='relative flex flex-col space-y-3'>
                                 <Image
-                                        src={logoUrl}
-                                        alt={`${title} logo`}
+                                        src={businessLogo.url}
+                                        alt={`${businessName} logo`}
                                         width={32}
                                         height={32}
                                         className='size-8 rounded-full aspect-square object-cover'
@@ -36,37 +45,37 @@ export default function MainBusinessCard({
                                 <div>
                                         <div>
                                                 <h3
-                                                        className='text-white font-semibold text-lg'
+                                                        className='text-white font-semibold text-base md:text-lg'
                                                 >
-                                                        {title}
+                                                        {businessName}
                                                 </h3>
-                                                <p className='text-white/70 text-sm mt-1 md:mt-2 line-clamp-2'>
+                                                <p className='text-white/70 text-xs md:text-sm mt-1 md:mt-2 line-clamp-2'>
                                                         {description}
                                                 </p>
                                         </div>
                                 </div>
-                                <div className='flex gap-2.5 mb-7 items-center text-xs font-semibold'>
+                                <div className='flex gap-2.5 mb-7 items-center text-[10px] md:text-xs font-semibold'>
                                         <Link
-                                                href={categorySlug}
-                                                title={category}
-                                                className='py-1 px-2.5 text-black bg-amber-300 transition-all duration-300 hover:text-amber-200 hover:bg-amber-900 rounded'
+                                                href={`/${categorySlug}`}
+                                                title={category?.title}
+                                                className='max-w-[100px] text-nowrap overflow-clip py-1 px-2.5 text-amber-300/50 border border-solid border-amber-300/50 bg-transparent transition-all duration-300 hover:text-amber-200 hover:bg-amber-900 rounded'
                                         >
-                                                {category}
+                                                {category?.title}
                                         </Link>
                                         <Link
-                                                href={locationSlug}
-                                                title={location}
-                                                className='py-1 px-2.5 text-black bg-amber-300 transition-all duration-300 hover:text-amber-200 hover:bg-amber-900 rounded'
+                                                href={`/${locationSlug}`}
+                                                title={location.title}
+                                                className='max-w-[100px] text-nowrap overflow-hidden py-1 px-2.5 text-amber-300/50 border border-solid border-amber-300/50 bg-transparent transition-all duration-300 hover:text-amber-200 hover:bg-amber-900 rounded'
                                         >
-                                                {location}
+                                                {location.title}
                                         </Link>
                                 </div>
                         </div>
-                        <div className='absolute bottom-0 left-0 flex items-center gap-2 py-1.5 px-5 bg-white w-full rounded-t text-center text-xs font-semibold'>
+                        <div className='absolute bottom-0 left-0 flex items-center gap-2 py-1 px-2.5 md:py-1.5 md:px-5 bg-amber-300 w-full rounded-t text-center text-[10px] md:text-xs font-semibold divide-x divide-amber-900'>
                                 <Link
-                                        href={businessSlug}
-                                        title={`learn more about ${title}`}
-                                        className='flex items-center gap-1 transition-colors duration-300 hover:text-amber-900'
+                                        href={`/${slug?.current}`}
+                                        title={`learn more about ${businessName}`}
+                                        className='flex items-center gap-1 transition-colors duration-300 hover:text-amber-900 pr-2'
                                 >
                                         <span>
                                                 View business
@@ -75,7 +84,7 @@ export default function MainBusinessCard({
                                 </Link>
                                 {businessWebsite && 
                                         <Link
-                                                href={`${businessWebsite}?r=lagoshomefixers.com`}
+                                                href={`${businessWebsite}?referral=lagoshomefixers.com`}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
                                                 className='flex items-center gap-1 transition-colors duration-300 hover:text-amber-900'
