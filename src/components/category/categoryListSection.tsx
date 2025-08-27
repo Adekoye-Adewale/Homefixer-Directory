@@ -5,10 +5,10 @@ import { customBusinessCategoryType } from '@/sanity/lib/customTypes/businessCat
 import CategoryCard from './categoryCard'
 
 type MainCategoryListProps = {
-        sectionTitle: string
-        archivePageSlug: string
-        slugTitle: string
-        bg: string
+        sectionTitle?: string
+        archivePageSlug?: string
+        slugTitle?: string
+        bg?: string
         allCategoryList: customBusinessCategoryType[]
 }
 
@@ -16,7 +16,7 @@ export default function CategoryListSection({ sectionTitle, archivePageSlug, slu
         return (
                 <section className={`flex justify-center items-center py-24 md:py-32 px-2.5 md:px-5 overflow-clip ${bg}`}>
                         <div className='container mx-auto'>
-                                <div className='flex justify-between'>
+                                {archivePageSlug && <div className='flex justify-between'>
                                         <h2
                                                 className='text-left font-bold text-3xl md:text-4xl'
                                         >
@@ -33,8 +33,9 @@ export default function CategoryListSection({ sectionTitle, archivePageSlug, slu
                                                         className='w-3'
                                                 />
                                         </Link>
-                                </div>
-                                <div className='grid grid-cols-2 justify-between lg:grid-cols-4 gap-5 mt-5 md:mt-8'>
+                                </div>}
+                                
+                                <div className='grid grid-cols-2 justify-between lg:grid-cols-4 md:gap-5 gap-3 mt-5 md:mt-8'>
                                         {allCategoryList.map((list) => (
                                                 <Fragment key={list._id}>
                                                         <CategoryCard

@@ -20,47 +20,47 @@ export const whoWeAreMenuItems: { title: string; href: string }[] = [
 export const exploreMenuItems: { title: string; href: string } [] = [
         {
                 title: "Plumbers",
-                href: "/plumbers",
+                href: "/category/plumbers",
         },
         {
                 title: "Carpenters",
-                href: "/carpenters",
+                href: "/category/carpenters",
         },
         {
                 title: "Electricians",
-                href: "/electricians",
+                href: "/category/electricians",
         },
         {
                 title: "Cleaners",
-                href: "/cleaners",
+                href: "/category/cleaners",
         },
         {
                 title: "Painters",
-                href: "/painters",
+                href: "/category/painters",
         },
         {
                 title: "Interior decors",
-                href: "/interior-decors",
+                href: "/category/interior-decors",
         },
         {
                 title: "Tailers",
-                href: "/tailers",
+                href: "/category/tailers",
         },
         {
                 title: "Pop makers",
-                href: "/pop-makers",
+                href: "/category/pop-makers",
         },
         {
                 title: "Air conditioning services",
-                href: "/air-conditioning-services",
+                href: "/category/air-conditioning-services",
         },
         {
                 title: "Landscaoing services",
-                href: "/landscaoing-services",
+                href: "/category/landscaoing-services",
         },
         {
                 title: "Security provider and installation services",
-                href: "/security-provider-and-installation-services",
+                href: "/category/security-provider-and-installation-services",
         },
 ]
 

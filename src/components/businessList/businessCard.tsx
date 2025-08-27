@@ -1,7 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Globe, SquareArrowOutUpRight } from 'lucide-react'
+import { Globe, MapPin, SquareArrowOutUpRight, Tag } from 'lucide-react'
 import { customBusiness } from '@/sanity/lib/customTypes/business'
 
 type UpdatedType = customBusiness & {
@@ -58,16 +58,22 @@ export default function MainBusinessCard({
                                         <Link
                                                 href={`/${categorySlug}`}
                                                 title={category?.title}
-                                                className='max-w-[100px] text-nowrap overflow-clip py-1 px-2.5 text-amber-300/50 border border-solid border-amber-300/50 bg-transparent transition-all duration-300 hover:text-amber-200 hover:bg-amber-900 rounded'
+                                                className='flex items-center gap-1 flex-nowrap max-w-[45%] text-nowrap overflow-clip py-0.5 px-2.5 text-amber-300/50 border border-solid border-amber-300/50 bg-transparent transition-all duration-300 hover:text-amber-200 hover:bg-amber-900 rounded'
                                         >
+                                                <Tag className='w-3' />
                                                 {category?.title}
                                         </Link>
                                         <Link
                                                 href={`/${locationSlug}`}
                                                 title={location.title}
-                                                className='max-w-[100px] text-nowrap overflow-hidden py-1 px-2.5 text-amber-300/50 border border-solid border-amber-300/50 bg-transparent transition-all duration-300 hover:text-amber-200 hover:bg-amber-900 rounded'
+                                                className='flex items-center gap-1 max-w-[45%] text-nowrap overflow-hidden py-0.5 px-2.5 text-amber-300/50 border border-solid border-amber-300/50 bg-transparent transition-all duration-300 hover:text-amber-200 hover:bg-amber-900 rounded'
                                         >
-                                                {location.title}
+                                                <MapPin 
+                                                        className='w-3' 
+                                                />
+                                                <span>
+                                                        {location?.title}
+                                                </span>
                                         </Link>
                                 </div>
                         </div>

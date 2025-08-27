@@ -21,7 +21,7 @@ export default function FrontPage({
         allCategoryList
 }: FrontPageProps ) {
         return (
-                <div>
+                <>
                         <HeroSection/>
                         <HowItWorks/>
                         <ListingSection
@@ -53,6 +53,6 @@ export default function FrontPage({
                                 bg='bg-white'
                         />
                         <ConnectingBiz/>
-                </div>
+                </>
         )
 }

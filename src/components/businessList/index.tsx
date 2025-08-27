@@ -20,9 +20,9 @@ export default function MainBusinessList({ BizContents }: MainBusinessListProps)
                                                 businessName={content.businessName}
                                                 description={content.description}
                                                 category={content.category}
-                                                categorySlug={`/${content.category.slug}`}
+                                                categorySlug={content.category.slug.current}
                                                 location={content.location}
-                                                locationSlug={`/${content.location?.slug}`}
+                                                locationSlug={content.location?.slug.current}
                                                 slug={content.slug}
                                                 businessWebsite={content.businessWebsite}
                                         />

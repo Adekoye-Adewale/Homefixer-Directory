@@ -4,13 +4,11 @@ import { getAllBusinesses, getAllBusinessesCategory, getAllBusinessesLocations }
 
 export default async function HomePage() {
 
-        const allBusinessList = await getAllBusinesses()
-        const allCategories = await getAllBusinessesCategory()
-        const allLocations = await getAllBusinessesLocations()
-
-        // console.log('--===-=-==', allBusinessList)
-        // console.log('--===-=-==', allLocations)
-        // console.log('--===-=-==', allCategories)
+        const [ allBusinessList, allCategories, allLocations ] = await Promise.all([
+                getAllBusinesses(),
+                getAllBusinessesCategory(),
+                getAllBusinessesLocations()
+        ])
 
         return (
                 <>

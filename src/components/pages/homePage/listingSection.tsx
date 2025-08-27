@@ -43,9 +43,9 @@ export default function ListingSection({ sectionTitle, archivePageSlug, slugTitl
                                                         businessName={biz.businessName}
                                                         description={biz.description}
                                                         category={biz.category}
-                                                        categorySlug={`/${biz.category.slug.current}`}
+                                                        categorySlug={biz.category.slug.current}
                                                         location={biz.location}
-                                                        locationSlug={`/${biz.location?.slug.current}`}
+                                                        locationSlug={biz.location?.slug.current}
                                                         slug={biz.slug}
                                                         businessWebsite={biz?.businessWebsite}
                                                 />
