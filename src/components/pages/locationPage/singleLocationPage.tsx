@@ -1,48 +1,48 @@
 "use client"
 import React, { useState, useMemo } from 'react'
-import CategoryHeroSection from './heroSection'
-import MainBusinessList from '@/components/businessList'
 import { customBusiness } from '@/sanity/lib/customTypes/business'
+import CategoryHeroSection from '../categoryPage/heroSection'
 import ConnectingBiz from '../homePage/connectingBiz'
+import MainBusinessList from '@/components/businessList'
 import CategoryFilter from '@/components/filters/categoryFilter'
 
-type CategoryPageProps = {
-        service?: string
+type LocationPageProps = {
+        location?: string
         length: number
         businessList: customBusiness[]
 }
 
-export default function SingleCategoryPageComponents({ service, businessList }: CategoryPageProps ) {
+export default function SingleLocationPageComponent({ location, businessList }: LocationPageProps) {
 
-        const [ selectedLocation, setSelectedLocation ] = useState<string>("All")
-
-        const locations = useMemo(() => {
-                const unique = new Map<string, { value: string; label: string }>()
-                unique.set("all", { value: "All", label: "All" })
-                businessList.forEach((biz) => {
-                        if (biz.location?.title) {
-                                unique.set(biz.location._id, {
-                                        value: biz.location.title,
-                                        label: biz.location.title,
-                                })
-                        }
-                })
-                return Array.from(unique.values())
-        }, [businessList])
-
-        const filteredBusinesses = useMemo(() => {
-                if (selectedLocation === "All") return businessList
-                return businessList.filter(biz => biz.location?.title === selectedLocation)
-        }, [selectedLocation, businessList])
+                const [ selectedCategory, setSelectedCategory ] = useState<string>("All")
+        
+                const category = useMemo(() => {
+                        const unique = new Map<string, { value: string; label: string }>()
+                        unique.set("all", { value: "All", label: "All" })
+                        businessList.forEach((biz) => {
+                                if (biz.category?.title) {
+                                        unique.set(biz.category._id, {
+                                                value: biz.category.title,
+                                                label: biz.category.title,
+                                        })
+                                }
+                        })
+                        return Array.from(unique.values())
+                }, [businessList])
+        
+                const filteredBusinesses = useMemo(() => {
+                        if (selectedCategory === "All") return businessList
+                        return businessList.filter(biz => biz.category?.title === selectedCategory)
+                }, [selectedCategory, businessList])
 
         const copyContent = {
-                title: `Discover The Top ${service} in Lagos`,
+                title: `Discover The Top Home Service Businesses in ${location}`,
                 paragraph: "Discover the best home-needs service providers here in Lagos to keep your home clean, brand new, and running smoothly, scored by public reviews, expert testings, and social signals.",
         }
-        
+
         return (
                 <main>
-                        <CategoryHeroSection
+                        <CategoryHeroSection 
                                 copyContent={copyContent}
                         />
                         <section className='py-5 md:py-10 px-2.5 md:px-5'>
@@ -52,9 +52,9 @@ export default function SingleCategoryPageComponents({ service, businessList }: 
                                                         {filteredBusinesses.length} Results found
                                                 </span>
                                                 <CategoryFilter 
-                                                        listToFilter={locations} 
-                                                        onFilterChange={setSelectedLocation}
-                                                        filterType='location'
+                                                        listToFilter={category} 
+                                                        onFilterChange={setSelectedCategory}
+                                                        filterType='category'
                                                 />
                                         </div>
                                         <div>

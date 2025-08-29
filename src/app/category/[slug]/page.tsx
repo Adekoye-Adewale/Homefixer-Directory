@@ -5,12 +5,11 @@ import SingleCategoryPageComponents from '@/components/pages/categoryPage/single
 import PriBtn from '@/components/buttons/priBtn'
 import SecBtn from '@/components/buttons/secBtn'
 
-
 type CategoryPageProps = {
         params: Promise<{ slug: string}>
 }
 
-export default async function SingleCategoryPage({ params }: CategoryPageProps) {
+export default async function SingleCategoryPage({ params }: CategoryPageProps ) {
 
         const { slug } = await params
 
@@ -31,7 +30,7 @@ export default async function SingleCategoryPage({ params }: CategoryPageProps) 
                                                 No businesses found
                                         </h1>
                                         <p className="text-gray-600 my-2">
-                                                Currently, there are no businesses listed under <strong>{category.title}</strong>.
+                                                Currently, there are no businesses presently listed under <strong>{category.title}</strong>.
                                         </p>
                                         <div className='flex gap-2 items-center justify-center pt-5'>
                                                 <PriBtn

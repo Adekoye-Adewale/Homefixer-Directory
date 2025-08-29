@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react'
 import MainBusinessCard from './businessCard'
-import { BizContentCardProps } from './businessCardProps'
 import { customBusiness } from '@/sanity/lib/customTypes/business'
 
 type MainBusinessListProps = {
@@ -10,7 +9,7 @@ type MainBusinessListProps = {
 export default function MainBusinessList({ BizContents }: MainBusinessListProps) {
         return (
                 <div 
-                        className='flex gap-3 md:gap-5'
+                        className='flex gap-2.5 md:gap-5'
                 >
                         {BizContents.map((content) => (
                                 <Fragment key={content._id}>

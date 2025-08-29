@@ -2,8 +2,7 @@ import { createClient } from 'next-sanity'
 
 import { apiVersion, dataset, projectId } from '../env'
 import { sanityFetch } from './live'
-import { Business, BusinessCategory, BusinessLocation } from '@/sanity.types'
-import { businessByCategorySlugQuery, businessQuery } from './queries/business'
+import { businessByCategorySlugQuery, businessByLocationSlugQuery, businessQuery } from './queries/business'
 import { businessCategoryQuery } from './queries/businessCategory'
 import { businessLocationQuery } from './queries/businessLocation'
 import { customBusiness } from './customTypes/business'
@@ -35,6 +34,17 @@ export const getAllBusinessesLocations = async () => {
   return locations.data as customBusinessLocationType[];
 }
 
+export const getBusinessBySlug = async (slug: string) => {
+  try {
+    const query = `*[_type == 'business' && slug.current == $slug][0]`;
+    const business = await sanityFetch({ query, params: { slug } });
+    return business.data ?? null;
+  } catch (error) {
+    console.error("Error fetching business by slug:", error);
+    return null;
+  }
+}
+
 export const getCategoryBySlug = async (slug: string) => {
   try {
     const query = `*[_type == 'businessCategory' && slug.current == $slug][0]`;
@@ -53,6 +63,28 @@ export const getBusinessByCategorySlug = async (slug: string): Promise<customBus
     return business.data ?? [];
   } catch (error) {
     console.error("Error fetching businesses by category slug:", error);
+    return [];
+  }
+}
+
+export const getLoactionBySlug = async (slug: string) => {
+  try {
+    const query = `*[_type == 'businessLocation' && slug.current == $slug][0]`;
+    const location = await sanityFetch({ query, params: { slug } });
+    return location.data ?? null;
+  } catch (error) {
+    console.error("Error fetching location by slug:", error);
+    return null;
+  }
+}
+
+export const getBusinessByLocationSlug = async (slug: string): Promise<customBusiness[]> => {
+  try {
+    const query = businessByLocationSlugQuery
+    const business = await sanityFetch({ query, params: { slug } })
+    return business.data ?? [];
+  } catch (error) {
+    console.error("Error fetching businesses by location slug:", error);
     return [];
   }
 }

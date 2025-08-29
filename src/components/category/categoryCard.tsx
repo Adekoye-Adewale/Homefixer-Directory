@@ -6,7 +6,7 @@ import { customBusinessCategoryType } from '@/sanity/lib/customTypes/businessCat
 export default function CategoryCard({ slug, image, title }: customBusinessCategoryType) {
         return (
                 <Link
-                        href={`/${slug}`}
+                        href={`/category/${slug}`}
                         className='relative grid place-content-center aspect-video w-full p-2.5 md:p-5 overflow-hidden rounded group'
                 >
                         <Image

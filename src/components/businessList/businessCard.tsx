@@ -49,24 +49,26 @@ export default function MainBusinessCard({
                                                 >
                                                         {businessName}
                                                 </h3>
-                                                <p className='text-white/70 text-xs md:text-sm mt-1 md:mt-2 line-clamp-2'>
-                                                        {description}
-                                                </p>
+                                                <div className='hidden md:block mt-1 md:mt-2'>
+                                                        <p className='text-white/70 text-xs md:text-sm line-clamp-2'>
+                                                                {description}
+                                                        </p>
+                                                </div>
                                         </div>
                                 </div>
-                                <div className='flex gap-2.5 mb-7 items-center text-[10px] md:text-xs font-semibold'>
+                                <div className='flex flex-wrap gap-2.5 mb-7 items-center text-[10px] md:text-xs font-semibold'>
                                         <Link
-                                                href={`/${categorySlug}`}
+                                                href={`/category/${categorySlug}`}
                                                 title={category?.title}
-                                                className='flex items-center gap-1 flex-nowrap max-w-[45%] text-nowrap overflow-clip py-0.5 px-2.5 text-amber-300/50 border border-solid border-amber-300/50 bg-transparent transition-all duration-300 hover:text-amber-200 hover:bg-amber-900 rounded'
+                                                className='flex items-center gap-1 flex-nowrap  text-nowrap overflow-clip py-0.5 px-2.5 text-amber-300/50 border border-solid border-amber-300/50 bg-transparent transition-all duration-300 hover:text-amber-200 hover:bg-amber-900 rounded'
                                         >
                                                 <Tag className='w-3' />
                                                 {category?.title}
                                         </Link>
                                         <Link
-                                                href={`/${locationSlug}`}
+                                                href={`/locations/${locationSlug}`}
                                                 title={location.title}
-                                                className='flex items-center gap-1 max-w-[45%] text-nowrap overflow-hidden py-0.5 px-2.5 text-amber-300/50 border border-solid border-amber-300/50 bg-transparent transition-all duration-300 hover:text-amber-200 hover:bg-amber-900 rounded'
+                                                className='flex items-center gap-1 text-nowrap overflow-hidden py-0.5 px-2.5  text-amber-300/50 border border-solid border-amber-300/50 bg-transparent transition-all duration-300 hover:text-amber-200 hover:bg-amber-900 rounded'
                                         >
                                                 <MapPin 
                                                         className='w-3' 
@@ -77,9 +79,9 @@ export default function MainBusinessCard({
                                         </Link>
                                 </div>
                         </div>
-                        <div className='absolute bottom-0 left-0 flex items-center gap-2 py-1 px-2.5 md:py-1.5 md:px-5 bg-amber-300 w-full rounded-t text-center text-[10px] md:text-xs font-semibold divide-x divide-amber-900'>
+                        <div className='absolute bottom-0 left-0 flex items-center gap-2 py-1 px-2.5 md:py-1.5 md:px-5 bg-amber-300 w-full rounded-t text-left text-[10px] md:text-xs font-semibold divide-x divide-amber-900 whitespace-nowrap'>
                                 <Link
-                                        href={`/${slug?.current}`}
+                                        href={`/business/${slug?.current}`}
                                         title={`learn more about ${businessName}`}
                                         className='flex items-center gap-1 transition-colors duration-300 hover:text-amber-900 pr-2'
                                 >
@@ -95,7 +97,7 @@ export default function MainBusinessCard({
                                                 rel="noopener noreferrer"
                                                 className='flex items-center gap-1 transition-colors duration-300 hover:text-amber-900'
                                         >
-                                                <span>
+                                                <span className='hidden md:block'>
                                                         Visit website
                                                 </span>
                                                 <Globe className='w-3'/>

@@ -6,7 +6,7 @@ import { customBusinessLocationType } from '@/sanity/lib/customTypes/businessLoc
 export default function LocationCard({ slug, image, title }: customBusinessLocationType) {
         return (
                 <Link 
-                        href={`/${slug}`}
+                        href={`/locations/${slug}`}
                         className='relative grid place-content-center aspect-video w-full p-2.5 md:p-5 overflow-hidden rounded group'
                 >
                         <Image

@@ -7,11 +7,9 @@ export default async function CategoryPage() {
         const allCategory = await getAllBusinessesCategory()
 
         return (
-                <>
-                        <CategoryPageComponent
-                                length={allCategory.length}
-                                allCategory={allCategory}
-                        />
-                </>
+                <CategoryPageComponent
+                        length={allCategory.length}
+                        allCategory={allCategory}
+                />
         )
 }

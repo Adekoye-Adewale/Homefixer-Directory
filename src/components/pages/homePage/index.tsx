@@ -26,7 +26,7 @@ export default function FrontPage({
                         <HowItWorks/>
                         <ListingSection
                                 sectionTitle='Discover Our Top Listings'
-                                archivePageSlug='/business-list'
+                                archivePageSlug='/business'
                                 slugTitle='See all businesses'
                                 allBizList={allBizList}
                                 bg='bg-amber-100'
@@ -40,14 +40,14 @@ export default function FrontPage({
                         />
                         <ListingSection
                                 sectionTitle='Top plumbers near you'
-                                archivePageSlug='/plumbers'
+                                archivePageSlug='/category/plumbers'
                                 slugTitle='See all plumbers'
                                 allBizList={allBizList}
                                 bg='bg-amber-100'
                         />
                         <CategoryListSection
                                 sectionTitle='What service do you need?'
-                                archivePageSlug='/service'
+                                archivePageSlug='/category'
                                 slugTitle='See all services'
                                 allCategoryList={allCategoryList}
                                 bg='bg-white'
