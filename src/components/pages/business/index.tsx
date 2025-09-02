@@ -61,7 +61,7 @@ export default function BusinessPageComponent({ BizContents }: BusinessPageProps
                                                 <span className='text-sm font-semibold'>
                                                         {filteredBusinesses.length} Results found
                                                 </span>
-                                                <div className="flex gap-2.5">
+                                                <div className="w-full max-w-[450px] flex flex-wrap gap-2.5 justify-between">
                                                         <CategoryFilter
                                                                 listToFilter={locations}
                                                                 onFilterChange={setSelectedLocation}

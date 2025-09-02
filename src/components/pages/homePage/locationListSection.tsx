@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { MoveUpRight } from 'lucide-react'
 import LocationCard from '@/components/location/locationCard'
 import { customBusinessLocationType } from '@/sanity/lib/customTypes/businessLocation'
+import LocationSlider from '@/components/layouts/loctaionSlider'
 
 type MainLocationListProps = {
         sectionTitle: string
@@ -34,7 +35,11 @@ export default function LocationListSection({ sectionTitle, archivePageSlug, slu
                                                 />
                                         </Link>
                                 </div>
-                                <div className='grid grid-cols-2 justify-between lg:grid-cols-4 gap-5 mt-5 md:mt-8'>
+                                <LocationSlider 
+                                        slideContent={allLocationList}
+                                        className="mt-8 md:mt-10"
+                                />
+                                {/* <div className='grid grid-cols-2 justify-between lg:grid-cols-4 gap-5 mt-5 md:mt-8'>
                                         {allLocationList.map((list) =>(
                                                 <Fragment key={list._id}>
                                                         <LocationCard
@@ -44,7 +49,7 @@ export default function LocationListSection({ sectionTitle, archivePageSlug, slu
                                                         />
                                                 </Fragment>
                                         ))}
-                                </div>
+                                </div> */}
                         </div>
                 </section>
         )

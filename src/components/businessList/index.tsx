@@ -9,7 +9,7 @@ type MainBusinessListProps = {
 export default function MainBusinessList({ BizContents }: MainBusinessListProps) {
         return (
                 <div 
-                        className='flex gap-2.5 md:gap-5'
+                        className='grid grid-cols-2 md:grid-cols-3 lg:grid-col-4 gap-2.5 md:gap-5'
                 >
                         {BizContents.map((content) => (
                                 <Fragment key={content._id}>
