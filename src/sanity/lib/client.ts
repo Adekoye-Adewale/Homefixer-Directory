@@ -2,7 +2,7 @@ import { createClient } from 'next-sanity'
 
 import { apiVersion, dataset, projectId } from '../env'
 import { sanityFetch } from './live'
-import { businessByCategorySlugQuery, businessByLocationSlugQuery, businessQuery } from './queries/business'
+import { businessByCategorySlugQuery, businessByLocationSlugQuery, businessBySlugQuery, businessQuery } from './queries/business'
 import { businessCategoryQuery } from './queries/businessCategory'
 import { businessLocationQuery } from './queries/businessLocation'
 import { customBusiness } from './customTypes/business'
@@ -36,11 +36,11 @@ export const getAllBusinessesLocations = async () => {
 
 export const getBusinessBySlug = async (slug: string) => {
   try {
-    const query = `*[_type == 'business' && slug.current == $slug][0]`;
-    const business = await sanityFetch({ query, params: { slug } });
+    const query = businessBySlugQuery
+    const business = await sanityFetch({ query, params: { slug } })
     return business.data ?? null;
   } catch (error) {
-    console.error("Error fetching business by slug:", error);
+    console.error("Error fetching business by slug:", error)
     return null;
   }
 }

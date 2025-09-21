@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import HeaderNav from "@/components/header"
 import "./globals.css";
 import { SanityLive } from "@/sanity/lib/live";
+import { Toaster } from "@/components/ui/sonner"
 
 const inter = Inter({
   variable: "--font-inter",
@@ -29,6 +30,7 @@ export default function RootLayout({
           {children}
         </main>
         <SanityLive/>
+        <Toaster richColors position="top-center" />
       </body>
     </html>
   );
