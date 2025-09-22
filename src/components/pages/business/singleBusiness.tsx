@@ -4,10 +4,19 @@ import { customBusiness } from '@/sanity/lib/customTypes/business'
 import Link from 'next/link'
 import { Badge } from "@/components/ui/badge"
 import ShareButton from '@/components/layouts/shareButton'
-import { Globe, Phone } from 'lucide-react'
+import { Globe, Mail, Phone } from 'lucide-react'
+import SingleBusinessMapGoogle from '@/components/mapsComponents/singleBusinessMapGoogle'
 
 type BusinessPageProps = {
         biz: customBusiness
+}
+
+type ConatctProps = {
+        businessAddress?: string
+        businessName: string
+        businessPhoneNumber?: string
+        businessEmail?: string
+        businessWebsite?: string
 }
 
 export default function SingleBusinessPageComponent({ biz }: BusinessPageProps) {
@@ -82,56 +91,15 @@ export default function SingleBusinessPageComponent({ biz }: BusinessPageProps) 
                         <section className='flex justify-center items-center py-5 md:py-10 px-2.5 md:px-5 relative overflow-clip'>
                                 <div className='container relative mx-auto'>
                                         <div className='grid grid-cols-1 md:grid-cols-3 gap-5'>
-                                                <div className='col-span-1 md:col-span-2 border border-sm border-gray-300 rounded-sm p-5'>
-                                                        <p className='text-xs'>
-                                                                {biz?.description}
-                                                        </p>
-                                                </div>
-                                                <div className='col-span-1 border border-sm border-gray-300 rounded-sm p-5 space-y-2.5'>
-                                                        <div>
-                                                                MAP HERE
-                                                        </div>
-                                                        <div className='text-xs font-semibold  divide-gray-300 divide-y'>
-                                                                <div>
-                                                                        <p className='my-2.5'>
-                                                                                {biz?.businessAddress ?? "1077 broad way, Lagos Island, Lagos."}
-                                                                        </p>
-                                                                </div>
-                                                                <div>
-                                                                        <Link 
-                                                                                href={`tel:${biz?.businessPhoneNumber || ''}`} 
-                                                                                className='flex gap-2 my-2.5 items-center    text-blue-600'
-                                                                        >
-                                                                                <Phone className='size-3'/>
-                                                                                <span>
-                                                                                        {biz.businessPhoneNumber ? 'Call now' : 'No phone number'}
-                                                                                </span>
-                                                                        </Link>
-                                                                </div>
-                                                                <div>
-                                                                        <Link
-                                                                                href={`mailto:${biz?.businessEmail || ''}`}
-                                                                                className='flex gap-2 my-2.5 items-center   text-blue-600'
-                                                                        >
-                                                                                <Globe className='size-3' />
-                                                                                <span>
-                                                                                        {biz.businessEmail ? 'Send mail' : 'No email'}
-                                                                                </span>
-                                                                        </Link>
-                                                                </div>
-                                                                <div>
-                                                                        <Link
-                                                                                href={`${biz?.businessWebsite || ''}`}
-                                                                                className='flex gap-2 my-2.5 items-center   text-blue-600'
-                                                                        >
-                                                                                <Globe className='size-3' />
-                                                                                <span>
-                                                                                        {biz.businessWebsite ? 'Visit site' : 'No website'}
-                                                                                </span>
-                                                                        </Link>
-                                                                </div>
-                                                        </div>
-                                                </div>
+                                                <Description 
+                                                        description={biz?.description || 'No description provided for this business.'} 
+                                                />
+                                                <Contact 
+                                                        businessName={biz.businessName}
+                                                        businessAddress={biz.businessAddress || 'Business address not available.'} 
+                                                        businessEmail={biz?.businessEmail || undefined} 
+                                                        businessPhoneNumber={biz?.businessPhoneNumber || undefined} businessWebsite={biz?.businessWebsite || undefined} 
+                                                />
                                         </div>
                                         <div className='border border-sm border-gray-300 rounded-sm p-5 mt-5'>
                                                 Gallery
@@ -139,5 +107,81 @@ export default function SingleBusinessPageComponent({ biz }: BusinessPageProps) 
                                 </div>
                         </section>
                 </main>
+        )
+}
+
+const Description = ({ description }: { description: string }) => {
+        return (
+                <div className='col-span-1 md:col-span-2 border border-sm border-gray-300 rounded-sm p-5'>
+                        <h3 className='font-bold text-sm mb-2.5'>
+                                Description
+                        </h3>
+                        <p className='text-sm leading-6'>
+                                {description}
+                        </p>
+                </div>
+        )
+}
+
+const Contact = ({ businessAddress, businessName, businessPhoneNumber, businessWebsite, businessEmail }: ConatctProps) => {
+        return (
+                <div className='col-span-1 border border-sm border-gray-300 rounded-sm p-5 space-y-2.5'>
+                        <div>
+                                <h3 className='font-bold text-sm mb-2.5'>
+                                        Contact information
+                                </h3>
+                                <SingleBusinessMapGoogle
+                                        businessAddress={businessAddress || 'Lagos Island, Lagos, Nigeria.'}
+                                        businessName={businessName || 'Business Name'}
+                                />
+                        </div>
+                        <div className='text-xs font-semibold  divide-gray-300 divide-y'>
+                                <div>
+                                        <p className='font-medium my-2.5'>
+                                                {businessAddress ?? "Business address not available."}
+                                        </p>
+                                </div>
+                                <div>
+                                        {businessPhoneNumber && (
+                                                <Link
+                                                        href={`tel:${businessPhoneNumber}`}
+                                                        className='flex gap-2 my-2.5 items-center    text-blue-600'
+                                                >
+                                                        <Phone className='size-3' />
+                                                        <span>
+                                                                Call now
+                                                        </span>
+                                                </Link>
+                                        )}
+                                </div>
+                                <div>
+                                        {businessEmail && (
+                                                <Link
+                                                        href={`mailto:${businessEmail}`}
+                                                        className='flex gap-2 my-2.5 items-center   text-blue-600'
+                                                >
+                                                        <Mail className='size-3' />
+                                                        <span>
+                                                               Send mail
+                                                        </span>
+                                                </Link>
+                                        )}
+                                        
+                                </div>
+                                <div>
+                                        {businessWebsite && (
+                                                <Link
+                                                        href={`${businessWebsite}?referral=lagoshomefixers.com`}
+                                                        className='flex gap-2 my-2.5 items-center   text-blue-600'
+                                                >
+                                                        <Globe className='size-3' />
+                                                        <span>
+                                                                Visit site
+                                                        </span>
+                                                </Link>
+                                        )}
+                                </div>
+                        </div>
+                </div>
         )
 }

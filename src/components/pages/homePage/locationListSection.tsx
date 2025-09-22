@@ -1,7 +1,6 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import Link from 'next/link'
 import { MoveUpRight } from 'lucide-react'
-import LocationCard from '@/components/location/locationCard'
 import { customBusinessLocationType } from '@/sanity/lib/customTypes/businessLocation'
 import LocationSlider from '@/components/layouts/loctaionSlider'
 
