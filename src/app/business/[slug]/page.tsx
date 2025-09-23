@@ -2,6 +2,7 @@ import React from 'react'
 import { notFound } from 'next/navigation'
 import { getBusinessBySlug } from '@/sanity/lib/client'
 import SingleBusinessPageComponent from '@/components/pages/business/singleBusiness'
+import { getBusinessGoogleData } from '@/lib/getBusinessGoogleInfo'
 
 type LocationPageProps = {
         params: Promise<{ slug: string }>
@@ -16,14 +17,13 @@ export default async function SingleBusinessPage({ params }: LocationPageProps) 
                 notFound();
         }
 
-        // console.log(business)
+        const info = await getBusinessGoogleData(business.businessName, business.locationTitle)
 
         return (
                 <>
-                        {/* SingleBusinessPage: {slug}
-                        business data: {JSON.stringify(business)} */}
                         <SingleBusinessPageComponent
                                 biz={business}
+                                info={info}
                         />
                 </>
         )

@@ -1,11 +1,13 @@
 import React from 'react'
-import Image from 'next/image'
 import { customBusiness } from '@/sanity/lib/customTypes/business'
+import Image from 'next/image'
 import Link from 'next/link'
 import { Badge } from "@/components/ui/badge"
 import ShareButton from '@/components/layouts/shareButton'
-import { Globe, Mail, Phone } from 'lucide-react'
 import SingleBusinessMapGoogle from '@/components/mapsComponents/singleBusinessMapGoogle'
+import SingleBusinessPageRatingSection from './singleBusinessPageRatingSection'
+import { Globe, Mail, Phone, SquareArrowOutUpRight } from 'lucide-react'
+import { BusinessData } from '@/lib/getBusinessGoogleInfo'
 
 type BusinessPageProps = {
         biz: customBusiness
@@ -19,7 +21,14 @@ type ConatctProps = {
         businessWebsite?: string
 }
 
-export default function SingleBusinessPageComponent({ biz }: BusinessPageProps) {
+export default function SingleBusinessPageComponent(
+        {
+                biz,
+                info 
+        }: {
+                biz: BusinessPageProps; 
+                info: BusinessData | null
+}) {
         return (
                 <main>
                         <section className='flex justify-center items-center py-24 md:py-32 px-2.5 md:px-5 relative overflow-clip min-h-96 max-h-[500px] h-full z-[1]'>
@@ -83,12 +92,7 @@ export default function SingleBusinessPageComponent({ biz }: BusinessPageProps) 
                                         </div>
                                 </div>
                         </section>
-                        <section className='py-5 md:py-10 px-2.5 md:px-5'>
-                                <div className='container relative mx-auto'>
-
-                                </div>
-                        </section>
-                        <section className='flex justify-center items-center py-5 md:py-10 px-2.5 md:px-5 relative overflow-clip'>
+                        <section className='flex justify-center items-center pt-5 md:pt-10 px-2.5 md:px-5 relative overflow-clip'>
                                 <div className='container relative mx-auto'>
                                         <div className='grid grid-cols-1 md:grid-cols-3 gap-5'>
                                                 <Description 
@@ -102,10 +106,13 @@ export default function SingleBusinessPageComponent({ biz }: BusinessPageProps) 
                                                 />
                                         </div>
                                         <div className='border border-sm border-gray-300 rounded-sm p-5 mt-5'>
-                                                Gallery
+                                                <h3 className='font-bold text-sm mb-2.5'>
+                                                        Gallery
+                                                </h3>
                                         </div>
                                 </div>
                         </section>
+                        <SingleBusinessPageRatingSection info={info} />
                 </main>
         )
 }
@@ -134,6 +141,20 @@ const Contact = ({ businessAddress, businessName, businessPhoneNumber, businessW
                                         businessAddress={businessAddress || 'Lagos Island, Lagos, Nigeria.'}
                                         businessName={businessName || 'Business Name'}
                                 />
+                                {businessAddress && <a
+                                                href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
+                                                        businessAddress
+                                                )}`}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="flex gap-1 items-center text-xs font-semibold my-2.5 text-blue-600"
+                                        >
+                                                <span>
+                                                        Get directions
+                                                </span>
+                                                <SquareArrowOutUpRight className='size-3' />
+                                        </a>
+                                }
                         </div>
                         <div className='text-xs font-semibold  divide-gray-300 divide-y'>
                                 <div>
@@ -145,7 +166,7 @@ const Contact = ({ businessAddress, businessName, businessPhoneNumber, businessW
                                         {businessPhoneNumber && (
                                                 <Link
                                                         href={`tel:${businessPhoneNumber}`}
-                                                        className='flex gap-2 my-2.5 items-center    text-blue-600'
+                                                        className='flex gap-2 my-2.5 items-center text-blue-600'
                                                 >
                                                         <Phone className='size-3' />
                                                         <span>
@@ -172,6 +193,7 @@ const Contact = ({ businessAddress, businessName, businessPhoneNumber, businessW
                                         {businessWebsite && (
                                                 <Link
                                                         href={`${businessWebsite}?referral=lagoshomefixers.com`}
+                                                        target='_blank'
                                                         className='flex gap-2 my-2.5 items-center   text-blue-600'
                                                 >
                                                         <Globe className='size-3' />
