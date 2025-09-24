@@ -27,7 +27,7 @@ export type customBusiness = {
                 title: string
                 slug: Slug
         }
-        description: string
+        description?: string
         location: {
                 _id: string
                 title: string

@@ -5,14 +5,16 @@ import CategoryHeroSection from '../categoryPage/heroSection'
 import ConnectingBiz from '../homePage/connectingBiz'
 import MainBusinessList from '@/components/businessList'
 import CategoryFilter from '@/components/filters/categoryFilter'
+import { BusinessData } from '@/lib/getBusinessGoogleInfo'
 
 type LocationPageProps = {
         location?: string
         length: number
         businessList: customBusiness[]
+        info: (BusinessData | null)[]
 }
 
-export default function SingleLocationPageComponent({ location, businessList }: LocationPageProps) {
+export default function SingleLocationPageComponent({ location, businessList, info }: LocationPageProps) {
 
                 const [ selectedCategory, setSelectedCategory ] = useState<string>("All")
         
@@ -60,6 +62,7 @@ export default function SingleLocationPageComponent({ location, businessList }: 
                                         <div>
                                                 <MainBusinessList
                                                         BizContents={filteredBusinesses}
+                                                        info={info}
                                                 />
                                         </div>
                                 </div>                                

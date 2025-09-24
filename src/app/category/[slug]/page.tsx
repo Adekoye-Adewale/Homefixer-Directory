@@ -4,6 +4,7 @@ import { getCategoryBySlug, getBusinessByCategorySlug } from '@/sanity/lib/clien
 import SingleCategoryPageComponents from '@/components/pages/categoryPage/singleCategoryPage'
 import PriBtn from '@/components/buttons/priBtn'
 import SecBtn from '@/components/buttons/secBtn'
+import { getBusinessGoogleData } from '@/lib/getBusinessGoogleInfo'
 
 type CategoryPageProps = {
         params: Promise<{ slug: string}>
@@ -47,11 +48,18 @@ export default async function SingleCategoryPage({ params }: CategoryPageProps )
                 );
         }
 
+        const info = await Promise.all(
+                business.map(biz =>
+                        getBusinessGoogleData(biz.businessName, biz.location.title)
+                )
+        )
+
         return (
                 <SingleCategoryPageComponents
                         service={category.title}
                         length={business.length}
                         businessList={business}
+                        info={info}
                 />
         )
 }

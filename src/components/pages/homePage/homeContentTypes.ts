@@ -8,4 +8,5 @@ export type connectingBizCardProps = {
         titleTop: string
         titleBottom: string
         description: string
+        link: string
 }

@@ -20,18 +20,21 @@ export const howItWorksContents: cardProps[] = [
 
 export const connectBizContents: connectingBizCardProps[] = [
         {
-                titleTop: `Request `,
-                titleBottom: `a service`,
-                description: `Search businesses for your match.`,
-        },
-        {
                 titleTop: `Explore `,
                 titleBottom: `your loctaion`,
                 description: `Browse businesses from your location.`,
+                link: `/locations`,
         },
         {
                 titleTop: `Connect with `,
                 titleBottom: `your best fixer`,
                 description: `Find and connect with fixers close to you.`,
+                link: `/business`,
+        },
+        {
+                titleTop: `Request `,
+                titleBottom: `a service`,
+                description: `Search businesses for your match.`,
+                link: `/search`,
         },
 ]

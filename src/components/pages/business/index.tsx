@@ -5,12 +5,14 @@ import CategoryHeroSection from '../categoryPage/heroSection'
 import ConnectingBiz from '../homePage/connectingBiz'
 import MainBusinessList from '@/components/businessList'
 import { customBusiness } from '@/sanity/lib/customTypes/business'
+import { BusinessData } from "@/lib/getBusinessGoogleInfo"
 
 type BusinessPageProps = {
         BizContents: customBusiness[]
+        info: (BusinessData | null)[]
 }
 
-export default function BusinessPageComponent({ BizContents }: BusinessPageProps ) {
+export default function BusinessPageComponent({ BizContents, info }: BusinessPageProps ) {
 
         const [selectedLocation, setSelectedLocation] = useState<string>("All")
         const [selectedCategory, setSelectedCategory] = useState<string>("All")
@@ -77,6 +79,7 @@ export default function BusinessPageComponent({ BizContents }: BusinessPageProps
 
                                         <MainBusinessList
                                                 BizContents={filteredBusinesses}
+                                                info={info}
                                         />
                                 </div>
                         </section>

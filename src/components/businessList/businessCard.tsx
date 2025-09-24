@@ -3,10 +3,15 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Globe, MapPin, SquareArrowOutUpRight, Tag } from 'lucide-react'
 import { customBusiness } from '@/sanity/lib/customTypes/business'
+import StarRating from '../mapsComponents/StarRating'
+import { BusinessData } from '@/lib/getBusinessGoogleInfo'
+import { Badge } from "@/components/ui/badge"
+import { linkRefer } from '@/contents/constants'
 
 type UpdatedType = customBusiness & {
         locationSlug: string
         categorySlug: string
+        info?: (BusinessData | null)[]
 }
 
 export default function MainBusinessCard({ 
@@ -14,17 +19,22 @@ export default function MainBusinessCard({
         coverImage, 
         businessLogo, 
         businessName,
-        description, 
         category,  
         location, 
         slug,
         businessWebsite,
         locationSlug,
-        categorySlug
+        categorySlug,
+        info
 } : UpdatedType) {
+
+        const rateInfo = info?.find((data) => data?.name.toLowerCase().includes(businessName.toLowerCase()))
+
+        const ratingNumber = rateInfo?.name.toLowerCase().includes(businessName.toLowerCase()) ? rateInfo.rating : null
+
         return (
                 <div 
-                        className='grid content-end max-w-[350px] w-full p-2.5 md:p-5 relative rounded border border-solid overflow-hidden group'
+                        className='grid content-end max-w-[350px] w-full p-2.5 pt-5 md:p-5 relative rounded border border-solid overflow-hidden group'
                         key={_id}
                 >
                         <Image
@@ -32,7 +42,7 @@ export default function MainBusinessCard({
                                 alt={`${businessName} cover image`}
                                 width={350}
                                 height={230}
-                                className='absolute inset-0 size-full object-cover brightness-20 transition-all duration-300 group-hover:brightness-5'
+                                className='absolute inset-0 size-full object-cover brightness-10 md:brightness-20 transition-all duration-300 group-hover:brightness-5'
                         />
                         <div className='relative flex flex-col space-y-3'>
                                 <Image
@@ -49,10 +59,8 @@ export default function MainBusinessCard({
                                                 >
                                                         {businessName}
                                                 </h3>
-                                                <div className='hidden md:block mt-1 md:mt-2'>
-                                                        <p className='text-white/70 text-xs md:text-sm line-clamp-2'>
-                                                                {description}
-                                                        </p>
+                                                <div className='mt-1 md:mt-2'>
+                                                        <StarRating rating={ratingNumber} />
                                                 </div>
                                         </div>
                                 </div>
@@ -60,30 +68,38 @@ export default function MainBusinessCard({
                                         <Link
                                                 href={`/category/${categorySlug}`}
                                                 title={category?.title}
-                                                className='flex items-center gap-1 flex-nowrap  text-nowrap overflow-clip py-0.5 px-2.5 text-amber-300/50 border border-solid border-amber-300/50 bg-transparent transition-all duration-300 hover:text-amber-200 hover:bg-amber-900 rounded'
+                                                className='text-amber-300/50 transition-all duration-300 hover:text-amber-200 '
                                         >
-                                                <Tag className='w-3' />
-                                                {category?.title}
+                                                <Badge
+                                                        variant="outline"
+                                                        className="border-[#EE9513]/80 text-[#EE9513] hover:text-white/90 hover:border-white/90 transition-all duration-300"
+                                                >
+                                                        <Tag className='w-3' />
+                                                        {category.title || 'Business Category Here'}
+                                                </Badge>
                                         </Link>
                                         <Link
                                                 href={`/locations/${locationSlug}`}
                                                 title={location.title}
-                                                className='flex items-center gap-1 text-nowrap overflow-hidden py-0.5 px-2.5  text-amber-300/50 border border-solid border-amber-300/50 bg-transparent transition-all duration-300 hover:text-amber-200 hover:bg-amber-900 rounded'
+                                                className='text-amber-300/50 transition-all duration-300 hover:text-amber-200'
                                         >
-                                                <MapPin 
-                                                        className='w-3' 
-                                                />
-                                                <span>
+                                                <Badge
+                                                        variant="outline"
+                                                        className="border-[#EE9513]/80 text-[#EE9513] hover:text-white/90 hover:border-white/90 transition-all duration-300"
+                                                >
+                                                        <MapPin
+                                                                className='w-3'
+                                                        />
                                                         {location?.title}
-                                                </span>
+                                                </Badge>
                                         </Link>
                                 </div>
                         </div>
-                        <div className='absolute bottom-0 left-0 flex items-center gap-2 py-1 px-2.5 md:py-1.5 md:px-5 bg-amber-300 w-full rounded-t text-left text-[10px] md:text-xs font-semibold divide-x divide-amber-900 whitespace-nowrap'>
+                        <div className='absolute bottom-0 left-0 flex items-center gap-2 py-1 px-2.5 md:py-1.5 md:px-5 bg-black w-full rounded-t text-left text-[10px] md:text-xs font-semibold divide-x divide-white/10 whitespace-nowrap'>
                                 <Link
                                         href={`/business/${slug?.current}`}
                                         title={`learn more about ${businessName}`}
-                                        className='flex items-center gap-1 transition-colors duration-300 hover:text-amber-900 pr-2'
+                                        className='flex items-center gap-1 transition-colors duration-300 text-gray-400 hover:text-white pr-2'
                                 >
                                         <span>
                                                 View business
@@ -92,10 +108,10 @@ export default function MainBusinessCard({
                                 </Link>
                                 {businessWebsite && 
                                         <Link
-                                                href={`${businessWebsite}?referral=lagoshomefixers.com`}
+                                                href={`${businessWebsite}${linkRefer}`}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
-                                                className='flex items-center gap-1 transition-colors duration-300 hover:text-amber-900'
+                                                className='flex items-center gap-1 transition-colors duration-300 text-gray-400 hover:text-white'
                                         >
                                                 <span className='hidden md:block'>
                                                         Visit website

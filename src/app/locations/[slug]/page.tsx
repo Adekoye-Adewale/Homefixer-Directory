@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation'
 import PriBtn from '@/components/buttons/priBtn'
 import SubmitYourBizBtn from '@/components/buttons/submitYourBizBtn'
 import SingleLocationPageComponent from '@/components/pages/locationPage/singleLocationPage'
+import { getBusinessGoogleData } from '@/lib/getBusinessGoogleInfo'
 
 type LocationPageProps = {
         params: Promise<{ slug: string }>
@@ -44,13 +45,18 @@ export default async function SingleLocationPage({ params }: LocationPageProps )
                 );
         }
 
-        console.log(business);
+        const info = await Promise.all(
+                business.map(biz =>
+                        getBusinessGoogleData(biz.businessName, biz.location.title)
+                )
+        )
 
         return (
                 <SingleLocationPageComponent
                         location={location.title}
                         length={business.length}
                         businessList={business}
+                        info={info}
                 />
         )
 }

@@ -10,6 +10,7 @@ import { Globe, Mail, Phone, SquareArrowOutUpRight } from 'lucide-react'
 import { BusinessData } from '@/lib/getBusinessGoogleInfo'
 import StarRating from '@/components/mapsComponents/StarRating'
 import ConnectingBiz from '../homePage/connectingBiz'
+import { linkRefer } from '@/contents/constants'
 
 type ConatctProps = {
         businessAddress?: string
@@ -202,7 +203,7 @@ const Contact = ({ businessAddress, businessName, businessPhoneNumber, businessW
                                 <div>
                                         {businessWebsite && (
                                                 <Link
-                                                        href={`${businessWebsite}?referral=lagoshomefixers.com`}
+                                                        href={`${businessWebsite}${linkRefer}`}
                                                         target='_blank'
                                                         className='flex gap-2 my-2.5 items-center   text-blue-600'
                                                 >

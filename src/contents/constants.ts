@@ -1,0 +1,1 @@
+export const linkRefer = `?referral=lagoshomefixers.com`

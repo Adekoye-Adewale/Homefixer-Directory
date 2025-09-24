@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { connectingBizCardProps } from './homeContentTypes'
 import { connectBizContents } from '@/contents/homePage'
 import { MoveRight } from 'lucide-react'
+import Link from 'next/link'
 
 export default function ConnectingBiz() {
         return (
@@ -38,7 +39,7 @@ export default function ConnectingBiz() {
         )
 }
 
-const Card = ({ titleTop, titleBottom, description }: connectingBizCardProps ) => {
+const Card = ({ titleTop, titleBottom, description, link }: connectingBizCardProps ) => {
         return (
                 <div className='p-5 grow rounded text-left transition-all duration-300 bg-[#EE9513] hover:bg-amber-100 hover:-translate-y-1 group'>
                         <h3
@@ -51,14 +52,19 @@ const Card = ({ titleTop, titleBottom, description }: connectingBizCardProps ) =
                                         {titleBottom}
                                 </span>                                
                         </h3>
-                        <div className='flex gap-2 items-center justify-between'>
-                                <p className='text-sm mt-1 md:mt-2'>
-                                        {description}
-                                </p>
-                                <MoveRight
-                                        className='transition-colors duration-300 group-hover:text-[#ee9513]'
-                                />
-                        </div>
+                        <Link
+                                href={link}
+                                target='_blank'
+                        >
+                                <div className='flex gap-2 items-center justify-between'>
+                                        <p className='text-sm mt-1 md:mt-2 hover:text-[#503204] transition-colors duration-300'>
+                                                {description}
+                                        </p>
+                                        <MoveRight
+                                                className='transition-colors duration-300 group-hover:text-[#ee9513]'
+                                        />
+                                </div>
+                        </Link>
                 </div>
         )
 }
