@@ -38,7 +38,9 @@ export default function SingleBusinessPageRatingSection({
                                                 <div className="flex items-center gap-1">
                                                         <span className="flex items-center gap-1 text-black text-xs font-bold">
                                                                  <StarRating rating={rating} />
-                                                                <span>{rating.toFixed(1)}</span>
+                                                                {rating && rating > 0 && <span>
+                                                                        {rating.toFixed(1)}
+                                                                </span>}
                                                         </span>
                                                         <span className="text-xs">
                                                                 Based on  {user_ratings_total} Google reviews
@@ -55,7 +57,7 @@ export default function SingleBusinessPageRatingSection({
                                                                         </Fragment>
                                                                 ))
                                                         ) : (
-                                                                <p className="text-gray-500">
+                                                                <p className="text-xs text-gray-500 mt-2.5 border-t border-gray-300 pt-2.5">
                                                                         No reviews available.
                                                                 </p>
                                                         )}

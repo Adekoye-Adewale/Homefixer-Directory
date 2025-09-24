@@ -9,6 +9,7 @@ import SingleBusinessPageRatingSection from './singleBusinessPageRatingSection'
 import { Globe, Mail, Phone, SquareArrowOutUpRight } from 'lucide-react'
 import { BusinessData } from '@/lib/getBusinessGoogleInfo'
 import StarRating from '@/components/mapsComponents/StarRating'
+import ConnectingBiz from '../homePage/connectingBiz'
 
 type ConatctProps = {
         businessAddress?: string
@@ -52,10 +53,12 @@ export default function SingleBusinessPageComponent(
                                                                 <h1 className='font-bold text-2xl md:text-3xl text-white'>
                                                                         {biz?.businessName ?? "Business Name Here"}
                                                                 </h1>
-                                                                <div className="flex flex-col items-center gap-1 text-white/70">
+                                                                <div className="flex flex-col  items-center md:items-start gap-1 text-white/70">
                                                                         <span className="flex items-center gap-1  text-xs font-bold">
                                                                                         <StarRating rating={info?.rating ?? null} />
-                                                                                <span>{info?.rating.toFixed(1)}</span>
+                                                                                {info && info.rating > 0 && <span>
+                                                                                        {info.rating.toFixed(1)}
+                                                                                </span>}
                                                                         </span>
                                                                         <span className="text-xs">
                                                                                 Based on  {info?.user_ratings_total} Google reviews
@@ -119,6 +122,7 @@ export default function SingleBusinessPageComponent(
                                 info={info} 
                                 businessName={biz.businessName} 
                         />
+                        <ConnectingBiz/>
                 </main>
         )
 }
@@ -130,7 +134,7 @@ const Description = ({ description }: { description: string }) => {
                                 Description
                         </h3>
                         <p className='text-sm leading-6'>
-                                {description}
+                                {description ? description : 'No description provided for this business.'}
                         </p>
                 </div>
         )
