@@ -38,17 +38,6 @@ export default function LocationListSection({ sectionTitle, archivePageSlug, slu
                                         slideContent={allLocationList}
                                         className="mt-8 md:mt-10"
                                 />
-                                {/* <div className='grid grid-cols-2 justify-between lg:grid-cols-4 gap-5 mt-5 md:mt-8'>
-                                        {allLocationList.map((list) =>(
-                                                <Fragment key={list._id}>
-                                                        <LocationCard
-                                                                slug={list.slug}
-                                                                image={list.image}
-                                                                title={list.title}
-                                                        />
-                                                </Fragment>
-                                        ))}
-                                </div> */}
                         </div>
                 </section>
         )

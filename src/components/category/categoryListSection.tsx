@@ -1,8 +1,8 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import Link from 'next/link'
 import { MoveUpRight } from 'lucide-react'
 import { customBusinessCategoryType } from '@/sanity/lib/customTypes/businessCategory'
-import CategoryCard from './categoryCard'
+import CategorySlider from '../layouts/categorySlider'
 
 type MainCategoryListProps = {
         sectionTitle?: string
@@ -34,18 +34,11 @@ export default function CategoryListSection({ sectionTitle, archivePageSlug, slu
                                                 />
                                         </Link>
                                 </div>}
-                                
-                                <div className='grid grid-cols-2 justify-between lg:grid-cols-4 md:gap-5 gap-3 mt-5 md:mt-8'>
-                                        {allCategoryList.map((list) => (
-                                                <Fragment key={list._id}>
-                                                        <CategoryCard
-                                                                slug={list.slug}
-                                                                image={list.image}
-                                                                title={list.title}
-                                                        />
-                                                </Fragment>
-                                        ))}
-                                </div>
+
+                                <CategorySlider
+                                        slideContent={allCategoryList}
+                                        className="mt-8 md:mt-10"
+                                />
                         </div>
                 </section>
         )
