@@ -2,9 +2,10 @@
 import React from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation } from 'swiper/modules'
-import 'swiper/css'
 import LocationCard from '../location/locationCard'
 import { customBusinessLocationType } from '@/sanity/lib/customTypes/businessLocation'
+import 'swiper/css'
+import 'swiper/css/navigation'
 
 type LocationSliderProps = {
         slideContent: customBusinessLocationType[]
@@ -20,7 +21,11 @@ export default function LocationSlider( { slideContent, className }: LocationSli
                         loop={true}
                         className={className}
                         spaceBetween={20}
-                        slidesPerView={4}
+                        breakpoints={{
+                                0: { slidesPerView: 2 },      // mobile
+                                640: { slidesPerView: 3 },    // tablets
+                                1024: { slidesPerView: 4 },   // desktops
+                        }}
                 >
                         {slideContent.map((slide) => (
                                 <SwiperSlide 
