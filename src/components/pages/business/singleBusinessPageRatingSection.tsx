@@ -1,9 +1,11 @@
+import StarRating from '@/components/mapsComponents/StarRating';
 import { BusinessData, Review } from '@/lib/getBusinessGoogleInfo';
 import React, {Fragment} from 'react'
 
 export default function SingleBusinessPageRatingSection({
-        info
-}: { info: BusinessData | null }) {
+        info, 
+        businessName = 'This Business'
+}: { info: BusinessData | null; businessName?: string }) {
 
         if (!info) {
                 return (
@@ -33,9 +35,10 @@ export default function SingleBusinessPageRatingSection({
                                                 Public Review Sentiment
                                         </h3>      
                                         <div>
-                                                <div className="flex items-center gap-2">
-                                                        <span className="text-black-500 text-xs font-bold">
-                                                                 {rating.toFixed(1)}⭐
+                                                <div className="flex items-center gap-1">
+                                                        <span className="flex items-center gap-1 text-black text-xs font-bold">
+                                                                 <StarRating rating={rating} />
+                                                                <span>{rating.toFixed(1)}</span>
                                                         </span>
                                                         <span className="text-xs">
                                                                 Based on  {user_ratings_total} Google reviews
@@ -73,15 +76,15 @@ const ReviewCard = (
         return (
                 <div className="border-t border-gray-300 mt-4 pt-4">
                         <div className='flex justify-between items-end'>
-                                <div className='flex gap-2 items-end'>
+                                <div className='flex gap-2 items-center'>
                                         <p className="font-bold text-xs capitalize">
                                                 {review.author_name}
                                         </p>
                                         <p className="text-black text-xs font-normal">
-                                                 {review.rating}⭐ 
+                                                <StarRating rating={review.rating} /> 
                                         </p>
                                 </div>
-                                <p className='text-xs text-gray-400 italic'>
+                                <p className='text-[10px] text-gray-400 italic'>
                                         Since {review.relative_time_description}
                                 </p>
                         </div>

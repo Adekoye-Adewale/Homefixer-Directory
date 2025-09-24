@@ -1,15 +1,15 @@
 import { Star } from "lucide-react";
 
-export default function StarRating({ rating }: { rating: number }) {
-        const rounded = Math.round(rating)
+export default function StarRating({ rating }: { rating: number | null }) {
+        const rounded = Math.round(rating ?? 0)
 
         return (
                 <div className="flex items-center gap-1">
                         {Array.from({ length: 5 }, (_, i) => (
                                 <Star
                                         key={i}
-                                        className={`w-5 h-5 
-                                                ${i < rounded ? "text-yellow-500 fill-yellow-500" : "text-gray-300"
+                                        className={`w-3 h-3 
+                                                ${i < rounded ? "text-yellow-500 fill-yellow-500" : "text-gray-300 stroke-gray-600"
                                                 }
                                         `}
                                 />

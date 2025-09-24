@@ -8,10 +8,7 @@ import SingleBusinessMapGoogle from '@/components/mapsComponents/singleBusinessM
 import SingleBusinessPageRatingSection from './singleBusinessPageRatingSection'
 import { Globe, Mail, Phone, SquareArrowOutUpRight } from 'lucide-react'
 import { BusinessData } from '@/lib/getBusinessGoogleInfo'
-
-type BusinessPageProps = {
-        biz: customBusiness
-}
+import StarRating from '@/components/mapsComponents/StarRating'
 
 type ConatctProps = {
         businessAddress?: string
@@ -26,7 +23,7 @@ export default function SingleBusinessPageComponent(
                 biz,
                 info 
         }: {
-                biz: BusinessPageProps; 
+                        biz: customBusiness; 
                 info: BusinessData | null
 }) {
         return (
@@ -55,9 +52,15 @@ export default function SingleBusinessPageComponent(
                                                                 <h1 className='font-bold text-2xl md:text-3xl text-white'>
                                                                         {biz?.businessName ?? "Business Name Here"}
                                                                 </h1>
-                                                                <p className='text-sm mt-2.5 md:mt-4 text-white/80'>
-                                                                        {biz?.businessAddress ?? "1077 broad way, Lagos Island, Lagos."}
-                                                                </p>
+                                                                <div className="flex flex-col items-center gap-1 text-white/70">
+                                                                        <span className="flex items-center gap-1  text-xs font-bold">
+                                                                                        <StarRating rating={info?.rating ?? null} />
+                                                                                <span>{info?.rating.toFixed(1)}</span>
+                                                                        </span>
+                                                                        <span className="text-xs">
+                                                                                Based on  {info?.user_ratings_total} Google reviews
+                                                                        </span>
+                                                                </div>
                                                                 <div className='flex gap-2.5 justify-center md:justify-start flex-wrap '>
                                                                         <Link 
                                                                                 href={biz.category.slug.current ? `/category/${biz.category.slug.current}` : '#'}
@@ -112,7 +115,10 @@ export default function SingleBusinessPageComponent(
                                         </div>
                                 </div>
                         </section>
-                        <SingleBusinessPageRatingSection info={info} />
+                        <SingleBusinessPageRatingSection 
+                                info={info} 
+                                businessName={biz.businessName} 
+                        />
                 </main>
         )
 }
