@@ -24,6 +24,7 @@ export default async function HomePage() {
                                 allLocationList={allLocations}
                                 allCategoryList={allCategories}
                                 info={info}
+                                locations={allLocations}
                         />
                 </>
         )

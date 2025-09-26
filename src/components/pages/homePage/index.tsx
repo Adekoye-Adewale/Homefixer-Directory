@@ -15,17 +15,19 @@ type FrontPageProps = {
         allLocationList: customBusinessLocationType[]
         allCategoryList: customBusinessCategoryType[]
         info: (BusinessData | null)[]
+        locations: customBusinessLocationType[]
 }
 
 export default function FrontPage({ 
         allBizList, 
         allLocationList,
         allCategoryList,
-        info
+        info,
+        locations
 }: FrontPageProps ) {
         return (
                 <>
-                        <HeroSection/>
+                        <HeroSection locations={locations}/>
                         <HowItWorks/>
                         <ListingSection
                                 sectionTitle='Discover Our Top Listings'

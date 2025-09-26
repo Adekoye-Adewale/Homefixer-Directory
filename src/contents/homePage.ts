@@ -27,14 +27,14 @@ export const connectBizContents: connectingBizCardProps[] = [
         },
         {
                 titleTop: `Connect with `,
-                titleBottom: `your best fixer`,
+                titleBottom: `your needed fixer`,
                 description: `Find and connect with fixers close to you.`,
-                link: `/business`,
+                link: `/category`,
         },
         {
                 titleTop: `Request `,
                 titleBottom: `a service`,
                 description: `Search businesses for your match.`,
-                link: `/search`,
+                link: `/business`,
         },
 ]
