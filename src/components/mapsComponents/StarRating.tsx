@@ -4,7 +4,7 @@ export default function StarRating({ rating }: { rating: number | null }) {
         const rounded = Math.round(rating ?? 0)
 
         return (
-                <div className="flex items-center gap-1">
+                <span className="flex items-center gap-1">
                         {Array.from({ length: 5 }, (_, i) => (
                                 <Star
                                         key={i}
@@ -14,6 +14,6 @@ export default function StarRating({ rating }: { rating: number | null }) {
                                         `}
                                 />
                         ))}
-                </div>
+                </span>
         );
 }

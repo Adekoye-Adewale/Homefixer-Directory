@@ -12,7 +12,7 @@ export async function GET(req: Request) {
         }
 
         // Cache key
-        const cacheKey = `business-info:${businessName}:${locationTitle}`;
+        const cacheKey = `business-google-info:${businessName}:${locationTitle}`;
         const cached = await redis.get(cacheKey);
         if (cached) {
                 return new Response(JSON.stringify(cached), { status: 200 });
@@ -36,7 +36,7 @@ export async function GET(req: Request) {
                 // Use Places API with lat/lng bias
                 const searchUrl = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${encodeURIComponent(
                         businessName
-                )}&location=${lat},${lng}&radius=5000&key=${apiKey}`;
+                )}&location=${lat},${lng}&radius=50&key=${apiKey}`;
 
                 const searchRes = await fetch(searchUrl);
                 const searchData = await searchRes.json();
@@ -54,12 +54,23 @@ export async function GET(req: Request) {
                 const detailsRes = await fetch(detailsUrl);
                 const detailsData = await detailsRes.json();
 
-                console.log("Fetched from API:", detailsData);
+                if (!detailsData.result) {
+                        return new Response(JSON.stringify(
+                                { error: "No details found" }), 
+                                { status: 404 });
+                }
+
+                const mergedResult = {
+                        ...detailsData.result,
+                        geometry: {
+                                location: { lat, lng }
+                        }
+                };
 
                 // Save in Upstash KV
-                await redis.set(cacheKey, detailsData.result, { ex: 60 * 60 * 24 });
+                await redis.set(cacheKey, mergedResult, { ex: 60 * 60 * 24 });
 
-                return new Response(JSON.stringify(detailsData.result), { status: 200 });
+                return new Response(JSON.stringify(mergedResult), { status: 200 });
         } catch (err) {
                 console.error(err);
                 return new Response(JSON.stringify({ error: "Internal error" }), { status: 500 });

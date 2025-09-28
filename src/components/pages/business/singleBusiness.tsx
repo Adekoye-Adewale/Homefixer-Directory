@@ -79,7 +79,7 @@ export default function SingleBusinessPageComponent(
                                                                                 </Badge>        
                                                                         </Link> 
                                                                         <Link 
-                                                                                href={biz.location.slug.current ? `/category/${biz.location.slug.current}` : '#'}
+                                                                                href={biz.location.slug.current ? `/locations/${biz.location.slug.current}` : '#'}
                                                                                 target='_blank' 
                                                                                 className='text-xs text-white/80'
                                                                         >

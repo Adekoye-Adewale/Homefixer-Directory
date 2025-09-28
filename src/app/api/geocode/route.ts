@@ -8,7 +8,6 @@ function normalizeKey(address: string) {
         return `geo:${encodeURIComponent(address.trim().toLowerCase().replace(/\s+/g, " "))}`
 }
 
-
 export async function GET(req: Request) {
         try {
                 const { searchParams } = new URL(req.url)

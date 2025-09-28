@@ -19,24 +19,63 @@ export type BusinessData = {
         };
 };
 
+/**
+ * Fetch business data using your internal API routes.
+ * - Always fetches coordinates from `/api/geocode` first (more accurate).
+ * - Then calls `/api/business-info` for details.
+ */
+
 export async function getBusinessGoogleData(
         businessName: string,
-        locationTitle: string
+        businessAddress: string
 ): Promise<BusinessData | null> {
         try {
-                const res = await fetch(
-                        `${process.env.NEXT_PUBLIC_BASE_URL}/api/business-info?businessName=${encodeURIComponent(
-                                businessName
-                        )}&locationTitle=${encodeURIComponent(locationTitle)}`,
+                const baseURL = process.env.NEXT_PUBLIC_BASE_URL;
+
+                const geoRes = await fetch(
+                        `${baseURL}/api/geocode?address=${encodeURIComponent(
+                                businessAddress
+                        )}`,
                         {
                                 cache: "force-cache",
                                 next: { revalidate: 60 * 60 * 24 },
                         }
                 );
 
-                if (!res.ok) return null;
+                if (!geoRes.ok) {
+                        console.error("Geocode API error:", await geoRes.text());
+                        return null;
+                }
 
-                return (await res.json()) as BusinessData;
+                const geoData = await geoRes.json();
+                const { lat, lon } = geoData;
+
+                const bizRes = await fetch(
+                        `${baseURL}/api/business-info?businessName=${encodeURIComponent(
+                                businessName
+                        )}&locationTitle=${encodeURIComponent(businessAddress)}`,
+                        {
+                                cache: "force-cache",
+                                next: { revalidate: 60 * 60 * 24 },
+                        }
+                );
+
+                if (!bizRes.ok) {
+                        console.error("Business-info API error:", await bizRes.text());
+                        return null;
+                }
+
+                const bizData = (await bizRes.json()) as BusinessData;
+
+                return {
+                        ...bizData,
+                        geometry: {
+                                location: {
+                                        lat,
+                                        lng: lon,
+                                },
+                        },
+                };
         } catch (error) {
                 console.error("Failed to fetch business data:", error);
                 return null;

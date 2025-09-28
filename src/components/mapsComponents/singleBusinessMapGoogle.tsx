@@ -33,6 +33,8 @@ export default function SingleBusinessMapGoogle({ businessAddress, businessName 
                                         throw new Error(body?.error || `HTTP ${res.status}`)
                                 }
                                 const data = await res.json()
+                                // console.log(`Geocode fetch result for "${businessAddress}":`, data)
+
                                 if (!cancelled) {
                                         setPosition({ lat: data.lat, lng: data.lon })
                                 }

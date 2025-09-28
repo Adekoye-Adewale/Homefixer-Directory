@@ -13,9 +13,11 @@ export default async function HomePage() {
 
         const info = await Promise.all(
                 allBusinessList.map(biz =>
-                        getBusinessGoogleData(biz.businessName, biz.location.title)
+                        getBusinessGoogleData(biz.businessName, biz.businessAddress ?? biz.location.title)
                 )
         )
+
+        // console.log(allBusinessList)
 
         return (
                 <>

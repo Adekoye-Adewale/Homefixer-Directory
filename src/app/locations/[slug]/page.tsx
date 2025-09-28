@@ -47,7 +47,7 @@ export default async function SingleLocationPage({ params }: LocationPageProps )
 
         const info = await Promise.all(
                 business.map(biz =>
-                        getBusinessGoogleData(biz.businessName, biz.location.title)
+                        getBusinessGoogleData(biz.businessName, biz.businessAddress ?? biz.location.title)
                 )
         )
 

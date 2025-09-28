@@ -9,6 +9,8 @@ type MainBusinessListProps = {
 }
 
 export default function MainBusinessList({ BizContents, info }: MainBusinessListProps) {
+
+        console.log( "from MainBusinessList component", info)
         return (
                 <div 
                         className='grid grid-cols-2 md:grid-cols-3 lg:grid-col-4 gap-2.5 md:gap-5'

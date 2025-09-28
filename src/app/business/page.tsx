@@ -9,7 +9,7 @@ export default async function BusinessPage() {
 
         const info = await Promise.all(
                 businesses.map(biz =>
-                        getBusinessGoogleData(biz.businessName, biz.location.title)
+                        getBusinessGoogleData(biz.businessName, biz.businessAddress ?? biz.location.title)
                 )
         )
         

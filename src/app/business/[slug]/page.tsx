@@ -17,7 +17,9 @@ export default async function SingleBusinessPage({ params }: LocationPageProps) 
                 notFound();
         }
 
-        const info = await getBusinessGoogleData(business.businessName, business.locationTitle)
+        const info = await getBusinessGoogleData(business.businessName, business.businessAddress)
+
+        // console.log("single business page", info)
 
         return (
                 <>
