@@ -1,4 +1,4 @@
 export type MenuLink = {
         title: string
-        href: string
+        slug: string
 }

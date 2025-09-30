@@ -3,7 +3,11 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { customBusinessCategoryType } from '@/sanity/lib/customTypes/businessCategory'
 
-export default function CategoryCard({ slug, image, title }: customBusinessCategoryType) {
+interface CategoryCardProps extends customBusinessCategoryType {
+        businessCount: number;
+}
+
+export default function CategoryCard({ slug, image, title, businessCount }: CategoryCardProps) {
         return (
                 <Link
                         href={`/category/${slug}`}
@@ -15,13 +19,16 @@ export default function CategoryCard({ slug, image, title }: customBusinessCateg
                                 title={title}
                                 height={image?.metadata.dimensions.height || 1000}
                                 width={image?.metadata.dimensions.width || 667}
-                                className='absolute inset-0 size-full object-cover brightness-20 transition-all duration-300 group-hover:brightness-5'
+                                className='absolute inset-0 size-full object-cover brightness-10 transition-all duration-300 group-hover:brightness-5'
                         />
                         <div
                                 className='relative text-center'
                         >
-                                <span className='text-white font-semibold text-base md:text-lg'>
+                                <h4 className='text-white font-semibold text-base md:text-lg'>
                                         {title}
+                                </h4>
+                                <span className='text-white font-bold text-xs '>
+                                        {businessCount}
                                 </span>
                         </div>
                 </Link>

@@ -6,5 +6,6 @@ export const businessCategoryQuery = `*[_type == "businessCategory"]{
         "image": image.asset->{
                 url,
                 metadata { lqip, dimensions }
-        }
+        },
+        "businessCount": count(*[_type == "business" && references(^._id)])
 }`

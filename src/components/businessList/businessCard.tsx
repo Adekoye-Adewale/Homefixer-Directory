@@ -34,7 +34,7 @@ export default function MainBusinessCard({
 
         return (
                 <div 
-                        className='grid content-end max-w-[350px] w-full p-2.5 pt-5 md:p-5 relative rounded border border-solid overflow-hidden group'
+                        className='grid content-end  w-full p-2.5 pt-5 md:p-5 relative rounded border border-solid overflow-hidden group'
                         key={_id}
                 >
                         <Image

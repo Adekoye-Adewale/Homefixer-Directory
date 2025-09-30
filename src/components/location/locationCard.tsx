@@ -3,7 +3,11 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { customBusinessLocationType } from '@/sanity/lib/customTypes/businessLocation'
 
-export default function LocationCard({ slug, image, title }: customBusinessLocationType) {
+interface LocationCardProps extends customBusinessLocationType {
+        businessCount: number;
+}
+
+export default function LocationCard({ slug, image, title, businessCount }: LocationCardProps) {
         return (
                 <Link 
                         href={`/locations/${slug}`}
@@ -20,8 +24,11 @@ export default function LocationCard({ slug, image, title }: customBusinessLocat
                         <div
                                 className='relative text-center'
                         >
-                                <span className='text-white font-semibold text-base md:text-lg'>
+                                <h4 className='text-white font-semibold text-base md:text-lg'>
                                         {title}
+                                </h4>
+                                <span className='text-white font-bold text-xs '>
+                                        {businessCount}
                                 </span>
                         </div>
                 </Link>

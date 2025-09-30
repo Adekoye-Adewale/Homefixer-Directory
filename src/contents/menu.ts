@@ -17,69 +17,69 @@ export const whoWeAreMenuItems: { title: string; href: string }[] = [
         }
 ]
 
-export const exploreMenuItems: { title: string; href: string } [] = [
+export const exploreMenuItems: { title: string; slug: string } [] = [
         {
                 title: "Plumbers",
-                href: "/category/plumbers",
+                slug: "/category/plumbers",
         },
         {
                 title: "Carpenters",
-                href: "/category/carpenters",
+                slug: "/category/carpenters",
         },
         {
                 title: "Electricians",
-                href: "/category/electricians",
+                slug: "/category/electricians",
         },
         {
                 title: "Cleaners",
-                href: "/category/cleaners",
+                slug: "/category/cleaners",
         },
         {
                 title: "Painters",
-                href: "/category/painters",
+                slug: "/category/painters",
         },
         {
                 title: "Interior decors",
-                href: "/category/interior-decors",
+                slug: "/category/interior-decors",
         },
         {
                 title: "Tailers",
-                href: "/category/tailers",
+                slug: "/category/tailers",
         },
         {
                 title: "Pop makers",
-                href: "/category/pop-makers",
+                slug: "/category/pop-makers",
         },
         {
                 title: "Air conditioning services",
-                href: "/category/air-conditioning-services",
+                slug: "/category/air-conditioning-services",
         },
         {
                 title: "Landscaoing services",
-                href: "/category/landscaoing-services",
+                slug: "/category/landscaoing-services",
         },
         {
                 title: "Security provider and installation services",
-                href: "/category/security-provider-and-installation-services",
+                slug: "/category/security-provider-and-installation-services",
         },
 ]
 
-export const contactMenuItems: { title: string; href: string } [] = [
+export const contactMenuItems: { title: string; slug: string } [] = [
         {
                 title: "Get support",
-                href: "/get-support",
+                slug: "/get-support",
         },
         {
                 title: "Make enquire",
-                href: "/make-enquire",
+                slug: "/make-enquire",
         },
         {
                 title: "Partner with us",
-                href: "/partner-with-us",
+                slug: "/partner-with-us",
         },
         {
                 title: "Report a scam",
-                href: "/report-a-scam",
+                slug: "/report-a-scam",
         }
 ]
 

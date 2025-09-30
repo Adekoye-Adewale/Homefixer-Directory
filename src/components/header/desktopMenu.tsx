@@ -11,7 +11,10 @@ import {
         NavigationMenuTrigger,
         navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu"
-import { contactMenuItems, exploreMenuItems } from '@/contents/menu'
+import { 
+        contactMenuItems, 
+        // exploreMenuItems 
+} from '@/contents/menu'
 import { MenuLink } from './menuTypes'
 
 type MenuItemProps = {
@@ -19,7 +22,11 @@ type MenuItemProps = {
         menuItems: MenuLink[]
 }
 
-export default function DesktopMenu() {
+type DesktopMenuProps = {
+        exploreMenuItems: MenuLink[]
+}
+
+export default function DesktopMenu({ exploreMenuItems }: DesktopMenuProps ) {
         return (
                 <NavigationMenu viewport={false}>
                         <NavigationMenuList>
@@ -98,21 +105,21 @@ const MenuItem = ({ title, menuItems }: MenuItemProps) => {
                                 {title}
                         </NavigationMenuTrigger>
                         <NavigationMenuContent>
-                                <ul className="grid w-[300px] gap-2 text-black">
+                                <div className="grid w-[300px] gap-2 text-black">
                                         {menuItems.map((menu) => (
-                                                <li key={menu.title} >
+                                                <span key={menu.title} >
                                                         <NavigationMenuLink 
                                                                asChild 
                                                         >
                                                                 <Link
-                                                                        href={menu.href}
+                                                                        href={`/category/${menu.slug}`}
                                                                 >
                                                                         {menu.title}
                                                                 </Link>
                                                         </NavigationMenuLink>
-                                                </li>
+                                                </span>
                                         ))}
-                                </ul>
+                                </div>
                         </NavigationMenuContent>
                 </NavigationMenuItem>
         )

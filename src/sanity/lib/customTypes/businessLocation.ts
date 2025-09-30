@@ -15,4 +15,5 @@ export type customBusinessLocationType = {
                 }
                 url: string
         } | null
+        businessCount: number
 };

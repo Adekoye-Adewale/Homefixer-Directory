@@ -28,6 +28,7 @@ export default function CategoryPageComponent({ length, allCategory }: CategoryP
                                                                         slug={list.slug}
                                                                         image={list.image}
                                                                         title={list.title}
+                                                                        businessCount={list.businessCount} 
                                                                 />
                                                         </Fragment>
                                                 ))}

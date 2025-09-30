@@ -16,4 +16,5 @@ export type customBusinessCategoryType = {
                 }
                 url: string
         } | null
+        businessCount: number
 };

@@ -3,8 +3,9 @@ import Link from 'next/link'
 import SubmitYourBizBtn from '../buttons/submitYourBizBtn'
 import MobileMenu from './mobileMenu'
 import DesktopMenu from './desktopMenu'
+import { MenuLink } from './menuTypes'
 
-export default function HeaderNav() {
+export default function HeaderNav({ exploreMenuItems }: { exploreMenuItems: MenuLink[] }) {
         return (
                 <header className='py-2.5 px-2.5 md:px-5 bg-amber-100 sticky top-0 left-0 z-50'>
                         <div className='container mx-auto flex justify-between items-center gap-2 '>
@@ -21,7 +22,9 @@ export default function HeaderNav() {
                                         </Link>
                                 </div>
                                 <div className='md:flex hidden'>
-                                        <DesktopMenu/>
+                                        <DesktopMenu
+                                                exploreMenuItems={exploreMenuItems}
+                                        />
                                 </div>
                                 <div className='flex gap-2 items-center justify-between'>
                                         <SubmitYourBizBtn/>

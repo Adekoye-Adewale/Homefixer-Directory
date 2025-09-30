@@ -30,6 +30,7 @@ export default function LocationPageComponent({ length, allLocation }: LocationP
                                                                         slug={list.slug}
                                                                         image={list.image}
                                                                         title={list.title}
+                                                                        businessCount={list.businessCount} 
                                                                 />
                                                         </Fragment>
                                                 ))}
