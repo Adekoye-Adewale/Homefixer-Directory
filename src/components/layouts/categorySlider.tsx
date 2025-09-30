@@ -32,6 +32,7 @@ export default function CategorySlider({ slideContent, className }: CategorySlid
                         slug={slide.slug}
                         image={slide.image}
                         title={slide.title}
+                        businessCount={slide.businessCount}
                     />
                 </SwiperSlide>
             ))}
