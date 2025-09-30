@@ -1,19 +1,19 @@
-export const whoWeAreMenuItems: { title: string; href: string }[] = [
+export const whoWeAreMenuItems: { title: string; slug: string }[] = [
         {
                 title: "Home page",
-                href: "/",
+                slug: "/",
         },
         {
                 title: "About us",
-                href: "/about-us",
+                slug: "/about-us",
         },
         {
                 title: "How it works",
-                href: "/how-it-works",
+                slug: "/how-it-works",
         },
         {
                 title: "Terms and condition",
-                href: "/terms-and-condition",
+                slug: "/terms-and-condition",
         }
 ]
 

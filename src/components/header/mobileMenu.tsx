@@ -88,7 +88,7 @@ const Navs = ({ value, title, MenuItems }: NavProps) => {
                                                 asChild
                                         >
                                                 <Link 
-                                                        href={menu.href}
+                                                        href={menu.slug}
                                                         className='text-sm'
                                                 >
                                                         {menu.title}
