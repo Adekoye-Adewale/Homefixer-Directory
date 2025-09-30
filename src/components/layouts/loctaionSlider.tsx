@@ -35,6 +35,7 @@ export default function LocationSlider( { slideContent, className }: LocationSli
                                                 slug={slide.slug}
                                                 image={slide.image}
                                                 title={slide.title}
+                                                businessCount={slide.businessCount}
                                         />
                                 </SwiperSlide>
                         ))}
