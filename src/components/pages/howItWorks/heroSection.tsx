@@ -1,5 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
+import { howItWorksContents } from '@/contents/howItWorksPage'
 
 export default function HeroSection() {
         return (
@@ -13,14 +14,11 @@ export default function HeroSection() {
                         />
                         <div className='container relative mx-auto'>
                                 <div className='text-center text-pretty'>
-                                        <span className='text-xs md:text-sm font-bold text-white/80'>
-                                                Explore. Connect. Request. 
-                                        </span>
                                         <h1 className='font-bold text-4xl md:text-6xl text-white'>
-                                                Lagos Home Fixers
+                                                How It Works
                                         </h1>
                                         <p className='text-sm max-w-3xl mx-auto mt-2.5 md:mt-4 text-white/80'>
-                                                Experience hassle-free home services with Lagos Home Fixers. Your trusted partner for all your home improvement needs.
+                                                {howItWorksContents.intro}
                                         </p>
                                 </div>
                         </div>

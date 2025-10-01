@@ -154,3 +154,6 @@ body {
 .swiper-button-prev:hover::after {
   color: #000;
 }
+.how-it-works a{
+  @apply underline transition-colors duration-300 hover:text-blue-700 text-[#ee9513];
+}
