@@ -1,14 +1,11 @@
 import React from 'react'
+import BlogPageComponent from '@/components/blog'
+import { blogs } from '@/contents/blogs'
 
 export default function page() {
         return (
-                <div className='min-h-[150vh]'>
-                        <div className='min-h-[100vh] bg-amber-300'>
-                                BLOG PAGE Section
-                        </div>                        
-                        <div className='min-h-[100vh] bg-amber-800'>
-                                Section
-                        </div>
-                </div>
+                <BlogPageComponent
+                        blogs={blogs}
+                />
         )
 }
