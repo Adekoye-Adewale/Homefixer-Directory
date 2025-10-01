@@ -234,5 +234,147 @@
     ],
     "name": "businessLocation",
     "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "blogTitle",
+        "type": "string"
+      },
+      {
+        "options": {
+          "source": "blogTitle"
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "slug",
+        "type": "slug"
+      },
+      {
+        "initialValue": {
+          "asset": {
+            "_ref": "lagosHomeFixers-blog-image.webp"
+          }
+        },
+        "description": "Use an image with a 16:9 ratio for best display results",
+        "name": "blogImage",
+        "type": "image"
+      },
+      {
+        "initialValue": false,
+        "name": "featured",
+        "type": "boolean"
+      },
+      {
+        "to": [
+          {
+            "type": "blogCategory"
+          }
+        ],
+        "name": "category",
+        "type": "reference"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "body",
+        "type": "text"
+      }
+    ],
+    "name": "blog",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "name": "description",
+        "type": "text"
+      },
+      {
+        "options": {
+          "source": "title"
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "slug",
+        "type": "slug"
+      },
+      {
+        "name": "image",
+        "type": "image"
+      },
+      {
+        "description": "Select parent category if this is a sub-category",
+        "to": [
+          {
+            "type": "blogCategory"
+          }
+        ],
+        "name": "parent",
+        "type": "reference",
+        "title": "Parent Category"
+      }
+    ],
+    "name": "blogCategory",
+    "type": "document"
   }
 ]
