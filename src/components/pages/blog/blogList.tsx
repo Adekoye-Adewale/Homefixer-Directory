@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 import { Blog, BlogListProps } from './blogTypes'
-import { Badge } from '../ui/badge'
+import { Badge } from '../../ui/badge'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -33,8 +33,8 @@ const Card = ({ title, category, slug, image }: Blog) => {
                                         className='w-full h-auto object-cover transition-all hover:scale-105 duration-300 ease-in-out'
                                 />
                                 <div className='absolute top-2.5 left-2.5 z-10'>
-                                        <Link 
-                                                href={`/blog/category/${category.slug}`} 
+                                        <Link
+                                                href={`/blog/category/${category.slug}`}
                                                 title={`View all posts in ${category.title}`}
                                         >
                                                 <Badge>
