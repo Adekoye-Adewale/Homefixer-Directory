@@ -28,7 +28,8 @@ export async function GET(req: Request) {
                 const geoData = await geoRes.json();
 
                 if (!geoData.results?.length) {
-                        return new Response(JSON.stringify({ error: "Location not found" }), { status: 404 });
+                        console.warn("Geocode failed for:", locationTitle);
+                        return new Response(JSON.stringify({ error: "Location not found", locationTitle }), { status: 404 });
                 }
 
                 const { lat, lng } = geoData.results[0].geometry.location;
