@@ -64,7 +64,6 @@ export const businessBySlugQuery = `*[_type == 'business' && slug.current == $sl
         }
 }`
 
-
 export const businessByCategorySlugQuery = `*[_type == "business" && references(*[_type == "businessCategory" && slug.current == $slug][0]._id)]{
     _id,
     businessName,

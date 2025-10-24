@@ -8,6 +8,8 @@ import { businessLocationQuery } from './queries/businessLocation'
 import { customBusiness } from './customTypes/business'
 import { customBusinessLocationType } from './customTypes/businessLocation'
 import { customBusinessCategoryType } from './customTypes/businessCategory'
+import { blogBySlugQuery, blogQuery } from './queries/blog'
+import { customBlog } from './customTypes/blog'
 
 export const client = createClient({
   projectId,
@@ -86,5 +88,22 @@ export const getBusinessByLocationSlug = async (slug: string): Promise<customBus
   } catch (error) {
     console.error("Error fetching businesses by location slug:", error);
     return [];
+  }
+}
+
+export const getAllBlogs = async () => {
+  const query = blogQuery
+  const blog = await sanityFetch({ query: query })
+  return blog.data as customBlog[];
+}
+
+export const getBlogBySlug = async (slug: string) => {
+  try {
+    const query = blogBySlugQuery
+    const blog = await sanityFetch({ query, params: { slug } })
+    return blog.data ?? null;
+  } catch (error) {
+    console.error("Error fetching blog by slug:", error)
+    return null;
   }
 }
