@@ -37,7 +37,7 @@ export default function ListingSection({ sectionTitle, archivePageSlug, slugTitl
                                         </Link>
                                 </div>
                                 <div className='grid grid-cols-2 justify-between lg:grid-cols-4 gap-2.5 md:gap-5 mt-5 md:mt-8'>
-                                        {allBizList.map(( biz ) => (
+                                        {allBizList.slice(0, 12).map((biz) => (
                                                 <MainBusinessCard
                                                         key={biz._id}
                                                         coverImage={biz?.coverImage}
