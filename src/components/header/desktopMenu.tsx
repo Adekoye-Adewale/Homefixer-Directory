@@ -31,7 +31,7 @@ export default function DesktopMenu({ exploreMenuItems }: DesktopMenuProps ) {
                 <NavigationMenu viewport={false}>
                         <NavigationMenuList>
                                 <HomeMenu/>
-                                <MenuItem 
+                                <ExploreMenuItem 
                                         title={"Explore"} 
                                         menuItems={exploreMenuItems}
                                 />
@@ -97,6 +97,35 @@ const HomeMenu = () => {
 }
 
 const MenuItem = ({ title, menuItems }: MenuItemProps) => {
+        return (
+                <NavigationMenuItem>
+                        <NavigationMenuTrigger 
+                                className="bg-transparent hover:bg-transparent focus:bg-transparent shadow-none"
+                        >
+                                {title}
+                        </NavigationMenuTrigger>
+                        <NavigationMenuContent>
+                                <div className="grid w-[300px] gap-2 text-black">
+                                        {menuItems.map((menu) => (
+                                                <span key={menu.title} >
+                                                        <NavigationMenuLink 
+                                                               asChild 
+                                                        >
+                                                                <Link
+                                                                        href={menu.slug}
+                                                                >
+                                                                        {menu.title}
+                                                                </Link>
+                                                        </NavigationMenuLink>
+                                                </span>
+                                        ))}
+                                </div>
+                        </NavigationMenuContent>
+                </NavigationMenuItem>
+        )
+}
+
+const ExploreMenuItem = ({ title, menuItems }: MenuItemProps) => {
         return (
                 <NavigationMenuItem>
                         <NavigationMenuTrigger 
