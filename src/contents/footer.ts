@@ -35,32 +35,32 @@ export const footerCompanyLinks: FooterLinks[] = [
 export const footerQuickLinks: FooterLinks[] = [
         {
                 id: '1',
-                slug: '/about-lagos-home-fix',
+                slug: '/submit-your-business',
                 title: 'Submit business',
         },
         {
                 id: '2',
-                slug: '/how-it-works',
+                slug: '/request-a-removal',
                 title: 'Request a removal',
         },
         {
                 id: '3',
-                slug: '/category',
+                slug: '/report-a-scam',
                 title: 'Report a scam',
         },
         {
                 id: '4',
-                slug: '/locations',
+                slug: '/make-enquire',
                 title: 'Make enquire',
         },
         {
                 id: '5',
-                slug: '/blog',
+                slug: '/get-support',
                 title: 'Get support',
         },
         {
                 id: '6',
-                slug: '/blog',
+                slug: '/partner-with-us',
                 title: 'Partner with us',
         }
 ]

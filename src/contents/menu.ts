@@ -67,19 +67,19 @@ export const exploreMenuItems: { title: string; slug: string } [] = [
 export const contactMenuItems: { title: string; slug: string } [] = [
         {
                 title: "Get support",
-                slug: "/get-support",
+                slug: "get-support",
         },
         {
                 title: "Make enquire",
-                slug: "/make-enquire",
+                slug: "make-enquire",
         },
         {
                 title: "Partner with us",
-                slug: "/partner-with-us",
+                slug: "partner-with-us",
         },
         {
                 title: "Report a scam",
-                slug: "/report-a-scam",
+                slug: "report-a-scam",
         }
 ]
 
