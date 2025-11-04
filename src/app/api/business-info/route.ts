@@ -25,6 +25,12 @@ export async function GET(req: Request) {
                 )}&key=${apiKey}`;
 
                 const geoRes = await fetch(geoUrl);
+
+                if (!geoRes.ok) {
+                        console.warn("geoRes failed for:", locationTitle, geoUrl);
+                        return new Response(JSON.stringify({ error: "geoRes Location not found", locationTitle }), { status: 404 });
+                }
+
                 const geoData = await geoRes.json();
 
                 if (!geoData.results?.length) {
