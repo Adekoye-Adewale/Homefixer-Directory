@@ -75,7 +75,7 @@ export async function GET(req: Request) {
                 };
 
                 // Save in Upstash KV
-                await redis.set(cacheKey, mergedResult, { ex: 60 * 60 * 24 });
+                await redis.set(cacheKey, mergedResult, { ex: 60 * 60 * 24 * 14 });
 
                 return new Response(JSON.stringify(mergedResult), { status: 200 });
         } catch (err) {
