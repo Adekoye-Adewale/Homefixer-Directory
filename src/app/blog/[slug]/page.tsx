@@ -12,7 +12,12 @@ export default async function SignleBlogPage({ params }: BlogPageProps ) {
         const posts = await getAllBlogs()
         const blog = await getBlogBySlug(slug)
 
-        console.log("first log", blog)
+        // console.log("first log - Single Blog Page", blog)
+
+        if (!blog) {
+                return <div>Blog not found</div>
+        }
+
         return (
                 <SingleBlogPageComponents 
                         blog={blog}
