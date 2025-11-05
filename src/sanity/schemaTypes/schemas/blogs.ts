@@ -23,12 +23,12 @@ export const blog = defineType({
                         title: "Blog Image",
                         type: "image",
                         description: "Use an image with a 16:9 ratio for best display results",
-                        initialValue: {
-                                asset: {
-                                        _ref: "lagosHomeFixers-blog-image.webp",
-                                        _type: ""
-                                },
-                        },
+                        // initialValue: {
+                        //         asset: {
+                        //                 _ref: "/lagosHomeFixers-blog-image.webp",
+                        //                 _type: ""
+                        //         },
+                        // },
                 }),
                 defineField({
                         name: "featured",
