@@ -1,11 +1,16 @@
 import React from 'react'
 import BlogPageComponent from '@/components/pages/blog'
-import { blogs } from '@/contents/blogs'
+import { getAllBlogs } from '@/sanity/lib/client'
 
-export default function page() {
+export default async function BlogArchivePage() {
+
+        const posts = await getAllBlogs()
+
+        // console.log("first log - Blog Page", posts)
+        
         return (
                 <BlogPageComponent
-                        blogs={blogs}
+                        blogs={posts}
                 />
         )
 }
