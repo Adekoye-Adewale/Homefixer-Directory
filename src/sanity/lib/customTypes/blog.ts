@@ -21,7 +21,7 @@ export type customBlog = {
                 title: string
                 slug: Slug
         }
-        body: PortableTextValue
+        body?: PortableTextValue
         source?: string
         sourceLink?: string
 }
