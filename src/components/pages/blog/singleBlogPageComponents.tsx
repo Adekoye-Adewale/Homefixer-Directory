@@ -23,7 +23,7 @@ type HeroSectionProps = {
 }
 
 interface BlogContentProps {
-        body: PortableTextValue
+        body?: PortableTextValue
 }
 
 export default function SingleBlogPageComponents({ blog, relatedPosts }: BlogProps) {
@@ -71,12 +71,13 @@ const HeroSection = ({ blogImage, category, categorySlug, featured, source, sour
                                                         </Badge>
                                                 </Link>) : ''}
                                                 <div>
-                                                        <Badge
-                                                                variant="outline"
-                                                                className="border-[#EE9513]/80 text-[#EE9513] hover:text-white/90 hover:border-white/90 transition-all duration-300"
-                                                        >
-                                                                {featured && 'Featured'}
-                                                        </Badge>
+                                                         {featured && <Badge
+                                                                        variant="outline"
+                                                                        className="border-[#EE9513]/80 text-[#EE9513] hover:text-white/90 hover:border-white/90 transition-all duration-300"
+                                                                >
+                                                                        Featured
+                                                                </Badge>
+                                                        }
                                                 </div>
                                         </div>
                                         <div className='space-y-2.5 md:space-y-5'>
@@ -109,7 +110,7 @@ const BlogBody = ({ body }: BlogContentProps) => {
                 <div className='py-5 md:py-10 px-2.5 md:px-5'>
                         <article className='container relative mx-auto'>
                                 <PortableText 
-                                        value={body} 
+                                        value={body || []} 
                                         components={RichTextComponents} 
                                 />
                         </article>
