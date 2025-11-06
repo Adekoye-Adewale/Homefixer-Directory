@@ -1,5 +1,5 @@
 interface FooterLinks {
-        id: string;
+        id: number;
         slug: string;
         title: string;
 }
@@ -34,32 +34,27 @@ export const footerCompanyLinks: FooterLinks[] = [
 
 export const footerQuickLinks: FooterLinks[] = [
         {
-                id: '1',
+                id: 1,
                 slug: '/submit-your-business',
                 title: 'Submit business',
         },
         {
-                id: '2',
-                slug: '/request-a-removal',
-                title: 'Request a removal',
-        },
-        {
-                id: '3',
+                id: 2,
                 slug: '/report-a-scam',
                 title: 'Report a scam',
         },
         {
-                id: '4',
+                id: 3,
                 slug: '/make-enquire',
                 title: 'Make enquire',
         },
         {
-                id: '5',
+                id: 4,
                 slug: '/get-support',
                 title: 'Get support',
         },
         {
-                id: '6',
+                id: 5,
                 slug: '/partner-with-us',
                 title: 'Partner with us',
         }
