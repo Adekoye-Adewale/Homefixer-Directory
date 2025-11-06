@@ -6,7 +6,7 @@ import { footerCompanyLinks, footerQuickLinks } from '@/contents/footer';
 type FooterLinkProps = {
         topic: string;
         links: {
-                id: string;
+                id: number;
                 slug: string;
                 title: string;
         }[];

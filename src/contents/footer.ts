@@ -6,27 +6,27 @@ interface FooterLinks {
 
 export const footerCompanyLinks: FooterLinks[] = [
         {
-                id: '1',
+                id: 1,
                 slug: '/about-lagos-home-fix',
                 title: 'About',
         },
         {
-                id: '2',
+                id: 2,
                 slug: '/how-it-works',
                 title: 'How it works',
         },
         {
-                id: '3',
+                id: 3,
                 slug: '/category',
                 title: 'Categories',
         },
         {
-                id: '4',
+                id: 4,
                 slug: '/locations',
                 title: 'Locations',
         },
         {
-                id: '5',
+                id: 5,
                 slug: '/blog',
                 title: 'Blog',
         }
