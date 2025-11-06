@@ -76,6 +76,10 @@ export const lagosLocations = [
                 title: "Ikoyi" 
         },
         { 
+                value: "ikorodu", 
+                title: "Ikorodu" 
+        },
+        { 
                 value: "ikotun", 
                 title: "Ikotun" 
         },
