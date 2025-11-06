@@ -44,5 +44,5 @@ export const partnerWithUsContents = {
 
         ],
         formTitle: 'Ready to Grow with Us?',
-        formSubtitle: 'Complete the form below to advertise your business and become part of LagosU+2019s most reliable home services network..',
+        formSubtitle: `Complete the form below to advertise your business and become part of Lagos&apos;s most reliable home services network.`,
 }
