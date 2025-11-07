@@ -1,4 +1,5 @@
 import { customBlog } from "@/sanity/lib/customTypes/blog"
+import { customBlogCategoryType } from "@/sanity/lib/customTypes/blogCategory"
 
 // export type Blog = {
 //         id?: number
@@ -19,4 +20,8 @@ import { customBlog } from "@/sanity/lib/customTypes/blog"
 
 export type BlogListProps = {
         blogs: customBlog[]
+}
+
+export type CategoriesProps = {
+        categories?: customBlogCategoryType[]
 }
