@@ -1,14 +1,15 @@
 import React from 'react'
 import Image from 'next/image'
 import ArchivePage from './archivePage'
-import { BlogListProps } from './blogTypes'
+import { BlogListProps, CategoriesProps } from './blogTypes'
 
-export default function BlogPageComponent({ blogs }: BlogListProps) {
+export default function BlogPageComponent({ blogs, categories }: BlogListProps & CategoriesProps) {
         return (
                 <>
                         <HeroSection />
                         <ArchivePage
                                 blogs={blogs}
+                                categories={categories}
                         />
                 </>
         )
