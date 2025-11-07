@@ -33,3 +33,15 @@ export const blogBySlugQuery = `*[_type == 'blog' && slug.current == $slug][0]{
         source,
         sourceLink,
 }`
+
+export const blogCategoryQuery = `*[_type == "blogCategory"]{
+        _id,
+        title,
+        description,
+        "slug": slug.current,
+        "image": image.asset->{
+                url,
+                metadata { lqip, dimensions }
+        },
+        "blogCount": count(*[_type == "blog" && references(^._id)])
+}`
