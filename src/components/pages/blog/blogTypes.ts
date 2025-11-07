@@ -22,6 +22,10 @@ export type BlogListProps = {
         blogs: customBlog[]
 }
 
+export type featuredBlogListProps = {
+        featuredBlogs: customBlog[]
+}
+
 export type CategoriesProps = {
         categories?: customBlogCategoryType[]
 }
