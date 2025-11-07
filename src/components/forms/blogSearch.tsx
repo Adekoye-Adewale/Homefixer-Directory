@@ -15,8 +15,6 @@ import {
         PopoverTrigger,
 } from "@/components/ui/popover"
 import { Button } from "@/components/ui/button"
-import Link from "next/link"
-import Image from "next/image"
 import { customBlog } from "@/sanity/lib/customTypes/blog"
 import { Search } from "lucide-react"
 import SideBarBlogCard from "../pages/blog/sideBarBlogCard"
