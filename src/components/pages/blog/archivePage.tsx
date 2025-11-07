@@ -1,11 +1,11 @@
 import React, { Fragment } from 'react'
 import BlogList from './blogList'
-import { BlogListProps, CategoriesProps } from './blogTypes'
+import { BlogListProps, CategoriesProps, featuredBlogListProps } from './blogTypes'
 import BlogSearch from '@/components/forms/blogSearch'
 import SideBarBlogCard from './sideBarBlogCard'
 import Link from 'next/link'
 
-export default function ArchivePage({ blogs, categories }: BlogListProps & CategoriesProps) {
+export default function ArchivePage({ blogs, categories, featuredBlogs }: BlogListProps & CategoriesProps & featuredBlogListProps) {
         return (
                 <section className='flex justify-center items-center py-5 md:py-10 px-2.5 md:px-5 relative overflow-clip'>
                         <div className='container relative mx-auto'>
@@ -16,6 +16,7 @@ export default function ArchivePage({ blogs, categories }: BlogListProps & Categ
                                         <SideWidget
                                                 blogs={blogs}
                                                 categories={categories}
+                                                featuredBlogs={featuredBlogs}
                                         />
                                 </div>
                         </div>
@@ -33,7 +34,7 @@ const MainSecton = ({ blogs }: BlogListProps) => {
         )
 }
 
-const SideWidget = ({ blogs, categories }: BlogListProps & CategoriesProps) => {
+const SideWidget = ({ blogs, categories, featuredBlogs }: BlogListProps & CategoriesProps & featuredBlogListProps) => {
         return (
                 <div className='col-span-1 border border-sm border-gray-300 rounded-sm p-5 space-y-2.5'>
                         <div className='flex flex-col gap-2.5 md:gap-5'>
@@ -41,7 +42,7 @@ const SideWidget = ({ blogs, categories }: BlogListProps & CategoriesProps) => {
                                         <BlogSearch blogs={blogs} />
                                 </div>
                                 <div className='divide-y divide-gray-300/50 space-y-3'>
-                                        <RecentPosts blogs={blogs} />
+                                        <FeaturedPosts featuredBlogs={featuredBlogs} />
                                         <Categories categories={categories} />
                                 </div>
                         </div>
@@ -49,14 +50,14 @@ const SideWidget = ({ blogs, categories }: BlogListProps & CategoriesProps) => {
         )
 }
 
-const RecentPosts = ({ blogs }: BlogListProps) => {
+const FeaturedPosts = ({ featuredBlogs }: featuredBlogListProps) => {
         return (
                 <div className='pb-3'>
                         <h4 className='text-sm font-semibold text-black/90'>
                                 Featured Posts
                         </h4>
                         <div className='flex flex-col mt-2.5 divide-y divide-gray-300/40 space-y-1'>
-                                {blogs.slice(0, 3).map(blog => (
+                                {featuredBlogs.slice(0, 3).map(blog => (
                                         <Fragment key={blog._id}>
                                                 <SideBarBlogCard 
                                                         blog={blog}
