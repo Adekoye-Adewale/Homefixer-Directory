@@ -8,8 +8,9 @@ import { businessLocationQuery } from './queries/businessLocation'
 import { customBusiness } from './customTypes/business'
 import { customBusinessLocationType } from './customTypes/businessLocation'
 import { customBusinessCategoryType } from './customTypes/businessCategory'
-import { blogBySlugQuery, blogQuery } from './queries/blog'
+import { blogBySlugQuery, blogCategoryQuery, blogQuery } from './queries/blog'
 import { customBlog } from './customTypes/blog'
+import { customBlogCategoryType } from './customTypes/blogCategory'
 
 export const client = createClient({
   projectId,
@@ -106,4 +107,10 @@ export const getBlogBySlug = async (slug: string) => {
     console.error("Error fetching blog by slug:", error)
     return null;
   }
+}
+
+export const getAllBlogsCategory = async () => {
+  const query = blogCategoryQuery
+  const categories = await sanityFetch({ query: query })
+  return categories.data as customBlogCategoryType[];
 }
