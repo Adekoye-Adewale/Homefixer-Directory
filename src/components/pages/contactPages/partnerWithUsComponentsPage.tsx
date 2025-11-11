@@ -120,7 +120,7 @@ const FormSection = () => {
                                                 {partnerWithUsContents.formSubtitle}
                                         </p>
                                 </div>
-                                <div className='mt-5'>
+                                <div className='mt-10 md:mt-15 max-w-4xl mx-auto border border-gray-300 rounded-md p-5 md:p-10 shadow-lg'>
                                         <PartnerWithUsForm/>
                                 </div>
                         </div>
