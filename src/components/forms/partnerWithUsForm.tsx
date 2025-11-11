@@ -23,6 +23,7 @@ import {
 import { Button } from "@/components/ui/button"
 import FormInput from "./formInput"
 import SubmitButton from "./submitButton"
+import { AgreeTerms } from "./submitBusinessForm"
 
 const formSchema = z.object({
                 firstName: z.string().min(1, "First name is required"),
@@ -239,6 +240,8 @@ export default function PartnerWithUsForm() {
                                 <SubmitButton 
                                         label='Submit Partnership Request'
                                 />
+
+                                <AgreeTerms/>
                         </form>
                 </Form>
         ) 
