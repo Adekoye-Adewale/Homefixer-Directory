@@ -12,6 +12,7 @@ import {
         FormLabel,
         FormMessage,
 } from "@/components/ui/form"
+import FormInput from "./formInput"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
@@ -130,147 +131,59 @@ export default function SubmitBusinessForm() {
 
         return (
                 <Form {...form}>
-                        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
+                        <form 
+                                onSubmit={form.handleSubmit(onSubmit)} 
+                                className="space-y-5"
+                        >
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                        <FormField
+                                        <FormInput
                                                 control={form.control}
                                                 name="firstName"
-                                                render={({ field }) => (
-                                                        <FormItem>
-                                                                <FormLabel>
-                                                                        First Name
-                                                                </FormLabel>
-                                                                <FormControl>
-                                                                        <Input 
-                                                                                className="placeholder:text-xs text-xs"
-                                                                                placeholder="John" 
-                                                                                {...field} 
-                                                                        />
-                                                                </FormControl>
-                                                                <FormMessage />
-                                                        </FormItem>
-                                                )}
+                                                label="First Name"
+                                                placeholder="John"
                                         />
 
-                                        <FormField
+                                        <FormInput
                                                 control={form.control}
                                                 name="lastName"
-                                                render={({ field }) => (
-                                                        <FormItem>
-                                                                <FormLabel>
-                                                                        Last Name
-                                                                </FormLabel>
-                                                                <FormControl>
-                                                                        <Input 
-                                                                                className="placeholder:text-xs text-xs"
-                                                                                placeholder="Doe" 
-                                                                                {...field} 
-                                                                        />
-                                                                </FormControl>
-                                                                <FormMessage />
-                                                        </FormItem>
-                                                )}
+                                                label="Last Name"
+                                                placeholder="Doe"
                                         />
                                 </div>
 
-                                <FormField
+                                <FormInput
                                         control={form.control}
                                         name="email"
-                                        render={({ field }) => (
-                                                <FormItem>
-                                                        <FormLabel>
-                                                                Your Email
-                                                        </FormLabel>
-                                                        <FormControl>
-                                                                <Input 
-                                                                        className="placeholder:text-xs text-xs"
-                                                                        placeholder="person@email.com" 
-                                                                        {...field} 
-                                                                />
-                                                        </FormControl>
-                                                        <FormMessage />
-                                                </FormItem>
-                                        )}
+                                        label="Your Email"
+                                        placeholder="person@email.com"
                                 />
 
-                                <FormField
+                                <FormInput
                                         control={form.control}
                                         name="businessName"
-                                        render={({ field }) => (
-                                                <FormItem>
-                                                        <FormLabel>
-                                                                Legal Business Name
-                                                        </FormLabel>
-                                                        <FormControl>
-                                                                <Input 
-                                                                        className="placeholder:text-xs text-xs"
-                                                                        placeholder="Mak and Sons PLC" 
-                                                                        {...field} 
-                                                                />
-                                                        </FormControl>
-                                                        <FormMessage />
-                                                </FormItem>
-                                        )}
+                                        label="Legal Business Name"
+                                        placeholder="Mak and Sons PLC"
                                 />
 
-                                <FormField
+                                <FormInput
                                         control={form.control}
                                         name="businessEmail"
-                                        render={({ field }) => (
-                                                <FormItem>
-                                                        <FormLabel>
-                                                                Business Email
-                                                        </FormLabel>
-                                                        <FormControl>
-                                                                <Input 
-                                                                        className="placeholder:text-xs text-xs"
-                                                                        placeholder="info@sample.org" 
-                                                                        {...field} 
-                                                                />
-                                                        </FormControl>
-                                                        <FormMessage />
-                                                </FormItem>
-                                        )}
+                                        label="Business Email"
+                                        placeholder="info@sample.org"
                                 />
 
-                                <FormField
+                                <FormInput
                                         control={form.control}
                                         name="businessPhone"
-                                        render={({ field }) => (
-                                                <FormItem>
-                                                        <FormLabel>
-                                                                Business Phone Number
-                                                        </FormLabel>
-                                                        <FormControl>
-                                                                <Input 
-                                                                        className="placeholder:text-xs text-xs"
-                                                                        placeholder="09012345678" 
-                                                                        {...field} 
-                                                                />
-                                                        </FormControl>
-                                                        <FormMessage />
-                                                </FormItem>
-                                        )}
+                                        label="Business Phone Number"
+                                        placeholder="09012345678"
                                 />
 
-                                <FormField
+                                <FormInput
                                         control={form.control}
                                         name="businessAddress"
-                                        render={({ field }) => (
-                                                <FormItem>
-                                                        <FormLabel>
-                                                                Business Address
-                                                        </FormLabel>
-                                                        <FormControl>
-                                                                <Input 
-                                                                        className="placeholder:text-xs text-xs"
-                                                                        placeholder="123 sample road, Ojota, Lagos" 
-                                                                        {...field} 
-                                                                />
-                                                        </FormControl>
-                                                        <FormMessage />
-                                                </FormItem>
-                                        )}
+                                        label="Business Address"
+                                        placeholder="123 sample road, Ojota, Lagos"
                                 />
 
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -284,7 +197,7 @@ export default function SubmitBusinessForm() {
                                                                 </FormLabel>
                                                                 <Select onValueChange={field.onChange}>
                                                                         <FormControl>
-                                                                                <SelectTrigger className="text-xs w-full">
+                                                                                <SelectTrigger className="text-xs w-full rounded-[4px] border-2 placeholder:text-xs focus-visible:ring-[0px]">
                                                                                         <SelectValue
                                                                                                 placeholder="Select location"
                                                                                         />
@@ -313,7 +226,7 @@ export default function SubmitBusinessForm() {
                                                                 </FormLabel>
                                                                 <Select onValueChange={field.onChange}>
                                                                         <FormControl>
-                                                                                <SelectTrigger className="text-xs w-full">
+                                                                                <SelectTrigger className="text-xs w-full rounded-[4px] border-2 placeholder:text-xs focus-visible:ring-[0px]">
                                                                                         <SelectValue 
                                                                                                 placeholder="Select category" 
                                                                                         />
@@ -343,7 +256,7 @@ export default function SubmitBusinessForm() {
                                                         </FormLabel>
                                                         <FormControl>
                                                                 <Textarea 
-                                                                        className="placeholder:text-xs text-xs"
+                                                                        className="rounded-[4px] border-2 placeholder:text-xs text-xs focus-visible:ring-[0px]"
                                                                         placeholder="Describe your business briefly..." 
                                                                         {...field}
                                                                 />
@@ -353,23 +266,11 @@ export default function SubmitBusinessForm() {
                                         )}
                                 />
 
-                                <FormField
+                                <FormInput
                                         control={form.control}
                                         name="businessWebsite"
-                                        render={({ field }) => (
-                                                <FormItem>
-                                                        <FormLabel>
-                                                                Business Website
-                                                        </FormLabel>
-                                                        <FormControl>
-                                                                <Input 
-                                                                        className="placeholder:text-xs text-xs"
-                                                                        placeholder="domain.org" {...field} 
-                                                                />
-                                                        </FormControl>
-                                                        <FormMessage />
-                                                </FormItem>
-                                        )}
+                                        label="Business Website"
+                                        placeholder="https://domain.com"
                                 />
 
                                 {/* Logo */}
@@ -386,7 +287,7 @@ export default function SubmitBusinessForm() {
                                                                         type="file" 
                                                                         accept="image/png, image/jpeg" 
                                                                         onChange={(e) => field.onChange(e.target.files)} 
-                                                                        className="text-xs"
+                                                                        className="rounded-[4px] border-2 placeholder:text-xs text-xs focus-visible:ring-[0px]"
                                                                 />
                                                         </FormControl>
                                                         <FormMessage />
@@ -408,7 +309,7 @@ export default function SubmitBusinessForm() {
                                                                         type="file" 
                                                                         accept="image/png, image/jpeg, image/jpg" 
                                                                         onChange={(e) => field.onChange(e.target.files)} 
-                                                                        className="text-xs"
+                                                                        className="rounded-[4px] border-2 placeholder:text-xs text-xs focus-visible:ring-[0px]"
                                                                 />
                                                         </FormControl>
                                                         <FormMessage />
@@ -421,12 +322,12 @@ export default function SubmitBusinessForm() {
                                         control={form.control}
                                         name="authorisation"
                                         render={({ field }) => (
-                                                <FormItem className="flex items-center space-x-2">
+                                                <FormItem className="flex items-center space-x-2 cursor-pointer">
                                                         <FormControl>
                                                                 <Checkbox 
                                                                         checked={field.value}
                                                                         onCheckedChange={field.onChange} 
-                                                                        className="border-black"
+                                                                        className="border-black rounded-[4px]"
                                                                 />
                                                         </FormControl>
                                                         <FormLabel className="leading-snug text-xs">
@@ -439,7 +340,7 @@ export default function SubmitBusinessForm() {
 
                                 <Button 
                                         type="submit" 
-                                        className="w-full mt-4"
+                                        className="w-full mt-4 bg-black text-white border border-black hover:bg-black/10 hover:text-black transition-colors duration-300 text-sm cursor-pointer"
                                 >
                                         Submit Business
                                 </Button>
