@@ -16,7 +16,7 @@ import FormInput from "./formInput"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
-import { Button } from "@/components/ui/button"
+import SubmitButton from "./submitButton"
 import { Checkbox } from "@/components/ui/checkbox"
 import { toast } from "sonner"
 import Link from "next/link"
@@ -256,7 +256,7 @@ export default function SubmitBusinessForm() {
                                                         </FormLabel>
                                                         <FormControl>
                                                                 <Textarea 
-                                                                        className="rounded-[4px] border-2 placeholder:text-xs text-xs focus-visible:ring-[0px]"
+                                                                        className="rounded-[4px] border-2 placeholder:text-xs text-xs focus-visible:ring-[0px] min-h-32"
                                                                         placeholder="Describe your business briefly..." 
                                                                         {...field}
                                                                 />
@@ -338,12 +338,7 @@ export default function SubmitBusinessForm() {
                                         )}
                                 />
 
-                                <Button 
-                                        type="submit" 
-                                        className="w-full mt-4 bg-black text-white border border-black hover:bg-black/10 hover:text-black transition-colors duration-300 text-sm cursor-pointer"
-                                >
-                                        Submit Business
-                                </Button>
+                                <SubmitButton label="Submit Business" />
 
                                 <AgreeTerms />
                         </form>
@@ -351,7 +346,7 @@ export default function SubmitBusinessForm() {
         )
 }
 
-const AgreeTerms = () => {
+export const AgreeTerms = () => {
         return (
                 <p className="text-xs text-center text-gray-500 mt-2">
                         By continuing, you agree to Lagos Home Fixers&apos; <Link href={`/terms-and-conditions`} target="_blank" className="underline cursor-pointer">Terms of Use</Link> and <Link href={`/privacy`} target="_blank" className="underline cursor-pointer">Privacy Policy</Link>.
