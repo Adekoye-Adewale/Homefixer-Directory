@@ -25,6 +25,7 @@ import { Button } from "@/components/ui/button"
 import { toast } from "sonner"
 import FormInput from "./formInput"
 import SubmitButton from "./submitButton"
+import { AgreeTerms } from "./submitBusinessForm"
 
 const enquirySchema = z.object({
         enquiryType: z.enum(["General", "Technical"] as const, "Please select the type of enquiry."),
@@ -146,6 +147,8 @@ export default function MakeEnquireForm() {
                                 />
 
                                 <SubmitButton label="Submit Enquiry"/>
+
+                                <AgreeTerms/>
                         </form>
                 </Form>
         )
