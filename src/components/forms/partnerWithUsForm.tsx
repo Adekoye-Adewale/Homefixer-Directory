@@ -21,6 +21,8 @@ import {
         SelectValue,
 } from "@/components/ui/select"
 import { Button } from "@/components/ui/button"
+import FormInput from "./formInput"
+import SubmitButton from "./submitButton"
 
 const formSchema = z.object({
                 firstName: z.string().min(1, "First name is required"),
@@ -102,185 +104,141 @@ export default function PartnerWithUsForm() {
                                 className="space-y-6"
                         >
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                        <FormField
+                                        <FormInput 
                                                 control={form.control}
                                                 name="firstName"
+                                                label="First Name"
+                                                placeholder="John"
+                                        />
+                                        <FormInput 
+                                                control={form.control}
+                                                name="lastName"
+                                                label="Last Name"
+                                                placeholder="Doe"
+                                        />
+                                </div>
+
+                                <FormInput
+                                        control={form.control}
+                                        name="businessEmail"
+                                        label="Business Email"
+                                        placeholder="mail@business.com"
+                                />
+
+                                <FormInput
+                                        control={form.control}
+                                        name="businessName"
+                                        label="Business Name"
+                                        placeholder="Business LLC"
+                                />
+
+                                <FormInput
+                                        control={form.control}
+                                        name="businessAddress"
+                                        label="Business Address"
+                                        placeholder="123 Broad Way Street, Lagos"
+                                />
+
+                                <FormInput
+                                        control={form.control}
+                                        name="businessWebsite"
+                                        label="Business Website"
+                                        placeholder="https://www.business.com"
+                                />
+
+                                <FormInput
+                                        control={form.control}
+                                        name="businessPhone"
+                                        label="Business Phone"
+                                        placeholder="09012345678"
+                                />
+
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                        <FormField
+                                                control={form.control}
+                                                name="businessType"
                                                 render={({ field }) => (
                                                         <FormItem>
-                                                                <FormLabel>First Name</FormLabel>
-                                                                <FormControl>
-                                                                        <Input placeholder="John" {...field} />
-                                                                </FormControl>
+                                                                <FormLabel>
+                                                                        Business Type / Industry
+                                                                </FormLabel>
+                                                                <Select
+                                                                        onValueChange={field.onChange}
+                                                                        value={field.value}
+                                                                >
+                                                                        <FormControl>
+                                                                                <SelectTrigger className="text-xs w-full rounded-[4px] border-2 placeholder:text-xs focus-visible:ring-[0px]">
+                                                                                        <SelectValue 
+                                                                                                placeholder="Select industry" 
+                                                                                        />
+                                                                                </SelectTrigger>
+                                                                        </FormControl>
+                                                                        <SelectContent>
+                                                                                {businessTypes.map((type) => (
+                                                                                        <SelectItem 
+                                                                                                key={type} 
+                                                                                                value={type}
+                                                                                        >
+                                                                                                {type}
+                                                                                        </SelectItem>
+                                                                                ))}
+                                                                        </SelectContent>
+                                                                </Select>
                                                                 <FormMessage />
                                                         </FormItem>
                                                 )}
                                         />
+
                                         <FormField
                                                 control={form.control}
-                                                name="lastName"
+                                                name="partnershipType"
                                                 render={({ field }) => (
                                                         <FormItem>
-                                                                <FormLabel>Last Name</FormLabel>
-                                                                <FormControl>
-                                                                        <Input placeholder="Doe" {...field} />
-                                                                </FormControl>
+                                                                <FormLabel>
+                                                                        How would you like to partner with us?
+                                                                </FormLabel>
+                                                                <Select
+                                                                        onValueChange={field.onChange}
+                                                                        value={field.value}
+                                                                >
+                                                                        <FormControl>
+                                                                                <SelectTrigger className="text-xs w-full rounded-[4px] border-2 placeholder:text-xs focus-visible:ring-[0px]">
+                                                                                        <SelectValue placeholder="Select partnership type" />
+                                                                                </SelectTrigger>
+                                                                        </FormControl>
+                                                                        <SelectContent>
+                                                                                <SelectItem value="advertise">
+                                                                                        Advertise with us
+                                                                                </SelectItem>
+                                                                                <SelectItem value="collaborate">
+                                                                                        Brand collaborations
+                                                                                </SelectItem>
+                                                                                <SelectItem value="sponsor">
+                                                                                        We sponsor your event
+                                                                                </SelectItem>
+                                                                                <SelectItem value="other">
+                                                                                        Other
+                                                                                </SelectItem>
+                                                                        </SelectContent>
+                                                                </Select>
                                                                 <FormMessage />
                                                         </FormItem>
                                                 )}
                                         />
                                 </div>
 
-                                <FormField
-                                        control={form.control}
-                                        name="businessEmail"
-                                        render={({ field }) => (
-                                                <FormItem>
-                                                        <FormLabel>Business Email</FormLabel>
-                                                        <FormControl>
-                                                                <Input placeholder="mail@business.com" {...field} />
-                                                        </FormControl>
-                                                        <FormMessage />
-                                                </FormItem>
-                                        )}
-                                />
-
-                                <FormField
-                                        control={form.control}
-                                        name="businessName"
-                                        render={({ field }) => (
-                                                <FormItem>
-                                                        <FormLabel>Business Name</FormLabel>
-                                                        <FormControl>
-                                                                <Input placeholder="Business LLC" {...field} />
-                                                        </FormControl>
-                                                        <FormMessage />
-                                                </FormItem>
-                                        )}
-                                />
-
-                                <FormField
-                                        control={form.control}
-                                        name="businessAddress"
-                                        render={({ field }) => (
-                                                <FormItem>
-                                                        <FormLabel>Business Address</FormLabel>
-                                                        <FormControl>
-                                                                <Input placeholder="123 Broad Way Street, Lagos" {...field} />
-                                                        </FormControl>
-                                                        <FormMessage />
-                                                </FormItem>
-                                        )}
-                                />
-
-                                <FormField
-                                        control={form.control}
-                                        name="businessWebsite"
-                                        render={({ field }) => (
-                                                <FormItem>
-                                                        <FormLabel>Business Website</FormLabel>
-                                                        <FormControl>
-                                                                <Input placeholder="business.com" {...field} />
-                                                        </FormControl>
-                                                        <FormMessage />
-                                                </FormItem>
-                                        )}
-                                />
-
-                                <FormField
-                                        control={form.control}
-                                        name="businessPhone"
-                                        render={({ field }) => (
-                                                <FormItem>
-                                                        <FormLabel>Business Phone Number</FormLabel>
-                                                        <FormControl>
-                                                                <Input placeholder="09012345678" {...field} />
-                                                        </FormControl>
-                                                        <FormMessage />
-                                                </FormItem>
-                                        )}
-                                />
-
-                                <FormField
-                                        control={form.control}
-                                        name="businessType"
-                                        render={({ field }) => (
-                                                <FormItem>
-                                                        <FormLabel>Business Type / Industry</FormLabel>
-                                                        <Select
-                                                                onValueChange={field.onChange}
-                                                                value={field.value}
-                                                        >
-                                                                <FormControl>
-                                                                        <SelectTrigger>
-                                                                                <SelectValue placeholder="Select industry" />
-                                                                        </SelectTrigger>
-                                                                </FormControl>
-                                                                <SelectContent>
-                                                                        {businessTypes.map((type) => (
-                                                                                <SelectItem key={type} value={type}>
-                                                                                        {type}
-                                                                                </SelectItem>
-                                                                        ))}
-                                                                </SelectContent>
-                                                        </Select>
-                                                        <FormMessage />
-                                                </FormItem>
-                                        )}
-                                />
-
-                                <FormField
-                                        control={form.control}
-                                        name="partnershipType"
-                                        render={({ field }) => (
-                                                <FormItem>
-                                                        <FormLabel>How would you like to partner with us?</FormLabel>
-                                                        <Select
-                                                                onValueChange={field.onChange}
-                                                                value={field.value}
-                                                        >
-                                                                <FormControl>
-                                                                        <SelectTrigger>
-                                                                                <SelectValue placeholder="Select partnership type" />
-                                                                        </SelectTrigger>
-                                                                </FormControl>
-                                                                <SelectContent>
-                                                                        <SelectItem value="advertise">Advertise with us</SelectItem>
-                                                                        <SelectItem value="collaborate">
-                                                                                Brand collaborations
-                                                                        </SelectItem>
-                                                                        <SelectItem value="sponsor">
-                                                                                We sponsor your event
-                                                                        </SelectItem>
-                                                                        <SelectItem value="other">Other</SelectItem>
-                                                                </SelectContent>
-                                                        </Select>
-                                                        <FormMessage />
-                                                </FormItem>
-                                        )}
-                                />
-
                                 {selectedPartnership === "other" && (
-                                        <FormField
+                                        <FormInput
                                                 control={form.control}
                                                 name="otherPartnership"
-                                                render={({ field }) => (
-                                                        <FormItem>
-                                                                <FormLabel>Describe your partnership idea</FormLabel>
-                                                                <FormControl>
-                                                                        <Input
-                                                                                placeholder="Tell us how you'd like to partner"
-                                                                                {...field}
-                                                                        />
-                                                                </FormControl>
-                                                                <FormMessage />
-                                                        </FormItem>
-                                                )}
+                                                label="Describe your partnership idea"
+                                                placeholder="Tell us how you'd like to partner"
                                         />
                                 )}
 
-                                <Button type="submit" className="w-full">
-                                        Submit Partnership Request
-                                </Button>
+                                <SubmitButton 
+                                        label='Submit Partnership Request'
+                                />
                         </form>
                 </Form>
         ) 
