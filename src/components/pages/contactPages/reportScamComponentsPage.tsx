@@ -2,6 +2,7 @@ import React from 'react'
 import HeroSection from './heroSection'
 import { reportScamContents } from '@/contents/reportScam'
 import ReportScamForm from '@/components/forms/reportScamForm'
+import BodySectionComponents from './bodySectionComponents'
 
 export default function ReportScamComponentsPage() {
         return (
@@ -11,19 +12,9 @@ export default function ReportScamComponentsPage() {
                                 pageTitle={reportScamContents.pageTitle}
                                 pageParagraph={reportScamContents.pageParagraph}
                         />
-                        <ReportScamBody/>
+                        <BodySectionComponents>
+                                <ReportScamForm />
+                        </BodySectionComponents>
                 </main>
-        )
-}
-
-const ReportScamBody = () => {
-        return (
-                <section className='flex justify-center items-center py-20 md:py-24 px-2.5 md:px-5'>
-                        <div className='container relative mx-auto'>
-                                <div>
-                                        <ReportScamForm/>
-                                </div>
-                        </div>
-                </section>
         )
 }
