@@ -12,12 +12,13 @@ import {
         FormLabel,
         FormMessage,
 } from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Checkbox } from "@/components/ui/checkbox"
-import { Button } from "@/components/ui/button"
+import SubmitButton from "./submitButton"
+import FormInput from "./formInput"
+import { AgreeTerms } from "./submitBusinessForm"
+import { toast } from "sonner"
 
-// Schema validation
 const formSchema = z.object({
         firstName: z.string().min(2, "First name is required"),
         lastName: z.string().min(2, "Last name is required"),
@@ -47,6 +48,8 @@ export default function ReportScamForm() {
 
         function onSubmit(values: z.infer<typeof formSchema>) {
                 console.log(values)
+                toast.success("Business submitted successfully!")
+                form.reset()
         }
 
         return (
@@ -55,64 +58,38 @@ export default function ReportScamForm() {
                                 onSubmit={form.handleSubmit(onSubmit)}
                                 className="space-y-6 max-w-xl mx-auto"
                         >
-                                {/* First Name */}
-                                <FormField
-                                        control={form.control}
-                                        name="firstName"
-                                        render={({ field }) => (
-                                                <FormItem>
-                                                        <FormLabel>First Name</FormLabel>
-                                                        <FormControl>
-                                                                <Input placeholder="John" {...field} />
-                                                        </FormControl>
-                                                        <FormMessage />
-                                                </FormItem>
-                                        )}
-                                />
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        {/* First Name */}
+                                        <FormInput
+                                                control={form.control}
+                                                name="firstName"
+                                                label="First Name"
+                                                placeholder="John"
+                                        />
 
-                                {/* Last Name */}
-                                <FormField
-                                        control={form.control}
-                                        name="lastName"
-                                        render={({ field }) => (
-                                                <FormItem>
-                                                        <FormLabel>Last Name</FormLabel>
-                                                        <FormControl>
-                                                                <Input placeholder="Doe" {...field} />
-                                                        </FormControl>
-                                                        <FormMessage />
-                                                </FormItem>
-                                        )}
-                                />
+                                        {/* Last Name */}
+                                        <FormInput
+                                                control={form.control}
+                                                name="lastName"
+                                                label="Last Name"
+                                                placeholder="Doe"
+                                        />
+                                </div>
 
                                 {/* Phone */}
-                                <FormField
+                                <FormInput
                                         control={form.control}
                                         name="phone"
-                                        render={({ field }) => (
-                                                <FormItem>
-                                                        <FormLabel>Your Phone Number</FormLabel>
-                                                        <FormControl>
-                                                                <Input placeholder="09012345678" {...field} />
-                                                        </FormControl>
-                                                        <FormMessage />
-                                                </FormItem>
-                                        )}
+                                        label="Your Phone Number"
+                                        placeholder="09012345678"
                                 />
 
                                 {/* Business Name */}
-                                <FormField
+                                <FormInput
                                         control={form.control}
                                         name="businessName"
-                                        render={({ field }) => (
-                                                <FormItem>
-                                                        <FormLabel>Business Name You Are Reporting</FormLabel>
-                                                        <FormControl>
-                                                                <Input placeholder="Business LLC" {...field} />
-                                                        </FormControl>
-                                                        <FormMessage />
-                                                </FormItem>
-                                        )}
+                                        label="Business Name You Are Reporting"
+                                        placeholder="Business LLC"
                                 />
 
                                 {/* Reason */}
@@ -125,7 +102,7 @@ export default function ReportScamForm() {
                                                         <FormControl>
                                                                 <Textarea
                                                                         placeholder="Describe your reason for reporting the business here..."
-                                                                        className="min-h-[120px]"
+                                                                        className="rounded-[4px] border-2 placeholder:text-xs text-xs focus-visible:ring-[0px] min-h-32"
                                                                         {...field}
                                                                 />
                                                         </FormControl>
@@ -139,11 +116,12 @@ export default function ReportScamForm() {
                                         control={form.control}
                                         name="consent"
                                         render={({ field }) => (
-                                                <FormItem className="flex items-start space-x-2">
+                                                <FormItem className="flex items-center space-x-2 cursor-pointer">
                                                         <FormControl>
                                                                 <Checkbox
                                                                         checked={field.value}
                                                                         onCheckedChange={field.onChange}
+                                                                        className="border-black rounded-[4px]"
                                                                 />
                                                         </FormControl>
                                                         <div className="space-y-1 leading-none">
@@ -156,12 +134,11 @@ export default function ReportScamForm() {
                                         )}
                                 />
 
-                                <Button 
-                                        type="submit" 
-                                        className="w-full"
-                                >
-                                        Submit Report
-                                </Button>
+                                <SubmitButton 
+                                        label='Submit Report'
+                                />
+
+                                <AgreeTerms/>
                         </form>
                 </Form>
         )
