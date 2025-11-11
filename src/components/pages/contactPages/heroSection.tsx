@@ -15,6 +15,7 @@ export default function HeroSection({ imageUrl, pageTitle, pageParagraph }: Hero
                                 alt={pageTitle} 
                                 width={1000} 
                                 height={758}
+                                priority
                                 className='absolute inset-0 size-full object-cover brightness-10'
                         />
                         <div className='container relative mx-auto'>
