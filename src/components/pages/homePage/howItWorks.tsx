@@ -47,6 +47,7 @@ const Card = ({ title, description, imgSrc }: cardProps ) => {
                                         alt={title}
                                         width={120}
                                         height={120}
+                                        unoptimized
                                 />
                         </div>
                         <div>
