@@ -22,6 +22,9 @@ import {
 } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button"
+import { toast } from "sonner"
+import FormInput from "./formInput"
+import SubmitButton from "./submitButton"
 
 const enquirySchema = z.object({
         enquiryType: z.enum(["General", "Technical"] as const, "Please select the type of enquiry."),
@@ -50,12 +53,14 @@ export default function MakeEnquireForm() {
 
         function onSubmit(values: EnquiryFormValues) {
                 console.log(values)
+                toast.success("Enquiry submitted successfully!")
+                form.reset()
         }
         return (
                 <Form {...form}>
                         <form
                                 onSubmit={form.handleSubmit(onSubmit)}
-                                className="space-y-6 max-w-lg mx-auto"
+                                className="space-y-6 w-full"
                         >
                                 {/* Type of Enquiry */}
                                 <FormField
@@ -63,10 +68,14 @@ export default function MakeEnquireForm() {
                                         name="enquiryType"
                                         render={({ field }) => (
                                                 <FormItem>
-                                                        <FormLabel>Type of Enquiry</FormLabel>
-                                                        <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                                        <FormLabel>
+                                                                Type of Enquiry
+                                                        </FormLabel>
+                                                        <Select 
+                                                                onValueChange={field.onChange} 
+                                                                defaultValue={field.value}>
                                                                 <FormControl>
-                                                                        <SelectTrigger>
+                                                                        <SelectTrigger className="text-xs w-full rounded-[4px] border-2 placeholder:text-xs focus-visible:ring-[0px]">
                                                                                 <SelectValue placeholder="Select type" />
                                                                         </SelectTrigger>
                                                                 </FormControl>
@@ -80,80 +89,38 @@ export default function MakeEnquireForm() {
                                         )}
                                 />
 
-                                {/* First Name */}
-                                <FormField
-                                        control={form.control}
-                                        name="firstName"
-                                        render={({ field }) => (
-                                                <FormItem>
-                                                        <FormLabel>
-                                                                First Name
-                                                        </FormLabel>
-                                                        <FormControl>
-                                                                <Input 
-                                                                        placeholder="John" 
-                                                                        {...field}
-                                                                />
-                                                        </FormControl>
-                                                        <FormMessage />
-                                                </FormItem>
-                                        )}
-                                />
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        {/* First Name */}
+                                        <FormInput
+                                                control={form.control}
+                                                name="firstName"
+                                                label="First Name"
+                                                placeholder="John"
+                                        />
 
-                                {/* Last Name */}
-                                <FormField
-                                        control={form.control}
-                                        name="lastName"
-                                        render={({ field }) => (
-                                                <FormItem>
-                                                        <FormLabel>
-                                                                Last Name
-                                                        </FormLabel>
-                                                        <FormControl>
-                                                                <Input 
-                                                                        placeholder="Doe" 
-                                                                        {...field} 
-                                                                />
-                                                        </FormControl>
-                                                        <FormMessage />
-                                                </FormItem>
-                                        )}
-                                />
+                                        {/* last Name */}
+                                        <FormInput
+                                                control={form.control}
+                                                name="lastName"
+                                                label="Last Name"
+                                                placeholder="Doe"
+                                        />
+                                </div>
 
                                 {/* Email */}
-                                <FormField
+                                <FormInput
                                         control={form.control}
                                         name="email"
-                                        render={({ field }) => (
-                                                <FormItem>
-                                                        <FormLabel>E-mail</FormLabel>
-                                                        <FormControl>
-                                                                <Input 
-                                                                        placeholder="sample@email.com" 
-                                                                        {...field} 
-                                                                />
-                                                        </FormControl>
-                                                        <FormMessage />
-                                                </FormItem>
-                                        )}
+                                        label="E-mail"
+                                        placeholder="sample@email.com"
                                 />
 
                                 {/* Phone (optional) */}
-                                <FormField
+                                <FormInput
                                         control={form.control}
                                         name="phone"
-                                        render={({ field }) => (
-                                                <FormItem>
-                                                        <FormLabel>Phone (optional)</FormLabel>
-                                                        <FormControl>
-                                                                <Input 
-                                                                        placeholder="08012345678" 
-                                                                        {...field} 
-                                                                />
-                                                        </FormControl>
-                                                        <FormMessage />
-                                                </FormItem>
-                                        )}
+                                        label="Phone number (optional)"
+                                        placeholder="08012345678"
                                 />
 
                                 {/* Message */}
@@ -162,9 +129,12 @@ export default function MakeEnquireForm() {
                                         name="message"
                                         render={({ field }) => (
                                                 <FormItem>
-                                                        <FormLabel>Message</FormLabel>
+                                                        <FormLabel>
+                                                                Message
+                                                        </FormLabel>
                                                         <FormControl>
                                                                 <Textarea
+                                                                        className="rounded-[4px] border-2 placeholder:text-xs text-xs focus-visible:ring-[0px] min-h-32"
                                                                         placeholder="Type your message here..."
                                                                         rows={8}
                                                                         {...field}
@@ -175,10 +145,7 @@ export default function MakeEnquireForm() {
                                         )}
                                 />
 
-                                {/* Submit Button */}
-                                <Button type="submit" className="w-full">
-                                        Submit Enquiry
-                                </Button>
+                                <SubmitButton label="Submit Enquiry"/>
                         </form>
                 </Form>
         )
