@@ -13,6 +13,7 @@ export default function HeroSection({ locations }: {
                                 alt={'Lagos Home Fixers'} 
                                 width={1000} 
                                 height={758}
+                                priority
                                 className='absolute inset-0 size-full object-cover brightness-10'
                         />
                         <div className='container relative mx-auto'>
