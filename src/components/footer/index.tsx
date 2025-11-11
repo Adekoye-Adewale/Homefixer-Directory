@@ -60,21 +60,21 @@ const CopyRight = () => {
                         <div className='container mx-auto flex flex-col md:flex-row-reverse gap-2 items-center justify-between text-xs'>
                                 <div className='flex gap-2 font-semibold'>
                                         <Link 
-                                                href='/terms'
+                                                href='/terms-and-conditions'
                                                 title='Terms and Conditions'
                                                 className='hover:text-white/70 transition-colors duration-300 ease-in-out'
                                         >
                                                 Terms
                                         </Link>
                                         <Link 
-                                                href='/privacy'
+                                                href='/privacy-policy'
                                                 title='Privacy Policy'
                                                 className='hover:text-white/70 transition-colors duration-300 ease-in-out'
                                         >
                                                 Privacy
                                         </Link>
                                         <Link 
-                                                href='/support'
+                                                href='/get-support'
                                                 title='Contact Support'
                                                 className='hover:text-white/70 transition-colors duration-300 ease-in-out'
                                         >
