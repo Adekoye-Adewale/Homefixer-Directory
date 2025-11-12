@@ -80,6 +80,8 @@ export default function MakeEnquireForm() {
                         const data = await res.json();
                         if (!res.ok) {
                                 toast.error(data?.error ?? `Failed to submit enquiry (status: ${res.status}. ${data?.error ?? ""})`);
+                                console.log("ERROR", data?.error)
+                                setStatus("idle")
                                 return;
                         }
 
@@ -89,6 +91,7 @@ export default function MakeEnquireForm() {
                 } catch (err) {
                         console.error(err);
                         toast.error("An unexpected error occurred");
+                        setStatus("idle")
                 }
         }
 
@@ -104,7 +107,7 @@ export default function MakeEnquireForm() {
                 <Form {...form}>
                         <form
                                 onSubmit={form.handleSubmit(onSubmit)}
-                                className="space-y-6 w-full"
+                                className={`space-y-6 w-full ${status === "submitting" ? 'opacity-70 cursor-progress' : ''}`}
                         >
                                 {/* Type of Enquiry */}
                                 <FormField
