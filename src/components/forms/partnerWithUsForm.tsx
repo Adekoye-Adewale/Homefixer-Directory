@@ -1,6 +1,6 @@
 "use client"
 
-import React from "react"
+import React, { useState } from "react"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
@@ -12,7 +12,6 @@ import {
         FormLabel,
         FormMessage,
 } from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
 import {
         Select,
         SelectContent,
@@ -20,10 +19,11 @@ import {
         SelectTrigger,
         SelectValue,
 } from "@/components/ui/select"
-import { Button } from "@/components/ui/button"
+import { toast } from "sonner"
 import FormInput from "./formInput"
 import SubmitButton from "./submitButton"
 import { AgreeTerms } from "./submitBusinessForm"
+import FormConfirmation from "../layouts/formConfirmation"
 
 const formSchema = z.object({
                 firstName: z.string().min(1, "First name is required"),
@@ -60,6 +60,8 @@ type PartnerFormData = z.infer<typeof formSchema>
 
 export default function PartnerWithUsForm() { 
 
+        const [status, setStatus] = useState<"idle" | "submitting" | "submitted">("idle")
+
         const form = useForm<PartnerFormData>({
                 resolver: zodResolver(formSchema),
                 defaultValues: {
@@ -79,7 +81,10 @@ export default function PartnerWithUsForm() {
         const selectedPartnership = form.watch("partnershipType")
 
         const onSubmit = (values: PartnerFormData) => {
+                setStatus("submitting")
                 console.log("Form data:", values)
+                toast.success("Enquiry submitted successfully!");
+                form.reset();
         }
 
         const businessTypes = [
@@ -97,6 +102,14 @@ export default function PartnerWithUsForm() {
                 "Security Systems",
                 "Other",
         ]
+
+        if (status === "submitted") {
+                return (
+                        <FormConfirmation 
+                                title="Partnership Request Sent!"
+                        />
+                )
+        }
 
         return (
                 <Form {...form}>
@@ -238,6 +251,7 @@ export default function PartnerWithUsForm() {
                                 )}
 
                                 <SubmitButton 
+                                        status={status}
                                         label='Submit Partnership Request'
                                 />
 
