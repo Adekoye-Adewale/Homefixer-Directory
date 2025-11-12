@@ -1,6 +1,6 @@
 "use client"
 
-import React from "react"
+import React, { useState } from "react"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
@@ -18,6 +18,7 @@ import SubmitButton from "./submitButton"
 import FormInput from "./formInput"
 import { AgreeTerms } from "./submitBusinessForm"
 import { toast } from "sonner"
+import FormConfirmation from "../layouts/formConfirmation"
 
 const formSchema = z.object({
         firstName: z.string().min(2, "First name is required"),
@@ -34,6 +35,8 @@ const formSchema = z.object({
 
 export default function ReportScamForm() {
 
+        const [status, setStatus] = useState<"idle" | "submitting" | "submitted">("idle")
+
         const form = useForm<z.infer<typeof formSchema>>({
                 resolver: zodResolver(formSchema),
                 defaultValues: {
@@ -47,9 +50,18 @@ export default function ReportScamForm() {
         })
 
         function onSubmit(values: z.infer<typeof formSchema>) {
+                setStatus("submitting")
                 console.log(values)
                 toast.success("Business submitted successfully!")
                 form.reset()
+        }
+
+        if (status === "submitted") {
+                return (
+                        <FormConfirmation 
+                                title="Report Sent!"
+                        />
+                )
         }
 
         return (
@@ -135,6 +147,7 @@ export default function ReportScamForm() {
                                 />
 
                                 <SubmitButton 
+                                        status={status}
                                         label='Submit Report'
                                 />
 
