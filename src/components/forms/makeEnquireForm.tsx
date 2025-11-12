@@ -1,6 +1,6 @@
 "use client"
 
-import React from "react"
+import React, { useState } from "react"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
@@ -12,7 +12,6 @@ import {
         FormLabel,
         FormMessage,
 } from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
 import {
         Select,
         SelectContent,
@@ -21,11 +20,12 @@ import {
         SelectValue,
 } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
-import { Button } from "@/components/ui/button"
 import { toast } from "sonner"
 import FormInput from "./formInput"
 import SubmitButton from "./submitButton"
 import { AgreeTerms } from "./submitBusinessForm"
+import FormConfirmation from "../layouts/formConfirmation"
+
 
 const enquirySchema = z.object({
         enquiryType: z.enum(["General", "Technical"] as const, "Please select the type of enquiry."),
@@ -38,7 +38,11 @@ const enquirySchema = z.object({
 
 type EnquiryFormValues = z.infer<typeof enquirySchema>
 
+const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!
+
 export default function MakeEnquireForm() {
+
+        const [status, setStatus] = useState<"idle" | "submitting" | "submitted">("idle")
 
         const form = useForm < EnquiryFormValues > ({
                 resolver: zodResolver(enquirySchema),
@@ -52,11 +56,50 @@ export default function MakeEnquireForm() {
                 },
         })
 
-        function onSubmit(values: EnquiryFormValues) {
-                console.log(values)
-                toast.success("Enquiry submitted successfully!")
-                form.reset()
+        async function onSubmit(values: EnquiryFormValues) {
+                setStatus("submitting")
+                try {
+                        const token = await grecaptcha.enterprise.execute(`${siteKey}`, { action: 'submit' });
+
+                        if (!token) {
+                                toast.error("Recaptcha verification failed");
+                                return;
+                        }
+
+                        const payload = { 
+                                ...values, 
+                                recaptchaToken: token
+                        };
+
+                        const res = await fetch("/api/make-enquiries", {
+                                method: "POST",
+                                headers: { "Content-Type": "application/json" },
+                                body: JSON.stringify(payload),
+                        });
+
+                        const data = await res.json();
+                        if (!res.ok) {
+                                toast.error(data?.error ?? `Failed to submit enquiry (status: ${res.status}. ${data?.error ?? ""})`);
+                                return;
+                        }
+
+                        setStatus("submitted")
+                        toast.success("Enquiry submitted successfully!");
+                        form.reset();
+                } catch (err) {
+                        console.error(err);
+                        toast.error("An unexpected error occurred");
+                }
         }
+
+        if (status === "submitted") {
+                return (
+                        <FormConfirmation 
+                                title="Enquiry Sent!"
+                        />
+                )
+        }
+
         return (
                 <Form {...form}>
                         <form
@@ -146,7 +189,10 @@ export default function MakeEnquireForm() {
                                         )}
                                 />
 
-                                <SubmitButton label="Submit Enquiry"/>
+                                <SubmitButton
+                                        status={status}
+                                        label="Submit Enquiry"
+                                />
 
                                 <AgreeTerms/>
                         </form>
