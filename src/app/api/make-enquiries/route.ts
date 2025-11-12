@@ -3,8 +3,12 @@ import { z } from "zod";
 import { supabase } from "@/supabase/client";
 import redisRateLimit from "@/lib/rate-limit-redis";
 import { GoogleAuth } from "google-auth-library"
+import { Resend } from "resend";
+import { ADMIN_EMAIL } from "@/contents/constants";
 
 const PROJECT_ID = process.env.GOOGLE_PROJECT_ID!
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 const schema = z.object({
         enquiryType: z.enum(["General", "Technical"]),
@@ -80,14 +84,21 @@ export async function POST(req: NextRequest) {
                 // 1. validate
                 const parsed = schema.safeParse(formData);
                 if (!parsed.success) {
-                        return NextResponse.json({ error: "Invalid input", details: parsed.error.format() }, { status: 400 });
+                        return NextResponse.json(
+                                { 
+                                        error: "Invalid input", 
+                                        details: parsed.error.format() 
+                                }, 
+                                { status: 400 });
                 }
 
                 // 2. rate limit
                 const rl = await redisRateLimit(ip, 10, 60);
 
                 if (!rl.ok) {
-                        return NextResponse.json({ error: "Too many requests" }, { status: 429 });
+                        return NextResponse.json(
+                                { error: "Too many requests" }, 
+                                { status: 429 });
                 }
 
                 // 3. insert into supabase (server role)
@@ -106,6 +117,67 @@ export async function POST(req: NextRequest) {
                         console.error("Supabase insert error:", error);
                         return NextResponse.json({ error: "Database error" }, { status: 500 });
                 }
+
+                // Send confirmation to user
+                try {
+                        const userEmail = await resend.emails.send({
+                                from: "Lagos Home Fixers <noreply@lagoshomefixers.adekoye.com.ng>", 
+                                to: formData.email,
+                                subject: "We’ve Received Your Enquiry",
+                                html: `
+                                <h2>Hi ${formData.firstName},</h2>
+                                <p>Thank you for contacting Lagos Home Fixers. We’ve received your enquiry and will get back to you shortly.</p>
+                                <p><strong>Summary:</strong></p>
+                                <ul>
+                                <li>Type: ${formData.enquiryType}</li>
+                                <li>Message: ${formData.message}</li>
+                                </ul>
+                                <p>Kind regards,<br/>The Lagos Home Fixers Team</p>
+                        `,
+                        });
+                if (userEmail.error) {
+                        console.error(
+                                "Resend user email error:", 
+                                userEmail.error
+                        );
+                        return NextResponse.json(
+                                { error: "Invalid email address" }, 
+                                { status: 400 }
+                        );
+                }
+                } catch (mailError: unknown) {
+                        if (mailError instanceof Error) {
+                                console.error(
+                                        "Failed to send user confirmation email:",
+                                        mailError.message
+                                );
+                        } else {
+                                console.error(
+                                        "Unknown email sending error:", 
+                                        mailError
+                                );
+                        }
+                        return NextResponse.json(
+                                { error: "Invalid email address" }, 
+                                { status: 400 }
+                        );
+                }
+
+                // Send notification to admin
+                await resend.emails.send({
+                        from: "Lagos Home Fixers <noreply@lagoshomefixers.adekoye.com.ng>",
+                to: ADMIN_EMAIL,
+                        subject: `New Enquiry from ${formData.firstName} ${formData.lastName}`,
+                html: `
+                <h3>New enquiry received:</h3>
+                <p><strong>Type:</strong> ${formData.enquiryType}</p>
+                <p><strong>Name:</strong> ${formData.firstName} ${formData.lastName}</p>
+                <p><strong>Email:</strong> ${formData.email}</p>
+                <p><strong>Phone:</strong> ${formData.phone || "N/A"}</p>
+                <p><strong>Message:</strong></p>
+                <p>${formData.message}</p>
+                `,
+                });
 
                 return NextResponse.json({ ok: true }, { status: 201 });
         } catch (err) {
