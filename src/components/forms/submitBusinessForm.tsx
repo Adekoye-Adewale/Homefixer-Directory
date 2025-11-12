@@ -1,6 +1,6 @@
 "use client"
 
-import React from "react"
+import React, { useState } from "react"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
@@ -20,6 +20,7 @@ import SubmitButton from "./submitButton"
 import { Checkbox } from "@/components/ui/checkbox"
 import { toast } from "sonner"
 import Link from "next/link"
+import FormConfirmation from "../layouts/formConfirmation"
 
 const formSchema = z.object({
         firstName: z.string().min(1, "First name is required"),
@@ -54,6 +55,8 @@ const formSchema = z.object({
 
 export default function SubmitBusinessForm() {
 
+        const [status, setStatus] = useState<"idle" | "submitting" | "submitted">("idle")
+
         const form = useForm<z.infer<typeof formSchema>>({
                 resolver: zodResolver(formSchema),
                 defaultValues: {
@@ -73,6 +76,7 @@ export default function SubmitBusinessForm() {
         })
 
         const onSubmit = (values: z.infer<typeof formSchema>) => {
+                setStatus("submitting")
                 console.log(values)
                 toast.success("Business submitted successfully!")
                 form.reset()
@@ -128,6 +132,14 @@ export default function SubmitBusinessForm() {
                 "Landscaping services",
                 "Painters",
         ]
+
+        if (status === "submitted") {
+                return (
+                        <FormConfirmation 
+                                title="Business Submitted!"
+                        />
+                )
+        }
 
         return (
                 <Form {...form}>
@@ -338,7 +350,10 @@ export default function SubmitBusinessForm() {
                                         )}
                                 />
 
-                                <SubmitButton label="Submit Business" />
+                                <SubmitButton 
+                                        status={status}
+                                        label="Submit Business" 
+                                />
 
                                 <AgreeTerms />
                         </form>
