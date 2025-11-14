@@ -58,6 +58,8 @@ const formSchema = z.object({
 
 type PartnerFormData = z.infer<typeof formSchema>
 
+const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!
+
 export default function PartnerWithUsForm() { 
 
         const [status, setStatus] = useState<"idle" | "submitting" | "submitted">("idle")
@@ -80,11 +82,44 @@ export default function PartnerWithUsForm() {
 
         const selectedPartnership = form.watch("partnershipType")
 
-        const onSubmit = (values: PartnerFormData) => {
+        async function onSubmit (values: PartnerFormData) {
                 setStatus("submitting")
-                console.log("Form data:", values)
-                toast.success("Enquiry submitted successfully!");
-                form.reset();
+                try {
+                        const token = await grecaptcha.enterprise.execute(`${siteKey}`, { action: 'submit' });
+                        
+                        if (!token) {
+                                toast.error("Recaptcha verification failed");
+                                return;
+                        }
+
+                        const payload = { 
+                                ...values, 
+                                recaptchaToken: token
+                        };
+
+                        const res = await fetch("/api/partner-with-us", {
+                                method: "POST",
+                                headers: { "Content-Type": "application/json" },
+                                body: JSON.stringify(payload),
+                        });
+
+                        const data = await res.json();
+                        if (!res.ok) {
+                                toast.error(data?.error ?? `Failed to submit form (status: ${res.status}. ${data?.error ?? ""})`);
+                                console.log("ERROR", data?.error)
+                                setStatus("idle")
+                                return;
+                        }
+
+                        toast.success("Partnership form submitted successfully!");
+                        setStatus("submitted")
+                        form.reset();
+                } catch (err) {
+                                        console.error(err);
+                                        toast.error("An unexpected error occurred");
+                                        setStatus("idle")
+                                }
+                
         }
 
         const businessTypes = [
