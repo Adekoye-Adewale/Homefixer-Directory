@@ -364,7 +364,7 @@ export default function SubmitBusinessForm() {
 export const AgreeTerms = () => {
         return (
                 <p className="text-xs text-center text-gray-500 mt-2">
-                        By continuing, you agree to Lagos Home Fixers&apos; <Link href={`/terms-and-conditions`} target="_blank" className="underline cursor-pointer">Terms of Use</Link> and <Link href={`/privacy`} target="_blank" className="underline cursor-pointer">Privacy Policy</Link>.
+                        By continuing, you agree to Lagos Home Fixers&apos; <Link href={`/terms-and-conditions`} target="_blank" className="underline cursor-pointer">Terms of Use</Link> and <Link href={`/privacy-policy`} target="_blank" className="underline cursor-pointer">Privacy Policy</Link>.
                 </p>
         )
 }
