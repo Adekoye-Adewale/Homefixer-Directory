@@ -23,6 +23,7 @@ import FormConfirmation from "../layouts/formConfirmation"
 const formSchema = z.object({
         firstName: z.string().min(2, "First name is required"),
         lastName: z.string().min(2, "Last name is required"),
+        email: z.email("Please enter a valid email"),
         phone: z.string()
                 .min(10, "Enter a valid phone number")
                 .regex(/^0\d{10}$/, "Phone number must start with 0 and be 11 digits"),
@@ -42,6 +43,7 @@ export default function ReportScamForm() {
                 defaultValues: {
                         firstName: "",
                         lastName: "",
+                        email: "",
                         phone: "",
                         businessName: "",
                         reason: "",
@@ -49,11 +51,52 @@ export default function ReportScamForm() {
                 },
         })
 
-        function onSubmit(values: z.infer<typeof formSchema>) {
+        const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!
+
+        async function onSubmit(values: z.infer<typeof formSchema>) {
                 setStatus("submitting")
-                console.log(values)
-                toast.success("Business submitted successfully!")
-                form.reset()
+                try {
+                        const token = await grecaptcha.enterprise.execute(`${siteKey}`, { action: 'submit' });
+
+                        if (!token) {
+                                toast.error("Recaptcha verification failed");
+                                return;
+                        }
+
+                        const { consent, ...cleanData } = values;
+
+                        if (!consent) {
+                                toast.error("You must agree consent before submitting");
+                                return;
+                        }
+
+                        const payload = { 
+                                ...cleanData, 
+                                recaptchaToken: token
+                        };
+
+                        const res = await fetch("/api/report-scam", {
+                                method: "POST",
+                                headers: { "Content-Type": "application/json" },
+                                body: JSON.stringify(payload),
+                        });
+
+                        const data = await res.json();
+                        if (!res.ok) {
+                                toast.error(data?.error ?? `Failed to submit report (status: ${res.status}. ${data?.error ?? ""})`);
+                                console.log("ERROR", data?.error)
+                                setStatus("idle")
+                                return;
+                        }
+
+                        setStatus("submitted")
+                        toast.success("Report submitted successfully!");
+                        form.reset();
+                } catch (err) {
+                        console.error(err);
+                        toast.error("An unexpected error occurred");
+                        setStatus("idle")
+                }
         }
 
         if (status === "submitted") {
@@ -68,7 +111,7 @@ export default function ReportScamForm() {
                 <Form {...form}>
                         <form
                                 onSubmit={form.handleSubmit(onSubmit)}
-                                className="space-y-6 max-w-xl mx-auto"
+                                className={`space-y-6 w-full ${status === "submitting" ? 'opacity-70 cursor-progress' : ''}`}
                         >
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                         {/* First Name */}
@@ -87,6 +130,14 @@ export default function ReportScamForm() {
                                                 placeholder="Doe"
                                         />
                                 </div>
+
+                                {/* Email */}
+                                <FormInput
+                                        control={form.control}
+                                        name="email"
+                                        label="Your Email Address"
+                                        placeholder="email@sample.com"
+                                />
 
                                 {/* Phone */}
                                 <FormInput
