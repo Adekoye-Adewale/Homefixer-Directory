@@ -7,7 +7,7 @@ export default function SubmitYourBizBtn() {
                 <Link
                         href={'/submit-your-business'}
                         title={'Submit your business'}
-                        className='py-2 px-5 flex gap-1 items-center justify-center text-sm font-semibold border border-solid border-black rounded bg-transparent transition-colors duration-300 hover:bg-black hover:text-white'
+                        className='py-2 px-5 flex gap-1 items-center justify-center text-xs font-semibold border border-solid border-black rounded bg-transparent transition-colors duration-300 hover:bg-black hover:text-white'
                 >
                         <Plus className='size-4'/>
                         <span>
