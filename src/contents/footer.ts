@@ -41,7 +41,7 @@ export const footerQuickLinks: FooterLinks[] = [
         {
                 id: 2,
                 slug: '/report-a-scam',
-                title: 'Report a scam',
+                title: 'Report a business',
         },
         {
                 id: 3,

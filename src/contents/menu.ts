@@ -5,7 +5,7 @@ export const whoWeAreMenuItems: { title: string; slug: string }[] = [
         },
         {
                 title: "About us",
-                slug: "/about-us",
+                slug: "/about-lagos-home-fix",
         },
         {
                 title: "How it works",
@@ -78,7 +78,7 @@ export const contactMenuItems: { title: string; slug: string } [] = [
                 slug: "partner-with-us",
         },
         {
-                title: "Report a scam",
+                title: "Report a business",
                 slug: "report-a-scam",
         }
 ]
