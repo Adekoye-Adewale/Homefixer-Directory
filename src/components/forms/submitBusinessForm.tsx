@@ -25,15 +25,15 @@ import FormConfirmation from "../layouts/formConfirmation"
 const formSchema = z.object({
         firstName: z.string().min(1, "First name is required"),
         lastName: z.string().min(1, "Last name is required"),
-        email: z.string().email("Invalid email"),
+        email: z.email("Invalid email"),
         businessName: z.string().min(1, "Legal business name is required"),
-        businessEmail: z.string().email("Invalid business email"),
-        businessPhone: z.string().min(10, "Phone number is required"),
+        businessEmail: z.email("Invalid business email"),
+        businessPhone: z.string().min(10, "Phone number is required").max(11, "Check Phone number, digit too long, number can not be longer than 11"),
         businessAddress: z.string().min(1, "Business address is required"),
-        businessLocation: z.string().min(5, "Select a location"),
+        businessLocation: z.string().min(1, "Select a location"),
         businessCategory: z.string().min(1, "Select a category"),
-        businessDescription: z.string().min(1, "Business description is required"),
-        businessWebsite: z.string().url("Enter a valid website URL e.g https://domain.com"),
+        businessDescription: z.string().min(10, "Business description is required"),
+        businessWebsite: z.url("Enter a valid website URL e.g https://domain.com"),
         businessLogo: z
                 .any()
                 .refine(file => file?.[0], "Logo is required")
@@ -42,7 +42,7 @@ const formSchema = z.object({
                         file => ["image/png", "image/jpeg", "image/jpg"].includes(file?.[0]?.type),
                         "Only PNG, JPEG, or JPG allowed"
                 ),
-        businessCover: z
+        businessCoverImage: z
                 .any()
                 .refine(file => file?.[0], "Cover image is required")
                 .refine(file => file?.[0]?.size <= 10 * 1024 * 1024, "Max size is 10MB")
@@ -52,6 +52,8 @@ const formSchema = z.object({
                 ),
         authorisation: z.boolean().refine(val => val === true, "You must confirm authorisation"),
 })
+
+const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!
 
 export default function SubmitBusinessForm() {
 
@@ -71,15 +73,62 @@ export default function SubmitBusinessForm() {
                         businessCategory: "",
                         businessDescription: "",
                         businessWebsite: "",
+                        businessLogo: "",
+                        businessCoverImage: "",
                         authorisation: false,
                 },
         })
 
-        const onSubmit = (values: z.infer<typeof formSchema>) => {
+        async function onSubmit ( values: z.infer<typeof formSchema> ) {
                 setStatus("submitting")
-                console.log(values)
-                toast.success("Business submitted successfully!")
-                form.reset()
+                try {
+                        const token = await grecaptcha.enterprise.execute(`${siteKey}`, { action: 'submit' });
+
+                        if (!token) {
+                                toast.error("Recaptcha verification failed");
+                                return;
+                        }
+
+                        const formData = new FormData();
+
+                        // Append form fields
+                        formData.append("firstName", values.firstName);
+                        formData.append("lastName", values.lastName);
+                        formData.append("email", values.email);
+                        formData.append("businessName", values.businessName);
+                        formData.append("businessEmail", values.businessEmail);
+                        formData.append("businessPhone", values.businessPhone);
+                        formData.append("businessAddress", values.businessAddress);
+                        formData.append("businessLocation", values.businessLocation);
+                        formData.append("businessCategory", values.businessCategory);
+                        formData.append("businessDescription", values.businessDescription);
+                        formData.append("businessWebsite", values.businessWebsite);
+                        formData.append("businessLogo", values.businessLogo[0]);
+                        formData.append("businessCoverImage", values.businessCoverImage[0]);
+                        formData.append("recaptchaToken", token);
+
+                        const res = await fetch("/api/submit-business", {
+                                method: "POST",
+                                body: formData,
+                        });
+
+
+                        const data = await res.json();
+                        if (!res.ok) {
+                                toast.error(data?.error ?? `Failed to submit business (status: ${res.status}. ${data?.error ?? ""})`);
+                                console.log("ERROR", data?.error)
+                                setStatus("idle")
+                                return;
+                        }
+
+                        toast.success("Business submitted successfully!")
+                        setStatus("submitted");
+                        form.reset()
+                } catch (err) {
+                        console.error(err);
+                        toast.error("An unexpected error occurred");
+                        setStatus("idle")
+                }
         }
 
         const locations = [
@@ -145,7 +194,7 @@ export default function SubmitBusinessForm() {
                 <Form {...form}>
                         <form 
                                 onSubmit={form.handleSubmit(onSubmit)} 
-                                className="space-y-5"
+                                className={`space-y-6 text-xs w-full ${status === "submitting" ? 'opacity-70 cursor-progress' : ''}`}
                         >
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                         <FormInput
@@ -310,7 +359,7 @@ export default function SubmitBusinessForm() {
                                 {/* Cover Image */}
                                 <FormField
                                         control={form.control}
-                                        name="businessCover"
+                                        name="businessCoverImage"
                                         render={({ field }) => (
                                                 <FormItem>
                                                         <FormLabel>
