@@ -41,15 +41,34 @@ export default async function SingleBusinessPage({ params }: BusinessPageProps) 
 
         const { slug } = await params
         const business = await getBusinessBySlug(slug)
+        const shortDescription = truncateDescription(business.description)
 
         if ( !business ) {
                 notFound();
+        }
+
+        const jsonLd = {
+                '@context': 'https://schema.org',
+                '@type': 'LocalBusiness',
+                name: business.businessName,
+                image: business?.businessLogo.url,
+                logo: business?.businessLogo.url,
+                description: shortDescription,
+                address: business?.businessAddress,
+                telephone: business?.businessPhoneNumber,
+                url: `${siteURL}/business/${slug}`,
         }
 
         const info = await getBusinessGoogleData(business.businessName, business.businessAddress)
 
         return (
                 <>
+                        <script
+                                type="application/ld+json"
+                                dangerouslySetInnerHTML={{
+                                        __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c'),
+                                }}
+                        />
                         <SingleBusinessPageComponent
                                 biz={business}
                                 info={info}
