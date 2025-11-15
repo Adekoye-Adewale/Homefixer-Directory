@@ -12,7 +12,10 @@ const inter = Inter({
   subsets: ["latin"],
 });
 
+const siteURL = process.env.NEXT_PUBLIC_BASE_URL
+
 export const metadata: Metadata = {
+  metadataBase: new URL(`${siteURL}`),
   title: "Lagos Home Fixers | Explore Lagos's Best Ho me Service Providers",
   description: "Need repairs, renovations, or gardening? Lagos's Home Fixers connects you with Lagos best home services providers—trusted, fast, and affordable.",
 };
