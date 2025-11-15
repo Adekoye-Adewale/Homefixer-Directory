@@ -1,0 +1,5 @@
+User-Agent: *
+Allow: /
+Disallow: /private/
+
+Sitemap: https://lagos-home-fixers.vercel.app/sitemap.xml
