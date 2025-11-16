@@ -29,10 +29,10 @@ const HeroSection = () => {
                         <div className='container relative mx-auto'>
                                 <div className='text-center text-pretty'>
                                         <h1 className='font-bold text-4xl md:text-6xl text-white'>
-                                                Blog, News, Articles, and Tips
+                                                Lagos Top News and DIY Tips
                                         </h1>
                                         <p className='text-sm max-w-3xl mx-auto mt-2.5 md:mt-4 text-white/80'>
-                                                Experience hassle-free home services with Lagos Home Fixers. Your trusted partner for all your home improvement needs.
+                                                Stay updated with the top news happening around your home in Lagos and get all the help you need with your DIY side project from Lagos Home Fixers tips section.
                                         </p>
                                 </div>
                         </div>
