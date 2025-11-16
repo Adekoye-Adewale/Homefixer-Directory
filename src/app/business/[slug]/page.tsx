@@ -54,7 +54,12 @@ export default async function SingleBusinessPage({ params }: BusinessPageProps) 
                 image: business?.businessLogo.url,
                 logo: business?.businessLogo.url,
                 description: shortDescription,
-                address: business?.businessAddress,
+                address: {
+                        "@type": "PostalAddress",
+                        "addressLocality": business?.location?.title,
+                        "addressRegion": "LA",
+                        "streetAddress": business?.businessAddress,
+                },
                 telephone: business?.businessPhoneNumber,
                 url: `${siteURL}/business/${slug}`,
         }
