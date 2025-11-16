@@ -49,10 +49,56 @@ export default async function SignleBlogPage({ params }: BlogPageProps ) {
                 redirect(`/not-found`)
         }
 
+        const plaintextBody = portableTextToPlaintext(blog?.body);
+
+        const shortDescription = truncateDescription(plaintextBody)
+
+        const jsonLd = {
+                "@context": "https://schema.org/",
+                "@type": "BlogPosting",
+                "@id": `${siteURL}/blog`,
+                "headline": blog.blogTitle,
+                "name": blog.blogTitle,
+                "description": shortDescription,
+                // "datePublished": "2019-05-14",
+                // "dateModified": "2019-05-14",
+                "publisher": {
+                        "@type": "Organization",
+                        "@id": blog.sourceLink,
+                        "name": blog.source,
+                },
+                "image": {
+                        "@type": "ImageObject",
+                        "@id": blog?.blogImage?.url,
+                        "url": blog?.blogImage?.url,
+                        "height": "270",
+                        "width": "650"
+                },
+                "url": blog.slug?.current,
+                "isPartOf": {
+                        "@type": "Blog",
+                        "@id": `${siteURL}/blog`,
+                        "name": "Lagos Top News and DIY Tips",
+                        "publisher": {
+                                "@type": "Organization",
+                                "@id": siteURL,
+                                "name": "Lagos Home Fixers"
+                        }
+                },
+        }
+
         return (
-                <SingleBlogPageComponents 
-                        blog={blog}
-                        relatedPosts={posts}
-                />
+                <>
+                        <script
+                                type="application/ld+json"
+                                dangerouslySetInnerHTML={{
+                                        __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c'),
+                                }}
+                        />
+                        <SingleBlogPageComponents 
+                                blog={blog}
+                                relatedPosts={posts}
+                        />
+                </>
         )
 }
