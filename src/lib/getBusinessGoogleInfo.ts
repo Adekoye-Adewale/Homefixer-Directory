@@ -17,6 +17,7 @@ export type BusinessData = {
                         lng: number 
                 } 
         };
+        url?: string;
 };
 
 /**
