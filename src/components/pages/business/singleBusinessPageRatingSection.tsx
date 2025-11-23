@@ -1,6 +1,8 @@
 import StarRating from '@/components/mapsComponents/StarRating';
 import { BusinessData, Review } from '@/lib/getBusinessGoogleInfo';
+import Link from 'next/link';
 import React, {Fragment} from 'react'
+import { SquareArrowOutUpRight } from 'lucide-react';
 
 export default function SingleBusinessPageRatingSection({
         info, 
@@ -24,7 +26,8 @@ export default function SingleBusinessPageRatingSection({
         const { 
                 rating, 
                 user_ratings_total, 
-                reviews
+                reviews,
+                url
         } = info
 
         return (
@@ -49,13 +52,27 @@ export default function SingleBusinessPageRatingSection({
 
                                                 <div>
                                                         {reviews && reviews.length > 0 ? (
-                                                                reviews.map((review, index) => (
-                                                                        <Fragment key={index} >
-                                                                                <ReviewCard 
-                                                                                        review={review}
-                                                                                />             
-                                                                        </Fragment>
-                                                                ))
+                                                                <>
+                                                                        {reviews.slice(0, 3).map((review, index) => (
+                                                                                <Fragment key={index}>
+                                                                                        <ReviewCard review={review} />
+                                                                                </Fragment>
+                                                                        ))}
+
+                                                                        {url && (
+                                                                                <Link
+                                                                                        href={url}
+                                                                                        target="_blank"
+                                                                                        rel="noopener noreferrer"
+                                                                                        className="mt-5 flex gap-1 items-center text-xs font-semibold my-2.5 text-blue-600"
+                                                                                >
+                                                                                        <span>
+                                                                                                View more reviews on Google
+                                                                                        </span>
+                                                                                        <SquareArrowOutUpRight className='size-3' />
+                                                                                </Link>
+                                                                        )}
+                                                                </>
                                                         ) : (
                                                                 <p className="text-xs text-gray-500 mt-2.5 border-t border-gray-300 pt-2.5">
                                                                         No reviews available.
