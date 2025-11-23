@@ -56,7 +56,7 @@ export async function GET(req: Request) {
 
                 // Get details (ratings + reviews)
                 const detailsUrl = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${place.place_id
-                        }&fields=name,rating,user_ratings_total,reviews,formatted_address,geometry&key=${apiKey}`;
+                        }&fields=name,rating,user_ratings_total,reviews,formatted_address,url,geometry,photos,editorial_summary,formatted_phone_number,international_phone_number,website,opening_hours,business_profile&key=${apiKey}`;
 
                 const detailsRes = await fetch(detailsUrl);
                 const detailsData = await detailsRes.json();
