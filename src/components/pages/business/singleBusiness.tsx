@@ -23,10 +23,12 @@ type ConatctProps = {
 export default function SingleBusinessPageComponent(
         {
                 biz,
-                info 
+                info,
+                galleryImages,
         }: {
-                        biz: customBusiness; 
-                info: BusinessData | null
+                biz: customBusiness; 
+                info: BusinessData | null;
+                galleryImages: string[];
 }) {
         return (
                 <main>
@@ -107,15 +109,15 @@ export default function SingleBusinessPageComponent(
                                                 />
                                                 <Contact 
                                                         businessName={biz.businessName}
-                                                        businessAddress={biz.businessAddress || 'Business address not available.'} 
+                                                        businessAddress={info?.formatted_address || 'Business address not available.'} 
                                                         businessEmail={biz?.businessEmail || undefined} 
                                                         businessPhoneNumber={biz?.businessPhoneNumber || undefined} businessWebsite={biz?.businessWebsite || undefined} 
                                                 />
                                         </div>
                                         <div className='border border-sm border-gray-300 rounded-sm p-5 mt-5'>
-                                                <h3 className='font-bold text-sm mb-2.5'>
-                                                        Gallery
-                                                </h3>
+                                                <Gallery 
+                                                        galleryImages={galleryImages} 
+                                                />
                                         </div>
                                 </div>
                         </section>
@@ -146,7 +148,7 @@ const Contact = ({ businessAddress, businessName, businessPhoneNumber, businessW
                 <div className='col-span-1 border border-sm border-gray-300 rounded-sm p-5 space-y-2.5'>
                         <div>
                                 <h3 className='font-bold text-sm mb-2.5'>
-                                        Contact information
+                                        Contact Information
                                 </h3>
                                 <SingleBusinessMapGoogle
                                         businessAddress={businessAddress || 'Lagos Island, Lagos, Nigeria.'}
@@ -214,6 +216,36 @@ const Contact = ({ businessAddress, businessName, businessPhoneNumber, businessW
                                                 </Link>
                                         )}
                                 </div>
+                        </div>
+                </div>
+        )
+}
+
+const Gallery = ({ galleryImages }: { galleryImages: string[] }) => {
+        return (
+                <div>
+                        <h3 className='font-bold text-sm mb-2.5'>
+                                Gallery
+                        </h3>
+                        <div>
+                                {galleryImages && galleryImages.length > 0 ? (
+                                        <div className='grid grid-cols-2 md:grid-cols-4 gap-2.5'>
+                                                {galleryImages.slice(0, 8).map((imageUrl, index) => (
+                                                        <div key={index} className='w-full h-32 relative'>
+                                                                <Image
+                                                                        src={imageUrl}
+                                                                        alt={`Gallery image ${index + 1}`}
+                                                                        fill
+                                                                        className='object-cover rounded-sm'
+                                                                />
+                                                        </div>
+                                                ))}
+                                        </div>
+                                ) : (
+                                        <p className='text-sm text-gray-500'>
+                                                No gallery images available.
+                                        </p>
+                                )}
                         </div>
                 </div>
         )

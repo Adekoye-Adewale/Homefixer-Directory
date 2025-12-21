@@ -5,12 +5,21 @@ import SingleBusinessPageComponent from '@/components/pages/business/singleBusin
 import { getBusinessGoogleData } from '@/lib/getBusinessGoogleInfo'
 import type { Metadata, ResolvingMetadata } from 'next'
 import { truncateDescription } from '@/lib/truncateDescription'
+import { getGooglePlacePhotoUrl } from '@/lib/getGooglePlacePhotoUrl'
 
 type BusinessPageProps = {
         params: Promise<{ slug: string }>
 }
 
+type GooglePlacePhoto = {
+        height: number;
+        width: number;
+        photo_reference: string;
+        html_attributions: string[];
+};
+
 const siteURL = process.env.NEXT_PUBLIC_BASE_URL
+const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY!;
 
 export async function generateMetadata(
         { params }: BusinessPageProps,
@@ -66,6 +75,16 @@ export default async function SingleBusinessPage({ params }: BusinessPageProps) 
 
         const info = await getBusinessGoogleData(business.businessName, business.businessAddress)
 
+        const galleryImages = info?.photos
+                ?.map((photo: GooglePlacePhoto) =>
+                        getGooglePlacePhotoUrl(photo.photo_reference, apiKey, {
+                                maxWidth: 1600,
+                        })
+                )
+                .filter(Boolean) as string[];
+
+        console.log(info)
+
         return (
                 <>
                         <script
@@ -77,6 +96,7 @@ export default async function SingleBusinessPage({ params }: BusinessPageProps) 
                         <SingleBusinessPageComponent
                                 biz={business}
                                 info={info}
+                                galleryImages={galleryImages}
                         />
                 </>
         )
