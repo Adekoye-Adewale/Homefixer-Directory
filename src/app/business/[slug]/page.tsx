@@ -83,8 +83,6 @@ export default async function SingleBusinessPage({ params }: BusinessPageProps) 
                 )
                 .filter(Boolean) as string[];
 
-        console.log(info)
-
         return (
                 <>
                         <script

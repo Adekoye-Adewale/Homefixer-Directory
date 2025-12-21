@@ -236,6 +236,7 @@ const Gallery = ({ galleryImages }: { galleryImages: string[] }) => {
                                                                         src={imageUrl}
                                                                         alt={`Gallery image ${index + 1}`}
                                                                         fill
+                                                                        unoptimized
                                                                         className='object-cover rounded-sm'
                                                                 />
                                                         </div>
