@@ -12,9 +12,6 @@ export default async function TipsPage() {
 
         const featuredTipsPosts = tipsPosts.filter(post => post.featured === true)
 
-        // console.log("Posts===++===", tipsPosts)
-        // console.log("FeaturedPosts===++===", featuredTipsPosts)
-
         return (
                 <>
                         <BlogCategoryPage 

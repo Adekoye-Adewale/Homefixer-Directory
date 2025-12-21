@@ -63,8 +63,6 @@ export async function POST(req: NextRequest) {
                 const score = riskAnalysis?.score ?? 0
                 const reasons = riskAnalysis?.reasons ?? []
 
-                // console.log("reCAPTCHA Score:", score, "Reasons:", reasons)
-
                 // Enforce threshold
                 if (score < 0.7) {
                         return NextResponse.json(

@@ -12,9 +12,6 @@ export default async function NewsPage() {
         const newsPosts = posts.filter(post => post.category?.slug.current === 'news')
 
         const featuredNewsPosts = newsPosts.filter(post => post.featured === true)
-
-        // console.log("Posts===++===", tipsPosts)
-        // console.log("FeaturedPosts===++===", featuredTipsPosts)
         
         return (
                 <BlogCategoryPage 

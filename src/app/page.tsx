@@ -17,8 +17,6 @@ export default async function HomePage() {
                 )
         )
 
-        // console.log(allBusinessList)
-
         return (
                 <>
                         <FrontPage
