@@ -8,6 +8,8 @@ export type Review = {
 export type BusinessData = {
         name: string;
         formatted_address: string;
+        formatted_phone_number?: string;
+        international_phone_number?: string;
         rating: number;
         user_ratings_total: number;
         reviews?: Review[];
@@ -17,7 +19,20 @@ export type BusinessData = {
                         lng: number 
                 } 
         };
+        opening_hours: {
+                open_now: boolean;
+                weekday_text: string[];
+        };
         url?: string;
+        website: string;
+        photos?: GooglePlacePhoto[];
+};
+
+type GooglePlacePhoto = {
+        height: number;
+        width: number;
+        photo_reference: string;
+        html_attributions: string[];
 };
 
 /**
