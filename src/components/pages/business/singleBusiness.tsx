@@ -30,11 +30,12 @@ export default function SingleBusinessPageComponent(
                 info: BusinessData | null;
                 galleryImages: string[];
 }) {
+        console.log(info?.opening_hours)
         return (
                 <main>
                         <section className='flex justify-center items-center py-24 md:py-32 px-2.5 md:px-5 relative overflow-clip min-h-96 max-h-[500px] h-full z-[1]'>
                                 <Image 
-                                        src={biz?.coverImage.url || '/lagoshomefixer-hero-img.webp'} 
+                                        src={galleryImages[0] || biz?.coverImage.url || '/lagoshomefixer-hero-img.webp'}
                                         alt={`${biz?.businessName} cover image` || 'Lagos Home Fixers'} 
                                         width={1000} 
                                         height={758}
@@ -106,6 +107,7 @@ export default function SingleBusinessPageComponent(
                                         <div className='grid grid-cols-1 md:grid-cols-3 gap-5'>
                                                 <Description 
                                                         description={biz?.description || 'No description provided for this business.'} 
+                                                        info={info}
                                                 />
                                                 <Contact 
                                                         businessName={biz.businessName}
@@ -130,15 +132,54 @@ export default function SingleBusinessPageComponent(
         )
 }
 
-const Description = ({ description }: { description: string }) => {
+const Description = (
+        { description, info }: 
+        { 
+                description: string 
+                info: BusinessData | null
+        }) => {
         return (
-                <div className='col-span-1 md:col-span-2 border border-sm border-gray-300 rounded-sm p-5'>
+                <div className='col-span-1 md:col-span-2 border border-sm border-gray-300 rounded-sm p-5 divide-gray-300 divide-y space-y-2.5'>
+                        <div className='pb-2.5'>
+                                <h3 className='font-bold text-sm mb-2.5'>
+                                        Description
+                                </h3>
+                                <p className='text-sm leading-6'>
+                                        {description ? description : 'No description provided for this business.'}
+                                </p>                                
+                        </div>
+                        <OpeningHours info={info} />
+                </div>
+        )
+}
+
+const OpeningHours = ({ info }: { info: BusinessData | null }) => {
+
+        const openingHours = info?.opening_hours?.weekday_text.map(text => {
+                const [day, time] = text.split(': ');
+                return { day, time };
+        });
+
+        return (
+                <div>
                         <h3 className='font-bold text-sm mb-2.5'>
-                                Description
+                                Opening Hours
                         </h3>
-                        <p className='text-sm leading-6'>
-                                {description ? description : 'No description provided for this business.'}
-                        </p>
+                        {info?.opening_hours?.weekday_text ? 
+                                (<ul className='text-xs leading-6'>
+                                        {openingHours?.map(({day, time}, index) => (
+                                                <li key={index}>
+                                                        <span className="font-semibold">{day}:</span>
+                                                        {' '}
+                                                        <span className="time">{time}</span>
+                                                </li>
+                                        ))}
+                                </ul>) : (
+                                        <span className='text-xs text-gray-500'>
+                                                Opening hours not available.
+                                        </span>
+                                )
+                        }
                 </div>
         )
 }
