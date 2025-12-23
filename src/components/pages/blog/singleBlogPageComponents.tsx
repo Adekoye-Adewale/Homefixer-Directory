@@ -14,6 +14,7 @@ type BlogProps = {
 }
 
 type HeroSectionProps = {
+        blogTitle: string
         blogImage: { url: string }
         category?: string
         categorySlug: string
@@ -30,6 +31,7 @@ export default function SingleBlogPageComponents({ blog, relatedPosts }: BlogPro
         return (
                 <main>
                         <HeroSection 
+                                blogTitle={blog.blogTitle}
                                 blogImage={blog.blogImage}
                                 category={blog.category?.title}
                                 categorySlug={blog.category ? `/blog/${blog.category.slug.current}` : '/blog'}
@@ -45,7 +47,7 @@ export default function SingleBlogPageComponents({ blog, relatedPosts }: BlogPro
         )
 }
 
-const HeroSection = ({ blogImage, category, categorySlug, featured, source, sourceLink }: HeroSectionProps ) => {
+const HeroSection = ({ blogTitle, blogImage, category, categorySlug, featured, source, sourceLink }: HeroSectionProps ) => {
         return (
                 <section className='flex justify-center items-center py-10 md:py-20 px-2.5 md:px-5 relative overflow-clip z-[1]'>
                         <Image 
@@ -82,7 +84,7 @@ const HeroSection = ({ blogImage, category, categorySlug, featured, source, sour
                                         <div className='space-y-2.5 md:space-y-5'>
                                                 <div className='text-left text-pretty'>
                                                         <h1 className='font-bold text-3xl md:text-5xl text-white'>
-                                                                Top 5 Ways to Keep Your Drains Clear in 2025
+                                                                {blogTitle}
                                                         </h1>
                                                 </div>
                                                 <div className='flex justify-between items-end'>
