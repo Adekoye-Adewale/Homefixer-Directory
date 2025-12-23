@@ -14,7 +14,15 @@ type MainBusinessListProps = {
         info: (BusinessData | null)[]
 }
 
-export default function ListingSection({ sectionTitle, archivePageSlug, slugTitle, allBizList, bg, info }: MainBusinessListProps ) {
+export default function ListingSection(
+        { 
+                sectionTitle, 
+                archivePageSlug, 
+                slugTitle, 
+                allBizList, 
+                bg,
+                info, 
+        }: MainBusinessListProps ) {
         return (
                 <section className={`flex justify-center items-center py-24 md:py-32 px-2.5 md:px-5 overflow-clip ${bg}`}>
                         <div className='container mx-auto'>
