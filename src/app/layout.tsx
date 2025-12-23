@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import HeaderNav from "@/components/header"
 import "./globals.css";
-import { SanityLive } from "@/sanity/lib/live";
 import { Toaster } from "@/components/ui/sonner"
 import { getAllBusinessesCategory } from "@/sanity/lib/client";
 import SiteFooter from "@/components/footer";
@@ -44,7 +43,6 @@ export default async function RootLayout({
           {children}
         </main>
         <SiteFooter/>
-        <SanityLive/>
         <Toaster richColors position="top-center" />
       </body>
     </html>
