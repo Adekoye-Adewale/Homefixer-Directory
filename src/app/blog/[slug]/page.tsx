@@ -1,4 +1,3 @@
-import React from 'react'
 import { redirect } from 'next/navigation'
 import SingleBlogPageComponents from '@/components/pages/blog/singleBlogPageComponents'
 import { getAllBlogs, getBlogBySlug } from '@/sanity/lib/client'
@@ -26,12 +25,12 @@ export async function generateMetadata(
         const previousImages = (await parent).openGraph?.images || []
 
         return {
-                title: blog.blogTitle,
+                title: blog?.blogTitle,
                 description: shortDescription,
                 openGraph: {
                         type: "website",
-                        url: `${siteURL}/blog/${blog.slug?.current}`,
-                        title: `${blog.blogTitle} | Lagos Home Fixer`,
+                        url: `${siteURL}/blog/${blog?.slug?.current}`,
+                        title: `${blog?.blogTitle} | Lagos Home Fixer`,
                         description: shortDescription,
                         siteName: "Lagos Home Fixer",
                         images: [`${blog?.blogImage.url}`, ...previousImages],
