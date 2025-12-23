@@ -7,7 +7,6 @@ import StarRating from '../mapsComponents/StarRating'
 import { BusinessData } from '@/lib/getBusinessGoogleInfo'
 import { Badge } from "@/components/ui/badge"
 import { linkRefer } from '@/contents/constants'
-import { GooglePlacePhoto } from '@/lib/getBusinessGoogleInfo'
 import { getGooglePlacePhotoUrl } from '@/lib/getGooglePlacePhotoUrl'
 
 const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY!;
