@@ -28,7 +28,7 @@ export type BusinessData = {
         photos?: GooglePlacePhoto[];
 };
 
-type GooglePlacePhoto = {
+export type GooglePlacePhoto = {
         height: number;
         width: number;
         photo_reference: string;
