@@ -23,7 +23,7 @@ export default function FrontPage({
         allLocationList,
         allCategoryList,
         info,
-        locations
+        locations,
 }: FrontPageProps ) {
         return (
                 <>
