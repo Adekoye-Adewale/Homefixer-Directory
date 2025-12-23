@@ -30,7 +30,6 @@ export default function SingleBusinessPageComponent(
                 info: BusinessData | null;
                 galleryImages: string[];
 }) {
-        console.log(info?.opening_hours)
         return (
                 <main>
                         <section className='flex justify-center items-center py-24 md:py-32 px-2.5 md:px-5 relative overflow-clip min-h-96 max-h-[500px] h-full z-[1]'>
