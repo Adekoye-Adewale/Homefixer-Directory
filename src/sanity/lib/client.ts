@@ -58,20 +58,20 @@ export const getCategoryBySlug = async (slug: string) => {
   }
 }
 
-export const getBusinessByCategorySlug = async (slug: string): Promise<customBusiness[]> => {
+export const getBusinessByCategorySlug = async (slug: string): Promise<customBusiness[] | null> => {
   try {
     const business = await sanityFetch<customBusiness[]>(businessByCategorySlugQuery, { slug } )
-    return business;
+    return business ?? null;
   } catch (error) {
     console.error("Error fetching businesses by category slug:", error);
-    return [];
+    return null;
   }
 }
 
 export const getLoactionBySlug = async (slug: string) => {
   try {
     const query = `*[_type == 'businessLocation' && slug.current == $slug][0]`;
-    const location = await sanityFetch<customBusinessLocationType[]>(query, { slug });
+    const location = await sanityFetch<customBusinessLocationType>(query, { slug });
     return location ?? null;
   } catch (error) {
     console.error("Error fetching location by slug:", error);
@@ -79,13 +79,13 @@ export const getLoactionBySlug = async (slug: string) => {
   }
 }
 
-export const getBusinessByLocationSlug = async (slug: string): Promise<customBusiness[]> => {
+export const getBusinessByLocationSlug = async (slug: string): Promise<customBusiness[] | null> => {
   try {
     const business = await sanityFetch<customBusiness[]>( businessByLocationSlugQuery, { slug } )
-    return business;
+    return business ?? null;
   } catch (error) {
     console.error("Error fetching businesses by location slug:", error);
-    return [];
+    return null;
   }
 }
 
