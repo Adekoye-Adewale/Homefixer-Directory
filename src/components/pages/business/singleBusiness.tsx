@@ -34,7 +34,7 @@ export default function SingleBusinessPageComponent(
                 <main>
                         <section className='flex justify-center items-center py-24 md:py-32 px-2.5 md:px-5 relative overflow-clip min-h-96 max-h-[500px] h-full z-[1]'>
                                 <Image 
-                                        src={galleryImages[0] || biz?.coverImage.url || '/lagoshomefixer-hero-img.webp'}
+                                        src={galleryImages?.[0] || biz?.coverImage.url || '/lagoshomefixer-hero-img.webp'}
                                         alt={`${biz?.businessName} cover image` || 'Lagos Home Fixers'} 
                                         width={1000} 
                                         height={758}
