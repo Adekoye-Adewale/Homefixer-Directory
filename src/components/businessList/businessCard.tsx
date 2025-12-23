@@ -7,6 +7,10 @@ import StarRating from '../mapsComponents/StarRating'
 import { BusinessData } from '@/lib/getBusinessGoogleInfo'
 import { Badge } from "@/components/ui/badge"
 import { linkRefer } from '@/contents/constants'
+import { GooglePlacePhoto } from '@/lib/getBusinessGoogleInfo'
+import { getGooglePlacePhotoUrl } from '@/lib/getGooglePlacePhotoUrl'
+
+const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY!;
 
 type UpdatedType = customBusiness & {
         locationSlug: string
@@ -27,10 +31,15 @@ export default function MainBusinessCard({
         categorySlug,
         info
 } : UpdatedType) {
-
-        const rateInfo = info?.find((data) => data?.name.toLowerCase().includes(businessName.toLowerCase()))
-
-        const ratingNumber = rateInfo?.name.toLowerCase().includes(businessName.toLowerCase()) ? rateInfo.rating : null
+        
+        const rateInfo = info?.find((data) => data?.name && data.name.toLowerCase().includes(businessName.toLowerCase()))
+        
+        const ratingNumber = rateInfo && rateInfo.name && rateInfo.name.toLowerCase().includes(businessName.toLowerCase()) ? rateInfo.rating ?? null : null
+        
+        const rawGalleryImage = rateInfo && rateInfo.name && rateInfo.name.toLowerCase().includes(businessName.toLowerCase()) ? rateInfo.photos?.[0] ?? null : null
+        const galleryImage = rawGalleryImage ? [getGooglePlacePhotoUrl(rawGalleryImage.photo_reference, apiKey, {
+                maxWidth: 1600,
+        })].filter(Boolean) as string[] : [];
 
         return (
                 <div 
@@ -38,7 +47,7 @@ export default function MainBusinessCard({
                         key={_id}
                 >
                         <Image
-                                src={coverImage.url}
+                                src={galleryImage[0] || coverImage.url}
                                 alt={`${businessName} cover image`}
                                 width={350}
                                 height={230}
