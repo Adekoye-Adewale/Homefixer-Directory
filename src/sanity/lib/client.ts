@@ -96,7 +96,7 @@ export const getAllBlogs = async () => {
 
 export const getBlogBySlug = async (slug: string) => {
   try {
-    const blog = await sanityFetch<customBlog[]>(blogBySlugQuery, { slug })
+    const blog = await sanityFetch<customBlog>(blogBySlugQuery, { slug })
     return blog
   } catch (error) {
     console.error("Error fetching blog by slug:", error)
