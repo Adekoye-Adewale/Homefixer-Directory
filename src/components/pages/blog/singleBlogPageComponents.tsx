@@ -32,7 +32,7 @@ export default function SingleBlogPageComponents({ blog, relatedPosts }: BlogPro
                         <HeroSection 
                                 blogImage={blog.blogImage}
                                 category={blog.category?.title}
-                                categorySlug={blog.category ? `/blog/category/${blog.category.slug.current}` : '/blog'}
+                                categorySlug={blog.category ? `/blog/${blog.category.slug.current}` : '/blog'}
                                 featured={!!blog.featured}
                                 source={blog.source}
                                 sourceLink={blog.sourceLink || '#'}
@@ -61,7 +61,6 @@ const HeroSection = ({ blogImage, category, categorySlug, featured, source, sour
                                         <div className='flex justify-between gap-2.5'>
                                                 {category ? (<Link 
                                                         href={categorySlug} 
-                                                        target='_blank'
                                                 >
                                                         <Badge 
                                                                 variant="outline"
@@ -162,7 +161,7 @@ const Card = ({ title, category, slug, image }: Blog) => {
                                 />
                                 <div className='absolute top-2.5 left-2.5 z-10'>
                                         <Link
-                                                href={`/blog/category/${category?.slug.current}`}
+                                                href={`/blog/${category?.slug.current}`}
                                                 title={`View all posts in ${category?.title}`}
                                         >
                                                 <Badge>
