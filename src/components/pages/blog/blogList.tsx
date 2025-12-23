@@ -35,7 +35,7 @@ const Card = ({ blogTitle, category, slug, blogImage }: customBlog) => {
                                 />
                                 <div className='absolute top-2.5 left-2.5 z-10'>
                                         <Link
-                                                href={`/blog/category/${category?.slug.current}`}
+                                                href={`/blog/${category?.slug.current}`}
                                                 title={`View all posts in ${category?.title}`}
                                         >
                                                 <Badge>
