@@ -20,28 +20,27 @@ export const client = createClient({
 })
 
 export const getAllBusinesses = async () => {
-  const query = businessQuery
-  const businesses = await sanityFetch({ query: query })
-  return businesses.data as customBusiness[];
+  const businesses = await sanityFetch<customBusiness[]>(businessQuery);
+  return businesses;
 }
 
 export const getAllBusinessesCategory = async () => {
-  const query = businessCategoryQuery
-  const categories = await sanityFetch({ query: query })
-  return categories.data as customBusinessCategoryType[];
+  const categories = await sanityFetch<customBusinessCategoryType[]>(businessCategoryQuery);
+  return categories;
 }
 
 export const getAllBusinessesLocations = async () => {
-  const query = businessLocationQuery
-  const locations = await sanityFetch({ query: query })
-  return locations.data as customBusinessLocationType[];
+  const locations = await sanityFetch<customBusinessLocationType[]>(businessLocationQuery);
+  return locations;
 }
 
 export const getBusinessBySlug = async (slug: string) => {
   try {
-    const query = businessBySlugQuery
-    const business = await sanityFetch({ query, params: { slug } })
-    return business.data ?? null;
+    const business = await sanityFetch<customBusiness | null>(
+      businessBySlugQuery,
+      { slug }
+    );
+    return business ?? null;
   } catch (error) {
     console.error("Error fetching business by slug:", error)
     return null;
@@ -51,8 +50,8 @@ export const getBusinessBySlug = async (slug: string) => {
 export const getCategoryBySlug = async (slug: string) => {
   try {
     const query = `*[_type == 'businessCategory' && slug.current == $slug][0]`;
-    const category = await sanityFetch({ query, params: { slug } });
-    return category.data ?? null;
+    const category = await sanityFetch<customBusinessCategoryType[]>( query,  { slug } );
+    return category ?? null;
   } catch (error) {
     console.error("Error fetching category by slug:", error);
     return null;
@@ -61,9 +60,8 @@ export const getCategoryBySlug = async (slug: string) => {
 
 export const getBusinessByCategorySlug = async (slug: string): Promise<customBusiness[]> => {
   try {
-    const query = businessByCategorySlugQuery
-    const business = await sanityFetch({ query, params: { slug } })
-    return business.data ?? [];
+    const business = await sanityFetch<customBusiness[]>(businessByCategorySlugQuery, { slug } )
+    return business;
   } catch (error) {
     console.error("Error fetching businesses by category slug:", error);
     return [];
@@ -73,8 +71,8 @@ export const getBusinessByCategorySlug = async (slug: string): Promise<customBus
 export const getLoactionBySlug = async (slug: string) => {
   try {
     const query = `*[_type == 'businessLocation' && slug.current == $slug][0]`;
-    const location = await sanityFetch({ query, params: { slug } });
-    return location.data ?? null;
+    const location = await sanityFetch<customBusinessLocationType[]>(query, { slug });
+    return location ?? null;
   } catch (error) {
     console.error("Error fetching location by slug:", error);
     return null;
@@ -83,9 +81,8 @@ export const getLoactionBySlug = async (slug: string) => {
 
 export const getBusinessByLocationSlug = async (slug: string): Promise<customBusiness[]> => {
   try {
-    const query = businessByLocationSlugQuery
-    const business = await sanityFetch({ query, params: { slug } })
-    return business.data ?? [];
+    const business = await sanityFetch<customBusiness[]>( businessByLocationSlugQuery, { slug } )
+    return business;
   } catch (error) {
     console.error("Error fetching businesses by location slug:", error);
     return [];
@@ -93,16 +90,14 @@ export const getBusinessByLocationSlug = async (slug: string): Promise<customBus
 }
 
 export const getAllBlogs = async () => {
-  const query = blogQuery
-  const blog = await sanityFetch({ query: query })
-  return blog.data as customBlog[];
+  const blog = await sanityFetch<customBlog[]>(blogQuery)
+  return blog;
 }
 
 export const getBlogBySlug = async (slug: string) => {
   try {
-    const query = blogBySlugQuery
-    const blog = await sanityFetch({ query, params: { slug } })
-    return blog.data ?? null;
+    const blog = await sanityFetch<customBlog[]>(blogBySlugQuery, { slug })
+    return blog
   } catch (error) {
     console.error("Error fetching blog by slug:", error)
     return null;
@@ -110,7 +105,6 @@ export const getBlogBySlug = async (slug: string) => {
 }
 
 export const getAllBlogsCategory = async () => {
-  const query = blogCategoryQuery
-  const categories = await sanityFetch({ query: query })
-  return categories.data as customBlogCategoryType[];
+  const categories = await sanityFetch<customBlogCategoryType[]>(blogCategoryQuery)
+  return categories;
 }
