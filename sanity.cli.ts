@@ -10,4 +10,7 @@ const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET
 export default defineCliConfig({
         api: { projectId, dataset },
         studioHost: 'lagos-homefixers',
+        deployment: {
+                appId: 'w4qc6ygeraxibp4csmqhkzqo',
+        },
 })
