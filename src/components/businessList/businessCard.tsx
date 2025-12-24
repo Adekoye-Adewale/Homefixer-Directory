@@ -46,7 +46,7 @@ export default function MainBusinessCard({
                         key={_id}
                 >
                         <Image
-                                src={galleryImage[0] || coverImage.url}
+                                src={galleryImage?.[0] || coverImage?.url || '/cover-image.webp'}
                                 alt={`${businessName} cover image`}
                                 width={350}
                                 height={230}
