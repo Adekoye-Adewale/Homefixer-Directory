@@ -1,5 +1,4 @@
 import { createClient } from 'next-sanity'
-
 import { apiVersion, dataset, projectId } from '../env'
 import { sanityFetch } from './live'
 import { businessByCategorySlugQuery, businessByLocationSlugQuery, businessBySlugQuery, businessQuery } from './queries/business'
@@ -50,8 +49,8 @@ export const getBusinessBySlug = async (slug: string) => {
 export const getCategoryBySlug = async (slug: string) => {
   try {
     const query = `*[_type == 'businessCategory' && slug.current == $slug][0]`;
-    const category = await sanityFetch<customBusinessCategoryType[]>( query,  { slug } );
-    return category ?? null;
+    const category = await sanityFetch<customBusinessCategoryType>( query,  { slug } );
+    return category ;
   } catch (error) {
     console.error("Error fetching category by slug:", error);
     return null;
