@@ -5,6 +5,7 @@ import "./globals.css";
 import { Toaster } from "@/components/ui/sonner"
 import { getAllBusinessesCategory } from "@/sanity/lib/client";
 import SiteFooter from "@/components/footer";
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 const inter = Inter({
   variable: "--font-inter",
@@ -43,6 +44,7 @@ export default async function RootLayout({
           {children}
         </main>
         <SiteFooter/>
+        <SpeedInsights />
         <Toaster richColors position="top-center" />
       </body>
     </html>
