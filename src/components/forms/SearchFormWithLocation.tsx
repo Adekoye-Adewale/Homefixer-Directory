@@ -62,7 +62,7 @@ export default function SearchFormWithLocation({
                                                 title="location-input"
                                                 value={location}
                                                 onChange={(e) => setLocation(e.target.value)}
-                                                className="grow w-full text-xs text-white/80 py-2 px-2.5 placeholder:text-xs placeholder:text-white/40 rounded border border-white/80 outline-[#ee9513]"
+                                                className="grow w-full text-xs text-white/80 py-2 px-2.5 placeholder:text-xs placeholder:text-white/40 rounded border border-white/80 outline-[#ee9513] search__form__select__field"
                                         >
                                                 <option 
                                                         value=""

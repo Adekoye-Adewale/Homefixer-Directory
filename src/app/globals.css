@@ -125,6 +125,10 @@ body {
   }
 }
 
+.search__form__select__field{
+  height: 34px !important;
+}
+
 .swiper-button-next,
 .swiper-button-prev {
   width: 24px !important;
