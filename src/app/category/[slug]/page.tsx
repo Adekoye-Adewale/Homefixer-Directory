@@ -1,4 +1,3 @@
-import React from 'react'
 import { notFound } from 'next/navigation'
 import { getCategoryBySlug, getBusinessByCategorySlug } from '@/sanity/lib/client'
 import SingleCategoryPageComponents from '@/components/pages/categoryPage/singleCategoryPage'
@@ -23,7 +22,7 @@ export default async function SingleCategoryPage({ params }: CategoryPageProps )
                 notFound();
         }
 
-        if (business.length === 0) {
+        if (business?.length === 0) {
                 return (
                         <section className='min-h-dvh grid place-content-center'>
                                 <div className="text-center py-20">
@@ -49,16 +48,16 @@ export default async function SingleCategoryPage({ params }: CategoryPageProps )
         }
 
         const info = await Promise.all(
-                business.map(biz =>
+                business && business.length > 0 ? business.map(biz =>
                         getBusinessGoogleData(biz.businessName, biz.businessAddress ?? biz.location.title)
-                )
+                ) : []
         )
 
         return (
                 <SingleCategoryPageComponents
                         service={category.title}
-                        length={business.length}
-                        businessList={business}
+                        length={business?.length || 0}
+                        businessList={business || []}
                         info={info}
                 />
         )

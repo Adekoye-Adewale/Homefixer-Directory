@@ -44,7 +44,7 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
         const allLocations = await getAllBusinessesLocations()
 
         if (location) {
-                businesses = await getBusinessByLocationSlug(location)
+                businesses = (await getBusinessByLocationSlug(location)) ?? []
         } else {
                 businesses = await getAllBusinesses()
         }

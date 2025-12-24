@@ -1,4 +1,3 @@
-import React from 'react'
 import { getBusinessByLocationSlug, getLoactionBySlug } from '@/sanity/lib/client'
 import { notFound } from 'next/navigation'
 import PriBtn from '@/components/buttons/priBtn'
@@ -23,7 +22,7 @@ export default async function SingleLocationPage({ params }: LocationPageProps )
                 notFound();
         }
 
-        if (business.length === 0) {
+        if (business?.length === 0) {
                 return (
                         <section className='min-h-dvh grid place-content-center'>
                                 <div className="text-center py-20">
@@ -31,7 +30,7 @@ export default async function SingleLocationPage({ params }: LocationPageProps )
                                                 No businesses found
                                         </h1>
                                         <p className="text-gray-600 my-2">
-                                                Currently, there are no businesses presently listed under <strong>{location.title}</strong>.
+                                                Currently, there are no businesses presently listed under <strong>{location.title}</strong>, Lagos.
                                         </p>
                                         <div className='flex flex-wrap gap-2 items-center justify-center pt-5'>
                                                 <SubmitYourBizBtn/>
@@ -46,16 +45,16 @@ export default async function SingleLocationPage({ params }: LocationPageProps )
         }
 
         const info = await Promise.all(
-                business.map(biz =>
+                business && business.length > 0 ? business.map(biz =>
                         getBusinessGoogleData(biz.businessName, biz.businessAddress ?? biz.location.title)
-                )
+                ) : []
         )
 
         return (
                 <SingleLocationPageComponent
                         location={location.title}
-                        length={business.length}
-                        businessList={business}
+                        length={business?.length || 0}
+                        businessList={business || []}
                         info={info}
                 />
         )

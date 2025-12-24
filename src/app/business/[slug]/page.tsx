@@ -1,4 +1,3 @@
-import React from 'react'
 import { notFound } from 'next/navigation'
 import { getBusinessBySlug } from '@/sanity/lib/client'
 import SingleBusinessPageComponent from '@/components/pages/business/singleBusiness'
@@ -28,17 +27,17 @@ export async function generateMetadata(
         const { slug } = await params
         const business = await getBusinessBySlug(slug)
 
-        const shortDescription = truncateDescription(business.description)
+        const shortDescription = truncateDescription(business?.description)
 
         const previousImages = (await parent).openGraph?.images || []
 
         return {
-                title: `${business.businessName} | Lagos Home Fixer`,
+                title: `${business?.businessName} | Lagos Home Fixer`,
                 description: shortDescription,
                 openGraph: {
                         type: "website",
-                        url: `${siteURL}/business/${business.slug?.current}`,
-                        title: `${business.businessName} | Lagos Home Fixer`,
+                        url: `${siteURL}/business/${business?.slug?.current}`,
+                        title: `${business?.businessName} | Lagos Home Fixer`,
                         description: shortDescription,
                         siteName: "Lagos Home Fixer",
                         images: [`${business?.businessLogo.url}`, ...previousImages],
@@ -50,7 +49,7 @@ export default async function SingleBusinessPage({ params }: BusinessPageProps) 
 
         const { slug } = await params
         const business = await getBusinessBySlug(slug)
-        const shortDescription = truncateDescription(business.description)
+        const shortDescription = truncateDescription(business?.description)
 
         if ( !business ) {
                 notFound();
@@ -73,7 +72,10 @@ export default async function SingleBusinessPage({ params }: BusinessPageProps) 
                 url: `${siteURL}/business/${slug}`,
         }
 
-        const info = await getBusinessGoogleData(business.businessName, business.businessAddress)
+        const info = await getBusinessGoogleData(
+                business.businessName,
+                business.businessAddress ?? business.location?.title ?? ""
+        )
 
         const galleryImages = info?.photos
                 ?.map((photo: GooglePlacePhoto) =>
