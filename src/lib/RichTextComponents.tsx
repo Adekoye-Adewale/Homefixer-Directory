@@ -1,19 +1,34 @@
 import type { PortableTextComponents } from '@portabletext/react'
 import Image from 'next/image'
+import { urlFor } from '@/sanity/lib/image'
 
 export const RichTextComponents: PortableTextComponents = {
         types: {
-                image: ({ value }) => (
-                        <div className="my-2.5">
-                                <Image
-                                        src={value.asset?.url}
-                                        alt={value.alt || 'Blog image'}
-                                        width={1000}
-                                        height={600}
-                                        className="rounded-lg w-full h-auto object-cover"
-                                />
-                        </div>
-                ),
+                image: ({ value }) => {
+                        if (!value?.asset) return null
+
+                        const alt =
+                                value.alt ||
+                                value.caption ||
+                                'Blog article image'
+                        return (
+                                <figure className="my-2.5">
+                                        <Image
+                                                src={urlFor(value).width(1000).height(600).url()}
+                                                alt={alt}
+                                                width={1000}
+                                                height={600}
+                                                className="rounded-lg w-full h-auto object-cover"
+                                        />
+
+                                        {value.caption && (
+                                                <figcaption className="mt-2 text-sm text-gray-500">
+                                                        {value.caption}
+                                                </figcaption>
+                                        )}
+                                </figure>
+                        )
+                },
         },
         list: {
                 bullet: ({ children }) => <ul className="list-disc pl-6">{children}</ul>,
