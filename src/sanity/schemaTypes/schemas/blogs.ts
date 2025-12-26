@@ -22,19 +22,34 @@ export const blog = defineType({
                         name: "blogImage",
                         title: "Blog Image",
                         type: "image",
+                        options: { hotspot: true },
                         description: "Use an image with a 16:9 ratio for best display results",
-                        // initialValue: {
-                        //         asset: {
-                        //                 _ref: "/lagosHomeFixers-blog-image.webp",
-                        //                 _type: ""
-                        //         },
-                        // },
+                        fields: [
+                                {
+                                        name: "alt",
+                                        title: "Alt text",
+                                        type: "string",
+                                        description: "Describe the image for SEO and accessibility",
+                                        validation: (rule) => rule.required(),
+                                },
+                                {
+                                        name: "caption",
+                                        title: "Caption",
+                                        type: "string",
+                                },
+                        ],
                 }),
                 defineField({
                         name: "featured",
                         title: "Featured",
                         type: "boolean",
                         initialValue: false,
+                }),
+                defineField({
+                        name: "publishedAt",
+                        title: "Published at",
+                        type: "datetime",
+                        initialValue: () => new Date().toISOString(),
                 }),
                 defineField({
                         name: "category",
@@ -89,6 +104,19 @@ export const blog = defineType({
                                 {
                                         type: "image",
                                         options: { hotspot: true },
+                                        fields: [
+                                                {
+                                                        name: 'alt',
+                                                        type: 'string',
+                                                        title: 'Alt text',
+                                                        description: 'Describe the image for SEO and accessibility',
+                                                },
+                                                {
+                                                        name: 'caption',
+                                                        type: 'string',
+                                                        title: 'Caption',
+                                                },
+                                        ],
                                 },
                         ],
                 }),
