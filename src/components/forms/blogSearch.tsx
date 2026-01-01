@@ -57,7 +57,7 @@ export default function BlogSearch({ blogs }: { blogs: customBlog[] }) {
                                                         <CommandEmpty>No results found.</CommandEmpty>
                                                         <CommandGroup heading="Search results">
                                                                 <div className='flex flex-col divide-y divide-gray-300/40 space-y-0'>
-                                                                        {filteredBlogs.slice(0, 3).map(blog => (
+                                                                        {filteredBlogs.map(blog => (
                                                                                 <CommandItem 
                                                                                         key={blog._id}
                                                                                 >
